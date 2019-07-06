@@ -35,6 +35,9 @@ Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'admin','middleware'
  	//packege
  	Route::get('/packege','PackegeController@index')->name('packege');
  	Route::get('/packege/create','PackegeController@create')->name('packege.create');
+ 	//.....get
+ 	Route::get('/get_packege_option','PackegeController@get_packege_option');
+ 	Route::get('/get_variation_value_row','PackegeController@get_variation_value_row');
  	Route::post('/packege/store','PackegeController@store')->name('packege.store');
   });		
 // Route::get('/home', 'HomeController@index')->name('home');

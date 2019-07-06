@@ -65,6 +65,7 @@
                                         
                                             <th>SL</th>
                                             <th>Photo</th>
+                                            <th>Name</th>
                                             <th>Destination Name</th>
                                             <th>Action</th>
                                           
