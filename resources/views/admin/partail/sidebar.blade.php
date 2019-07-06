@@ -34,21 +34,22 @@
                                 <!-- Main -->
                                 <li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
                                 <li class="{{Request::is('admin/dashboard') ?'active':''}}"><a href="{{ route('admin.dashboard') }}"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
-                        
+
 
                                 <li  class="{{Request::is('admin/destination*') ?'active':''}}"><a href="{{ route('admin.destination') }}"><i class="icon-width"></i> <span>Destination</span></a></li>
 
                                 <li  class="{{Request::is('admin/packege*') ?'active':''}}"><a href="{{ route('admin.packege') }}"><i class=" icon-package"></i> <span>Packege</span></a></li>
 
+                                <li  class="{{Request::is('admin/amenity*') ?'active':''}}"><a href="{{ route('admin.amenity') }}"><i class="icon-station"></i> <span>Amenity</span></a></li>
                               {{--    <li>
                                     <a href="#"><i class="icon-people"></i> <span>Destination</span></a>
                                     <ul>
                                         <li><a href=""> Supplier</a></li>
- 
+
                                     </ul>
                                 </li> --}}
 
-           
+
 
                                 <!-- /page kits -->
 
