@@ -2,12 +2,8 @@
         <div class="navbar navbar-inverse">
         <div class="navbar-header">
 
-            <a class="navbar-brand" href="index.html"><img src="@if(isset($appSettings['institute_settings']) & isset($appSettings['bussiness_settings']['logo'])){{asset('storage/logo/'.$appSettings['bussiness_settings']['logo'])}} @else{{ asset('image/logo.png') }}@endif" alt="" style="display: inline-block ;margin-right: 5px" width="100" height="80">
-            @if(isset($appSettings['institute_settings']) & isset($appSettings['bussiness_settings']['bussiness_name']))
-                {{$appSettings['bussiness_settings']['bussiness_name']}}
-            @else
+            <a class="navbar-brand" href="index.html"><img src="{{asset('fontend/images/yupa-logo-white.png')}}" alt="" style="display: inline-block ;margin-right: 5px" width="100" height="80">
             Yupa-Travel
-            @endif
             </a>
 
             <ul class="nav navbar-nav visible-xs-block">
@@ -260,10 +256,7 @@
                     </a>
 
                     <ul class="dropdown-menu dropdown-menu-right">
-                        <li><a href="#"><i class="icon-user-plus"></i> My profile</a></li>
-                        <li><a href="#"><i class="icon-coins"></i> My balance</a></li>
-                        <li><a href="#"><span class="badge bg-teal-400 pull-right">58</span> <i class="icon-comment-discussion"></i> Messages</a></li>
-                        <li class="divider"></li>
+                        <li><a href="{{ route('admin.profile') }}"><i class="icon-user-plus"></i> My profile</a></li>
                         <li><a href="#"><i class="icon-cog5"></i> Account settings</a></li>
                         <li><a href="{{route('admin.logout') }}" id="logout"><i class="icon-switch2"></i> Logout</a></li>
                     </ul>

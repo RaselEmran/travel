@@ -33,49 +33,22 @@
 
                                 <!-- Main -->
                                 <li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
-                                <li class="{{Request::is('dashboard') ?'active':''}}"><a href="{{ route('admin.dashboard') }}"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
+                                <li class="{{Request::is('admin/dashboard') ?'active':''}}"><a href="{{ route('admin.dashboard') }}"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
                         
 
-      
+                                <li  class="{{Request::is('admin/destination*') ?'active':''}}"><a href="{{ route('admin.destination') }}"><i class="icon-width"></i> <span>Destination</span></a></li>
 
-                                 <li>
-                                    <a href="#"><i class="icon-people"></i> <span>Contacts</span></a>
+                                <li  class="{{Request::is('admin/packege*') ?'active':''}}"><a href="{{ route('admin.packege') }}"><i class=" icon-package"></i> <span>Packege</span></a></li>
+
+                              {{--    <li>
+                                    <a href="#"><i class="icon-people"></i> <span>Destination</span></a>
                                     <ul>
                                         <li><a href=""> Supplier</a></li>
  
                                     </ul>
-                                </li>
+                                </li> --}}
 
-                                <li>
-                                    <a href="#"><i class="icon-stack"></i> <span>Package Management</span></a>
-                                    <ul>
-                                        <li><a href="../seed/horizontal_nav.html">Horizontal navigation</a></li>
-                                        <li><a href="../seed/1_col.html">1 column</a></li>
-                                        <li><a href="../seed/2_col.html">2 columns</a></li>
-                                        <li>
-                                            <a href="#">3 columns</a>
-                                            <ul>
-                                                <li><a href="../seed/3_col_dual.html">Dual sidebars</a></li>
-                                                <li><a href="../seed/3_col_double.html">Double sidebars</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="../seed/4_col.html">4 columns</a></li>
-                                        <li>
-                                            <a href="#">Detached layout</a>
-                                            <ul>
-                                                <li><a href="../seed/detached_left.html">Left sidebar</a></li>
-                                                <li><a href="../seed/detached_right.html">Right sidebar</a></li>
-                                                <li><a href="../seed/detached_sticky.html">Sticky sidebar</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="../seed/layout_boxed.html">Boxed layout</a></li>
-                                        <li class="navigation-divider"></li>
-                                        <li><a href="../seed/layout_navbar_fixed_main.html">Fixed main navbar</a></li>
-                                        <li><a href="../seed/layout_navbar_fixed_secondary.html">Fixed secondary navbar</a></li>
-                                        <li><a href="../seed/layout_navbar_fixed_both.html">Both navbars fixed</a></li>
-                                        <li><a href="../seed/layout_fixed.html">Fixed layout</a></li>
-                                    </ul>
-                                </li>
+           
 
                                 <!-- /page kits -->
 

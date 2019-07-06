@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
+use App\Admin;
 
 class DashboardController extends Controller
 {
@@ -27,5 +28,13 @@ class DashboardController extends Controller
     {
        
         return view('admin.welcome');
+    }
+
+    //admin profile
+    public function profile()
+    {
+        $user_id = Auth::user()->id;
+        $admin =Admin::find($user_id);
+        return view('admin.profile.profile',compact('admin'));
     }
 }
