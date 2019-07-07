@@ -41,6 +41,15 @@
                                 <li  class="{{Request::is('admin/packege*') ?'active':''}}"><a href="{{ route('admin.packege') }}"><i class=" icon-package"></i> <span>Packege</span></a></li>
 
                                 <li  class="{{Request::is('admin/amenity*') ?'active':''}}"><a href="{{ route('admin.amenity') }}"><i class="icon-station"></i> <span>Amenity</span></a></li>
+                                <li class="{{Request::is('admin/hotel*') ?'active':''}}">
+                                    <a href="#"><i class="icon-city"></i> <span>Hotel</span></a>
+                                    <ul>
+                                        <li class="{{Request::is('admin/hotel/create') ?'active':''}}"><a href="{{ route('admin.hotel.create') }}"> Add Hotel</a></li>
+
+                                          <li class="{{Request::is('admin/hotel') ?'active':''}}"><a href="{{ route('admin.hotel') }}"> List Hotel</a></li>
+
+                                    </ul>
+                                </li>
                               {{--    <li>
                                     <a href="#"><i class="icon-people"></i> <span>Destination</span></a>
                                     <ul>
