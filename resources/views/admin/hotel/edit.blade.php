@@ -34,11 +34,10 @@
                     </div>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Price: *</label>
+                        <label>Price: * (Per Night)</label>
                         <input type="text" name="price" id="price" class="form-control" placeholder="Price" value="{{ $hotel->price }}">
                     </div>
                 </div>
@@ -59,11 +58,11 @@
                     <div class="checkbox">
                         <label>
                             <input type="checkbox" name="amenity[]" value="{{ $amenity->id }}"
-                                @foreach($hotel->amenities as $hotel_amenity)
-                                @if ($hotel_amenity->hotel_id == $amenity->id)
-                                checked
-                                @endif
-                                @endforeach
+                            @foreach($hotel->amenities as $hotel_amenity)
+                            @if ($hotel_amenity->hotel_id == $amenity->id)
+                            checked
+                            @endif
+                            @endforeach
                             >
                             {{ $amenity->name }}
                         </label>
@@ -142,7 +141,6 @@
             </div>
         </form>
     </div>
-</div>
 </div>
 @endsection
 @push('js')

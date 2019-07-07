@@ -1,3 +1,6 @@
+body{
+	overflow-x: hidden;
+}
 nav a {
 
 	color: white!important;
@@ -1528,8 +1531,6 @@ nav {
 	border: 1px solid #d8d4d4;
 
 	border-radius: 5px;
-
-	width: 100%;
 
 	padding: 20px;
 

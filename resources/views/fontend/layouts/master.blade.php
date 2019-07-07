@@ -11,7 +11,7 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<!--===============================================================================================-->	
+	<!--===============================================================================================-->
 
 	<link rel="icon" href="{{asset('fontend/images/favicon.png')}}" type="image/x-icon" />
 
@@ -46,20 +46,14 @@
 <body>
 
 	<div class="container-fluid">
-
 		<div class="row">
-
 			<div id="content1">
-
-				@include('fontend.partial.topnav')			
+				@include('fontend.partial.topnav')
                 @yield('page-header')
-		
-
 			</div>
-
 		</div>
 
-		
+
    @section('content')
    @show
    @include('fontend.partial.footer')
@@ -67,7 +61,7 @@
 
 	</div>
 
-<!--===============================================================================================-->	
+<!--===============================================================================================-->
 
 	<script src="{{asset('fontend/vendor/jquery/jquery-3.2.1.min.js')}}"></script>
 
@@ -78,7 +72,7 @@
 <!--===============================================================================================-->
 
 	<script src="{{asset('fontend/vendor/tilt/tilt.jquery.min.js')}}"></script>
-	
+
 	    <script>
          $.ajaxSetup({
         headers: {
