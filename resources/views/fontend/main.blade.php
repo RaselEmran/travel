@@ -87,7 +87,7 @@
 						</div>
 						<div class="col-md-2">
 
-							<p class="p1"><a class="views-all-btn flt-right" href="">View All</a></p>
+							<p class="p1"><a class="views-all-btn flt-right" href="{{ route('explore') }}">View All</a></p>
 
 						</div>
 
@@ -95,7 +95,7 @@
 						
 						<div class="col-lg-3 col-md-6 borderimg1">
 
-						<a href="">
+						<a href="{{ route('experience-booking',$allpack->id) }}">
 							<img src="{{asset('/storage/packege/photo/'.$allpack->photo)}}" class="img1" width="264px" height="175" />
 
 							<div class="centered titleimg1 darkbg1">{{$allpack->destination->name}}</div>

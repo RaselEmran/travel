@@ -99,3 +99,6 @@ Route::get('facebook', function () {
 });
 Route::get('auth/{service}', 'Auth\FacebookController@redirectToFacebook');
 Route::get('auth/{service}/callback', 'Auth\FacebookController@handleFacebookCallback');
+//:::::::::::::booking:::::::::::::::
+Route::get('/explore','ExperienceBookingController@index')->name('explore');
+Route::get('/experience-booking/{id}','ExperienceBookingController@experience_booking')->name('experience-booking');
