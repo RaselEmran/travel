@@ -77,7 +77,7 @@ class AmenityController extends Controller {
 			$amenity = Amenity::find($id);
 			$amenity->delete();
 			if ($amenity) {
-				return true;
+				return response()->json(['success' => true, 'status' => 'success', 'message' => 'Amenity Information Deleted Successfully.', 'goto' => route('admin.amenity')]);
 			}
 		}
 	}

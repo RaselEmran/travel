@@ -19,33 +19,31 @@ $this->get('/admin/login', 'AdminAuth\LoginController@showLoginForm')->name('adm
 $this->post('admin/login', 'AdminAuth\LoginController@login')->name('admin.login');
 $this->post('admin/logout', 'AdminAuth\LoginController@logout')->name('admin.logout');
 
+// Auth::routes();
+$this->get('/admin/login', 'AdminAuth\LoginController@showLoginForm')->name('admin.login');
+$this->post('admin/login', 'AdminAuth\LoginController@login')->name('admin.login');
+$this->post('admin/logout', 'AdminAuth\LoginController@logout')->name('admin.logout');
 
-  // Auth::routes();
- $this->get('/admin/login', 'AdminAuth\LoginController@showLoginForm')->name('admin.login');
- $this->post('admin/login', 'AdminAuth\LoginController@login')->name('admin.login');
- $this->post('admin/logout', 'AdminAuth\LoginController@logout')->name('admin.logout');
+Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'admin', 'middleware' => ['auth:admin']], function () {
+	//profile
+	Route::get('/profile', 'DashboardController@profile')->name('profile');
+	Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
-Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'admin','middleware' => ['auth:admin']], function () {
-  	//profile
-  	Route::get('/profile','DashboardController@profile')->name('profile');
-    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+	Route::get('/destination', 'DestinationController@index')->name('destination');
+	Route::get('/destination/create', 'DestinationController@create')->name('destination.create');
+	Route::post('/destination/store', 'DestinationController@store')->name('destination.store');
+	Route::get('/destination/edit/{id}', 'DestinationController@edit')->name('destination.edit');
+	Route::post('/destination/edit', 'DestinationController@update')->name('destination.update');
+	Route::get('/destination/view/{id}', 'DestinationController@view')->name('destination.view');
+	Route::get('/destination/delete/{id}', 'DestinationController@delete')->name('destination.delete');
+	//packege
+	Route::get('/packege', 'PackegeController@index')->name('packege');
+	Route::get('/packege/create', 'PackegeController@create')->name('packege.create');
+	//.....get
+	Route::get('/get_packege_option', 'PackegeController@get_packege_option');
+	Route::get('/get_variation_value_row', 'PackegeController@get_variation_value_row');
+	Route::post('/packege/store', 'PackegeController@store')->name('packege.store');
 
- 	Route::get('/destination','DestinationController@index')->name('destination');	
- 	Route::get('/destination/create','DestinationController@create')->name('destination.create');
- 	Route::post('/destination/store','DestinationController@store')->name('destination.store');
- 	Route::get('/destination/edit/{id}','DestinationController@edit')->name('destination.edit');
- 	Route::post('/destination/edit','DestinationController@update')->name('destination.update');
- 	Route::get('/destination/view/{id}','DestinationController@view')->name('destination.view');
- 	Route::get('/destination/delete/{id}','DestinationController@delete')->name('destination.delete');
- 	//packege
- 	Route::get('/packege','PackegeController@index')->name('packege');
- 	Route::get('/packege/create','PackegeController@create')->name('packege.create');
- 	//.....get
- 	Route::get('/get_packege_option','PackegeController@get_packege_option');
- 	Route::get('/get_variation_value_row','PackegeController@get_variation_value_row');
- 	Route::post('/packege/store','PackegeController@store')->name('packege.store');
-
- 	
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
  *:::::::::::::::::::::::::::::::::::::Route From Tariqul Islam ::::::::::::::::::::::::::::::::::::::::::::::
  *::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -59,12 +57,21 @@ Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'admin','middleware'
 	Route::get('/amenity/delete/{id}', 'AmenityController@delete')->name('amenity.delete');
 
 	Route::view('/icon', 'admin.icon')->name('icon');
+	//07-07-19
+
+	Route::get('/hotel', 'HotelController@index')->name('hotel');
+	Route::get('/hotel/create', 'HotelController@create')->name('hotel.create');
+	Route::post('/hotel/store', 'HotelController@store')->name('hotel.store');
+	Route::get('/hotel/edit/{id}', 'HotelController@edit')->name('hotel.edit');
+	Route::post('/hotel/edit', 'HotelController@update')->name('hotel.update');
+	Route::get('/hotel/view/{id}', 'HotelController@view')->name('hotel.view');
+	Route::get('/hotel/delete/{id}', 'HotelController@delete')->name('hotel.delete');
 
 /* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
  * :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
  * ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
  */
-  });		
+});
 
 // Route::get('/home', 'HomeController@index')->name('home');
 
