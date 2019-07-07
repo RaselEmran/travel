@@ -47,7 +47,7 @@
      <div class="panel panel-flat">
               <div class="panel-heading">
                     <h5 class="panel-title">Packege 
-                    <a href="{{ route('admin.packege') }}" class="btn btn-info"><i class="icon-stack-plus mr-2"></i>View</a>
+                    <a href="{{ route('admin.packege.store') }}" class="btn btn-info"><i class="icon-stack-plus mr-2"></i>View</a>
                     </h5>
                     <div class="heading-elements">
                         <ul class="icons-list">
@@ -115,35 +115,51 @@
 
                      <div class="row">
                       <legend class="text-bold">Packege Option:
-                      <button type="button" class="btn btn-primary" id="add_variation" data-action="add">+</button>
+                      <button type="button" class="btn btn-primary" id="add_option" data-action="add">+</button>
                       </legend>
-                      <div class="col-md-12">
+                      <div class="col-md-12" id="table_append">
                           <table class="table table-bordered">
                              <thead>
                                  <tr>
                                      <td>
-                                        <input type="text" name="option_name" id="option_ name" class="form-control" placeholder="Option Name">
+                                        <input type="text" name="packege_variation[0][option_name]" id="option_name" class="form-control" placeholder="Option Name">
                                        
                                      </td>
                                       <td>
-                                        <input type="date" name="start_date" id="start_date" class="form-control" placeholder="Strat Date">  
+                                        <input type="date" name="packege_variation[0][start_date]" id="start_date" class="form-control" placeholder="Strat Date">  
                                      </td>
                                       <td>
-                                        <input type="date" name="end_date" id="end_date" class="form-control" placeholder="End Date">  
+                                        <input type="date" name="packege_variation[0][end_date]" id="end_date" class="form-control" placeholder="End Date">  
                                      </td>
                                       <td>
-                                        <input type="text" name="option_price" id="option_price" class="form-control" placeholder="Option Price">  
+                                        <input type="text" name="packege_variation[0][option_price]" id="option_price" class="form-control" placeholder="Option Price">  
+
                                      </td>
                                  </tr>
                                  <tr>
                                      <td colspan="4">
                                         <legend> Packege Itinary:
-                                             <button type="button" class="btn btn-success btn-xs add_variation_value_row">+</button>
+                                             <button type="button" class="btn btn-success btn-xs add_variation_value_row" data-id="0">+</button>
+                                             <input type="hidden" id="variation_id_0" value="1">
                                         </legend> 
                                      </td>
                                  </tr>
-                             </thead> 
+                             </thead>
+                             <tbody id="itinary_option_0">
+                                 <tr>
+                                    <td colspan="1">
+                                         <input type="date" name="packege_variation[0][variation][0][itinary_date]" id="itinary_date" class="form-control" placeholder="Itinary Date">  
+                                     </td>
+                                     <td colspan="2">
+                                          <input type="text" name="packege_variation[0][variation][0][itinary_name]" id="itinary_name" class="form-control" placeholder="Itinary Name">  
+                                     </td>
+                                     <td>
+                                         <button type="button" class="btn btn-danger btn-xs remove_variation_value_row">-</button>
+                                     </td>
+                                 </tr>
+                             </tbody> 
                           </table>
+                          <input type="hidden" id="variation_counter" value="1">
                       </div>
                      </div>
                      <div class="row">
