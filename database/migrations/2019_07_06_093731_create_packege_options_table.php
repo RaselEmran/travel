@@ -20,7 +20,7 @@ class CreatePackegeOptionsTable extends Migration
             $table->string('start_date')->nullable();
             $table->string('end_date')->nullable();
             $table->string('option_price')->nullable();
-            $table->foreign('packege_id')->references('id')->on('packeges')->onDelete('set null');
+            $table->foreign('packege_id')->references('id')->on('packeges')->onDelete('cascade');
             $table->timestamps();
         });
     }

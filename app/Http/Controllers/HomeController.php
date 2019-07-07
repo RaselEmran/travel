@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Packege;
+use App\Destination;
+use App\PackegeItinary;
+use App\PackegeOption;
 
 class HomeController extends Controller
 {
@@ -23,7 +27,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('fontend.main');
+        $packege =Packege::take(8)->get();
+        $latestpac =Packege::latest()->take(4)->get();
+        return view('fontend.main',compact('packege','latestpac'));
     }
 
     public function sign_up_option()

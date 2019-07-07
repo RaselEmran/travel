@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('pageTitle') Destination @endsection
+@section('pageTitle') Packege @endsection
 @section('page-header')
    <div class="page-header page-header-default">
                     <div class="page-header-content">
@@ -79,9 +79,9 @@
                                        <td>{{$element->name}}</td>
                                        <td>{{$element->destination->name}}</td>
                                        <td>
-                                          <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modal_default"  id="view_details" data-url="{{ route('admin.destination.view',$element->id) }}"><i class=" icon-eye8"></i>View</a>
-                                           <a href="{{ route('admin.destination.edit',$element->id) }}" class="btn btn-info"><i class=" icon-pencil5"></i>Edit</a>
-                                            <a href="#" id="delete_item" data-id="{{$element->id}}" data-url="{{ route('admin.destination.delete',$element->id) }}" class="btn btn-danger"><i class="  icon-trash"></i>Delete</a>
+                                          <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modal_default"  id="view_details" data-url="{{ route('admin.packege.view',$element->id) }}"><i class=" icon-eye8"></i>View</a>
+                                           <a href="{{ route('admin.packege.edit',$element->id) }}" class="btn btn-info"><i class=" icon-pencil5"></i>Edit</a>
+                                            <a href="#" id="delete_item" data-id="{{$element->id}}" data-url="{{ route('admin.packege.delete',$element->id) }}" class="btn btn-danger"><i class="  icon-trash"></i>Delete</a>
                                        </td>
 
                                    </tr>
@@ -101,7 +101,7 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h5 class="modal-title">Destination View</h5>
+                                    <h5 class="modal-title">Packege View</h5>
                                 </div>
 
                                 <div class="modal-body" id="show">

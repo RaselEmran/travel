@@ -135,7 +135,10 @@ $(document).on('click','#view_details',function(){
                        }).show();
                       $('#submit').show();
                       $('#submiting').hide();
-                      get_data_table();
+                       setTimeout(function(){
+
+                      window.location.href=data.goto;
+                      },2500);
 
                     }
 
@@ -210,7 +213,7 @@ $(document).on('click', '#delete_item', function(e) {
                     confirmButtonColor: "#66BB6A",
                     type: "success"
                 });
-                    get_data_table();
+                    window.location.reload();
                         }
                  if (data.error) {
                        new Noty({

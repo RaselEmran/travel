@@ -41,7 +41,7 @@
                             </li>
                         </ul>
                     </div>
-                </div>
+   </div>
 @endsection
 @section('content')
      <div class="panel panel-flat">
@@ -58,19 +58,19 @@
                     </div>
                 </div>
               <div class="panel-body">
-                 <form role="form" action="{{ route('admin.packege.store') }}" method="post" enctype="multipart/form-data" id="addForm">
+                 <form role="form" action="{{ route('admin.packege.update',$packege->id) }}" method="post" enctype="multipart/form-data" id="editForm">
                      <div class="row">
                          <div class="col-md-6">
                              <div class="form-group">
                                 <label>Packege Name:</label>
-                                <input type="text" name="name" id="name" class="form-control" placeholder="Packege Name">
+                                <input type="text" name="name" id="name" class="form-control" placeholder="Packege Name" value="{{$packege->name}}">
 
                             </div>
                          </div>
                              <div class="col-md-6">
                              <div class="form-group">
                                 <label>Duration(Hours):</label>
-                                <input type="text" name="duration" id="duration" class="form-control" placeholder="Duration">
+                                <input type="text" name="duration" id="duration" class="form-control" placeholder="Duration" value="{{$packege->duration}}">
 
                             </div>
                          </div>
@@ -79,7 +79,7 @@
                              <div class="col-md-6">
                              <div class="form-group">
                                 <label>Per Persion Price:</label>
-                                <input type="text" name="per_persion_price" id="per_persion_price" class="form-control" placeholder="Per Persion Price">
+                                <input type="text" name="per_persion_price" id="per_persion_price" class="form-control" placeholder="Per Persion Price" value="{{$packege->per_persion_price}}">
 
                             </div>
                          </div>
@@ -88,7 +88,7 @@
                                 <label>Destination:</label>
                                <select name="destination_id" id="destination_id" class="form-control select">
                                    @foreach ($destination as $element)
-                                    <option value="{{$element->id}}">{{$element->name}}</option>
+                                    <option {{$packege->destination_id ==$element->id?'selected':''}} value="{{$element->id}}">{{$element->name}}</option>
                                    @endforeach
                                </select>
 
@@ -98,16 +98,31 @@
                          </div>
                           <div class="row">
                              <div class="col-md-6">
+                              <div>
+                                 @if($packege && isset($packege->photo))
+                                    <img src="{{asset('/storage/packege/photo/'.$packege->photo)}}" alt="" width="120px">
+                                 @endif
+                            </div>
                              <div class="form-group">
                                 <label>Photo *</label>
                                 <input type="file" name="photo" id="photo" >
 
+                                 @if($packege && isset($packege->photo))
+                                    <input type="hidden" name="oldphoto" value="{{$packege->photo}}">
+                                 @endif
+
                             </div>
                          </div>
                              <div class="col-md-6">
+                             @if($packege && isset($packege->banner))
+                                <img src="{{asset('/storage/packege/banner/'.$packege->banner)}}" alt="" width="120px">
+                             @endif
                              <div class="form-group">
                                 <label>Banner *</label>
                                 <input type="file" name="banner" id="banner" >
+                                 @if($packege && isset($packege->banner))
+                                    <input type="hidden" name="oldbanner" value="{{$packege->banner}}">
+                                 @endif
 
                             </div>
                          </div>
@@ -118,48 +133,56 @@
                       <button type="button" class="btn btn-primary" id="add_option" data-action="add">+</button>
                       </legend>
                       <div class="col-md-12" id="table_append">
+                      @foreach ($packege->packege_option as $option)
                           <table class="table table-bordered">
                              <thead>
                                  <tr>
                                      <td>
-                                        <input type="text" name="packege_variation[0][option_name]" id="option_name" class="form-control" placeholder="Option Name">
+                                        <input type="text" name="packege_variation[{{$loop->index}}][option_name]" id="option_name" class="form-control" placeholder="Option Name" value="{{$option->option_name}}">
                                        
                                      </td>
                                       <td>
-                                        <input type="date" name="packege_variation[0][start_date]" id="start_date" class="form-control" placeholder="Strat Date">  
+                                        <input type="date" name="packege_variation[{{$loop->index}}][start_date]" id="start_date" class="form-control" placeholder="Strat Date" value="{{$option->start_date}}">  
                                      </td>
                                       <td>
-                                        <input type="date" name="packege_variation[0][end_date]" id="end_date" class="form-control" placeholder="End Date">  
+                                        <input type="date" name="packege_variation[{{$loop->index}}][end_date]" id="end_date" class="form-control" placeholder="End Date" value="{{$option->end_date}}">  
                                      </td>
                                       <td>
-                                        <input type="text" name="packege_variation[0][option_price]" id="option_price" class="form-control" placeholder="Option Price">  
+                                        <input type="text" name="packege_variation[{{$loop->index}}][option_price]" id="option_price" class="form-control" placeholder="Option Price" value="{{$option->option_price}}">  
 
                                      </td>
                                  </tr>
                                  <tr>
                                      <td colspan="4">
                                         <legend> Packege Itinary:
-                                             <button type="button" class="btn btn-success btn-xs add_variation_value_row" data-id="0">+</button>
-                                             <input type="hidden" id="variation_id_0" value="1">
+                                             <button type="button" class="btn btn-success btn-xs add_variation_value_row" data-id="{{$loop->index}}">+</button>
+                                             <input type="hidden" id="variation_id_{{$loop->index}}" value="{{count($option->packegeitinary)}}">
                                         </legend> 
                                      </td>
                                  </tr>
                              </thead>
-                             <tbody id="itinary_option_0">
+                             <tbody id="itinary_option_{{$loop->index}}">
+                             @php
+                                 $key =$loop->index;
+                             @endphp
+                             @foreach ($option->packegeitinary as $itinary)
+
                                  <tr>
                                     <td colspan="1">
-                                         <input type="date" name="packege_variation[0][variation][0][itinary_date]" id="itinary_date" class="form-control" placeholder="Itinary Date">  
+                                         <input type="date" name="packege_variation[{{$key}}][variation][{{$loop->index}}][itinary_date]" id="itinary_date" class="form-control" placeholder="Itinary Date" value="{{$itinary->itinary_date}}">  
                                      </td>
                                      <td colspan="2">
-                                          <input type="text" name="packege_variation[0][variation][0][itinary_name]" id="itinary_name" class="form-control" placeholder="Itinary Name">  
+                                          <input type="text" name="packege_variation[{{$key}}][variation][{{$loop->index}}][itinary_name]" id="itinary_name" class="form-control" placeholder="Itinary Name" value="{{$itinary->itinary_name}}">  
                                      </td>
                                      <td>
                                          <button type="button" class="btn btn-danger btn-xs remove_variation_value_row" data-id="0">-</button>
                                      </td>
                                  </tr>
+                               @endforeach
                              </tbody> 
                           </table>
-                          <input type="hidden" id="variation_counter" value="1">
+                     @endforeach
+                          <input type="hidden" id="variation_counter" value="{{$packege->packege_option?count($packege->packege_option):'0'}}">
                       </div>
                      </div>
                      <div class="row">
@@ -167,7 +190,7 @@
                                      
                         <div class="form-group">
                             <label>Short Description:</label>
-                            <textarea rows="5" cols="5" class="form-control" name="description" id="description" placeholder="Short Description" style="resize: none;"></textarea>
+                            <textarea rows="5" cols="5" class="form-control" name="description" id="description" placeholder="Short Description" style="resize: none;">{{$packege->description}}</textarea>
                         </div>
                          </div>
 
@@ -175,7 +198,7 @@
                                      
                         <div class="form-group">
                             <label>Inclusive Of:</label>
-                            <textarea rows="5" cols="5" class="form-control summernote" name="inclusive_of" id="inclusive_of" style="resize: none;"></textarea>
+                            <textarea rows="5" cols="5" class="form-control summernote" name="inclusive_of" id="inclusive_of" style="resize: none;">{{$packege->inclusive_of}}</textarea>
                         </div>
                         </div>
 
@@ -183,7 +206,7 @@
                                      
                         <div class="form-group">
                             <label>Not Inclusive Of:</label>
-                            <textarea rows="5" cols="5" class="form-control summernote" name="not_inclusive_of" id="not_inclusive_of"  style="resize: none;"></textarea>
+                            <textarea rows="5" cols="5" class="form-control summernote" name="not_inclusive_of" id="not_inclusive_of"  style="resize: none;">{{$packege->not_inclusive_of}}</textarea>
                         </div>
                         </div>
 
@@ -191,7 +214,7 @@
                                      
                         <div class="form-group">
                             <label>Booking Info:</label>
-                            <textarea rows="5" cols="5" class="form-control summernote" name="booking_info" id="booking_info"  style="resize: none;"></textarea>
+                            <textarea rows="5" cols="5" class="form-control summernote" name="booking_info" id="booking_info"  style="resize: none;">{{$packege->booking_info}}</textarea>
                         </div>
                         </div>
 
@@ -199,7 +222,7 @@
                                      
                         <div class="form-group">
                             <label>location(IFrame):</label>
-                            <textarea rows="5" cols="5" class="form-control " name="location" id="location" style="resize: none;"></textarea>
+                            <textarea rows="5" cols="5" class="form-control " name="location" id="location" style="resize: none;">{{$packege->location}}</textarea>
                         </div>
                         </div>
 
@@ -207,7 +230,7 @@
                                      
                         <div class="form-group">
                             <label>Policy:</label>
-                            <textarea rows="5" cols="5" class="form-control summernote" name="policy" id="policy"  style="resize: none;"></textarea>
+                            <textarea rows="5" cols="5" class="form-control summernote" name="policy" id="policy"  style="resize: none;">{{$packege->policy}}</textarea>
                         </div>
                         </div>
                      </div>
@@ -216,14 +239,14 @@
                             <div class="col-md-6">
                             <div class="form-group">
                                 <label>Meta Title:</label>
-                                <input type="text" name="meta_title" id="meta_title" class="form-control" placeholder="Meta Title">
+                                <input type="text" name="meta_title" id="meta_title" class="form-control" placeholder="Meta Title" value="{{$packege->meta_title}}">
 
                             </div>
                             </div>
                              <div class="col-md-6">
                                 <div class="form-group">
                                 <label>Meta Keywords:</label>
-                                <input type="text" name="meta_keywords" id="meta_keywords" class="form-control" placehokeywordsKeywords">
+                                <input type="text" name="meta_keywords" id="meta_keywords" class="form-control" value="{{$packege->meta_keywords}}">
 
                                </div>
                              </div> 
@@ -232,18 +255,18 @@
                          <div class="col-md-12">
                             <div class="form-group">
                             <label>Meta Description:</label>
-                            <textarea rows="5" cols="5" class="form-control " name="meta_description" id="meta_description" style="resize: none;"></textarea>
+                            <textarea rows="5" cols="5" class="form-control " name="meta_description" id="meta_description" style="resize: none;">{{$packege->meta_description}}</textarea>
                         </div>
                          </div>
                      </div>
                     <div class="text-right">
-                    <button type="submit" class="btn btn-primary"  id="submit">Create Packege<i class="icon-arrow-right14 position-right"></i></button>
+                    <button type="submit" class="btn btn-primary"  id="submit">Update Packege<i class="icon-arrow-right14 position-right"></i></button>
                     <button type="button" class="btn btn-link" id="submiting" style="display: none;">Processing <img src="{{ asset('ajaxloader.gif') }}" width="80px"></button>
                 </div>
                  </form>     
                 </div>
-            </div>
-        </div>
+     </div>
+ 
 
                 
 

@@ -19,7 +19,7 @@ class CreatePackegeItinariesTable extends Migration
             $table->string('itinary_date')->nullable();
             $table->string('itinary_name')->nullable();
             $table->timestamps();
-            $table->foreign('packege_option_id')->references('id')->on('packege_options')->onDelete('set null');
+            $table->foreign('packege_option_id')->references('id')->on('packege_options')->onDelete('cascade');
         });
     }
 

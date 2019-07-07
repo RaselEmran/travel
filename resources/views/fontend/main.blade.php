@@ -90,70 +90,20 @@
 							<p class="p1"><a class="views-all-btn flt-right" href="">View All</a></p>
 
 						</div>
+
+						@foreach ($packege as $allpack)
 						
 						<div class="col-lg-3 col-md-6 borderimg1">
 
-							<img src="{{asset('fontend/images/penang.jpg')}}" class="img1"/>
+						<a href="">
+							<img src="{{asset('/storage/packege/photo/'.$allpack->photo)}}" class="img1" width="264px" height="175" />
 
-							<div class="centered titleimg1 darkbg1">PENANG</div>
-
-						</div>
-
-						<div class="col-lg-3 col-md-6 borderimg1">
-
-							<img src="{{asset('fontend/images/kuala-lumpur.jpg')}}" class="img1"/>
-
-							<div class="centered titleimg1 darkbg1">KUALA LUMPUR</div>
+							<div class="centered titleimg1 darkbg1">{{$allpack->destination->name}}</div>
+						</a>
 
 						</div>
+						@endforeach
 
-						<div class="col-lg-3 col-md-6 borderimg1">
-
-							<img src="{{asset('fontend/images/sabah.jpg" class="img1')}}"/>
-
-							<div class="centered titleimg1 darkbg1">SABAH</div>
-
-						</div>
-
-						<div class="col-lg-3 col-md-6 borderimg1">
-
-							<img src="{{asset('fontend/images/sarawak.jpg')}}" class="img1"/>
-
-							<div class="centered titleimg1 darkbg1">SARAWAK</div>
-
-						</div>
-
-						<div class="col-lg-3 col-md-6 borderimg1">
-
-							<img src="{{asset('fontend/images/melaka.jpg')}}" class="img1"/>
-
-							<div class="centered titleimg1 darkbg1">MELAKA</div>
-
-						</div>
-
-						<div class="col-lg-3 col-md-6 borderimg1">
-
-							<img src=".{{asset('fontendimages/kedah.jpg')}}" class="img1"/>
-
-							<div class="centered titleimg1 darkbg1">KEDAH</div>
-
-						</div>
-
-						<div class="col-lg-3 col-md-6 borderimg1">
-
-							<img src=".{{asset('fontendimages/terengganu.jpg')}}" class="img1"/>
-
-							<div class="centered titleimg1 darkbg1">TERENGGANU</div>
-
-						</div>
-
-						<div class="col-lg-3 col-md-6 borderimg1">
-
-							<img src=".{{asset('fontendimages/pahang.jpg')}}')}}" class="img1"/>
-
-							<div class="centered titleimg1 darkbg1">PAHANG</div>
-
-						</div>
 
 					</div>
 
@@ -178,38 +128,18 @@
 							<h4><b>Recommended for you</b></h4>
 
 						</div>
-
+						@foreach ($latestpac as $recomand)
 						<div class="col-lg-3 col-md-6 borderimg1">
 
-							<img src="{{asset('fontend/images/langkawi.jpg')}}" class="img1"/>
+							<a href="">
+							<img src="{{asset('/storage/packege/photo/'.$recomand->photo)}}" class="img1" width="264px" height="175"/>
 
-							<div class="bottomed titleimg2 darkbg2">LANGKAWI</div>
+							<div class="bottomed titleimg2 darkbg2">{{$recomand->destination->name}}</div>
+							</a>
 
 						</div>
-
-						<div class="col-lg-3 col-md-6 borderimg1">
-
-							<img src="{{asset('fontend/images/kundasang.jpg')}}" class="img1"/>
-
-							<div class="bottomed titleimg2 darkbg2">KUNDASANG</div>
-
-						</div>
-
-						<div class="col-lg-3 col-md-6 borderimg1">
-
-							<img src="{{asset('fontend/images/genting-highland.jpg')}}" class="img1"/>
-
-							<div class="bottomed titleimg2 darkbg2">GENTING HIGHLAND</div>
-
-						</div>
-
-						<div class="col-lg-3 col-md-6 borderimg1">
-
-							<img src="{{asset('fontend/images/redang-island.jpg')}}" class="img1"/>
-
-							<div class="bottomed titleimg2 darkbg2">REDANG ISLAND</div>
-
-						</div>					
+						@endforeach
+				
 
 					</div>
 

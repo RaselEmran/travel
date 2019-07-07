@@ -11,4 +11,8 @@ class Packege extends Model
     {
     	return $this->belongsTo('App\Destination');
     }
+    public function packege_option()
+    {
+    	return $this->hasMany('App\PackegeOption');
+    }
 }

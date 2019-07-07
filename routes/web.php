@@ -44,7 +44,11 @@ Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'admin','middleware'
  	Route::get('/get_packege_option','PackegeController@get_packege_option');
  	Route::get('/get_variation_value_row','PackegeController@get_variation_value_row');
  	Route::post('/packege/store','PackegeController@store')->name('packege.store');
-
+ 	Route::get('/packege/edit/{id}','PackegeController@edit')->name('packege.edit');
+ 	Route::post('/packege/edit','PackegeController@update')->name('packege.update');
+ 	Route::post('/packege/edit/{id}','PackegeController@update')->name('packege.update');
+ 	Route::get('/packege/view/{id}','PackegeController@view')->name('packege.view');
+ 	Route::get('/packege/delete/{id}','PackegeController@delete')->name('packege.delete');
  	
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
  *:::::::::::::::::::::::::::::::::::::Route From Tariqul Islam ::::::::::::::::::::::::::::::::::::::::::::::
