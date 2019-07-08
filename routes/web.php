@@ -29,25 +29,25 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'admin', 'mi
 	Route::get('/profile', 'DashboardController@profile')->name('profile');
 	Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
- 	Route::get('/destination','DestinationController@index')->name('destination');	
- 	Route::get('/destination/create','DestinationController@create')->name('destination.create');
- 	Route::post('/destination/store','DestinationController@store')->name('destination.store');
- 	Route::get('/destination/edit/{id}','DestinationController@edit')->name('destination.edit');
- 	Route::post('/destination/edit','DestinationController@update')->name('destination.update');
- 	Route::get('/destination/view/{id}','DestinationController@view')->name('destination.view');
- 	Route::get('/destination/delete/{id}','DestinationController@delete')->name('destination.delete');
- 	//packege
- 	Route::get('/packege','PackegeController@index')->name('packege');
- 	Route::get('/packege/create','PackegeController@create')->name('packege.create');
- 	//.....get
- 	Route::get('/get_packege_option','PackegeController@get_packege_option');
- 	Route::get('/get_variation_value_row','PackegeController@get_variation_value_row');
- 	Route::post('/packege/store','PackegeController@store')->name('packege.store');
- 	Route::get('/packege/edit/{id}','PackegeController@edit')->name('packege.edit');
- 	Route::post('/packege/edit','PackegeController@update')->name('packege.update');
- 	Route::post('/packege/edit/{id}','PackegeController@update')->name('packege.update');
- 	Route::get('/packege/view/{id}','PackegeController@view')->name('packege.view');
- 	Route::get('/packege/delete/{id}','PackegeController@delete')->name('packege.delete');
+	Route::get('/destination', 'DestinationController@index')->name('destination');
+	Route::get('/destination/create', 'DestinationController@create')->name('destination.create');
+	Route::post('/destination/store', 'DestinationController@store')->name('destination.store');
+	Route::get('/destination/edit/{id}', 'DestinationController@edit')->name('destination.edit');
+	Route::post('/destination/edit', 'DestinationController@update')->name('destination.update');
+	Route::get('/destination/view/{id}', 'DestinationController@view')->name('destination.view');
+	Route::get('/destination/delete/{id}', 'DestinationController@delete')->name('destination.delete');
+	//packege
+	Route::get('/packege', 'PackegeController@index')->name('packege');
+	Route::get('/packege/create', 'PackegeController@create')->name('packege.create');
+	//.....get
+	Route::get('/one-way-itinary','PackegeController@one_way');
+	Route::get('/two-way-itinary','PackegeController@two_way');
+	Route::post('/packege/store', 'PackegeController@store')->name('packege.store');
+	Route::get('/packege/edit/{id}', 'PackegeController@edit')->name('packege.edit');
+	Route::post('/packege/edit', 'PackegeController@update')->name('packege.update');
+	Route::post('/packege/edit/{id}', 'PackegeController@update')->name('packege.update');
+	Route::get('/packege/view/{id}', 'PackegeController@view')->name('packege.view');
+	Route::get('/packege/delete/{id}', 'PackegeController@delete')->name('packege.delete');
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
  *:::::::::::::::::::::::::::::::::::::Route From Tariqul Islam ::::::::::::::::::::::::::::::::::::::::::::::
@@ -99,6 +99,11 @@ Route::get('facebook', function () {
 });
 Route::get('auth/{service}', 'Auth\FacebookController@redirectToFacebook');
 Route::get('auth/{service}/callback', 'Auth\FacebookController@handleFacebookCallback');
+
 //:::::::::::::booking:::::::::::::::
 Route::get('/explore','ExperienceBookingController@index')->name('explore');
 Route::get('/experience-booking/{id}','ExperienceBookingController@experience_booking')->name('experience-booking');
+
+
+Route::get('stay/{id}', 'admin\HotelController@view')->name('hotel.show');
+

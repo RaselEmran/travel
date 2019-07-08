@@ -30,8 +30,8 @@ class HotelController extends Controller {
 				'price' => 'required|numeric',
 				'status' => 'required|integer',
 				'amenity.*' => 'required|integer',
-				'photo' => 'required|mimes:jpeg,bmp,png',
-				'banner' => 'required|mimes:jpeg,bmp,png',
+				'photo' => 'required|mimes:jpeg,bmp,png|max:2000',
+				'banner' => 'required|mimes:jpeg,bmp,png|max:2000',
 			]);
 
 			if ($validator->fails()) {
@@ -88,8 +88,8 @@ class HotelController extends Controller {
 				'price' => 'required|numeric',
 				'status' => 'required|integer',
 				'amenity.*' => 'required|integer',
-				'photo' => 'sometimes|nullable|mimes:jpeg,bmp,png',
-				'banner' => 'sometimes|nullable|mimes:jpeg,bmp,png',
+				'photo' => 'sometimes|nullable|mimes:jpeg,bmp,png|max:2000',
+				'banner' => 'sometimes|nullable|mimes:jpeg,bmp,png|max:2000',
 			]);
 
 			if ($validator->fails()) {
@@ -140,6 +140,10 @@ class HotelController extends Controller {
 		if ($request->ajax()) {
 			$hotel = Hotel::find($id);
 			return view('admin.hotel.view', compact('hotel'));
+		} else {
+			$hotel = Hotel::findOrFail($id);
+			$latest = Hotel::take(4)->latest()->get();
+			return view('fontend.stay', compact('hotel', 'latest'));
 		}
 	}
 

@@ -60,13 +60,15 @@
               <div class="panel-body">
                  <form role="form" action="{{ route('admin.packege.update',$packege->id) }}" method="post" enctype="multipart/form-data" id="editForm">
                      <div class="row">
-                         <div class="col-md-6">
+                         <div class="col-md-12">
                              <div class="form-group">
                                 <label>Packege Name:</label>
                                 <input type="text" name="name" id="name" class="form-control" placeholder="Packege Name" value="{{$packege->name}}">
 
                             </div>
                          </div>
+                        </div>
+                        <div class="row">
                              <div class="col-md-6">
                              <div class="form-group">
                                 <label>Duration(Hours):</label>
@@ -74,16 +76,7 @@
 
                             </div>
                          </div>
-                         </div>
-                         <div class="row">
-                             <div class="col-md-6">
-                             <div class="form-group">
-                                <label>Per Persion Price:</label>
-                                <input type="text" name="per_persion_price" id="per_persion_price" class="form-control" placeholder="Per Persion Price" value="{{$packege->per_persion_price}}">
-
-                            </div>
-                         </div>
-                             <div class="col-md-6">
+                              <div class="col-md-6">
                              <div class="form-group">
                                 <label>Destination:</label>
                                <select name="destination_id" id="destination_id" class="form-control select">
@@ -91,6 +84,23 @@
                                     <option {{$packege->destination_id ==$element->id?'selected':''}} value="{{$element->id}}">{{$element->name}}</option>
                                    @endforeach
                                </select>
+
+                            </div>
+                         </div>
+                         </div>
+
+                          <div class="row">
+                             <div class="col-md-6">
+                             <div class="form-group">
+                                <label>One Way Price:</label>
+                                <input type="text" name="one_way_price" id="one_way_price" class="form-control" placeholder="One Way Price" value="{{$packege->one_way_price}}">
+
+                            </div>
+                          </div>
+                             <div class="col-md-6">
+                             <div class="form-group">
+                                <label>Two Way Price:</label>
+                              <input type="text" name="two_way_price" id="two_way_price" class="form-control" placeholder="Two Way Price" value="{{$packege->two_way_price}}">
 
                             </div>
                          </div>
@@ -129,61 +139,57 @@
                      </div>
 
                      <div class="row">
-                      <legend class="text-bold">Packege Option:
-                      <button type="button" class="btn btn-primary" id="add_option" data-action="add">+</button>
+                       <legend class="text-bold">One Way Packege:
+                       <button type="button" class="btn btn-primary" id="add_option1" data-action="add">Add Itinary(+)</button>
                       </legend>
-                      <div class="col-md-12" id="table_append">
-                      @foreach ($packege->packege_option as $option)
-                          <table class="table table-bordered">
-                             <thead>
-                                 <tr>
+                       <table class="table table-bordered">
+                           <tbody id="one_way_body">
+                        @if (count($packege->oneway)>0)
+                           @foreach ($packege->oneway as $one)                         
+                               <tr>
                                      <td>
-                                        <input type="text" name="packege_variation[{{$loop->index}}][option_name]" id="option_name" class="form-control" placeholder="Option Name" value="{{$option->option_name}}">
-                                       
+                                     <input type="time" name="time1[]" id="time1" class="form-control" placeholder="Itinary Time" value="{{$one->time1}}">  
                                      </td>
-                                      <td>
-                                        <input type="date" name="packege_variation[{{$loop->index}}][start_date]" id="start_date" class="form-control" placeholder="Strat Date" value="{{$option->start_date}}">  
-                                     </td>
-                                      <td>
-                                        <input type="date" name="packege_variation[{{$loop->index}}][end_date]" id="end_date" class="form-control" placeholder="End Date" value="{{$option->end_date}}">  
-                                     </td>
-                                      <td>
-                                        <input type="text" name="packege_variation[{{$loop->index}}][option_price]" id="option_price" class="form-control" placeholder="Option Price" value="{{$option->option_price}}">  
-
-                                     </td>
-                                 </tr>
-                                 <tr>
-                                     <td colspan="4">
-                                        <legend> Packege Itinary:
-                                             <button type="button" class="btn btn-success btn-xs add_variation_value_row" data-id="{{$loop->index}}">+</button>
-                                             <input type="hidden" id="variation_id_{{$loop->index}}" value="{{count($option->packegeitinary)}}">
-                                        </legend> 
-                                     </td>
-                                 </tr>
-                             </thead>
-                             <tbody id="itinary_option_{{$loop->index}}">
-                             @php
-                                 $key =$loop->index;
-                             @endphp
-                             @foreach ($option->packegeitinary as $itinary)
-
-                                 <tr>
-                                    <td colspan="1">
-                                         <input type="date" name="packege_variation[{{$key}}][variation][{{$loop->index}}][itinary_date]" id="itinary_date" class="form-control" placeholder="Itinary Date" value="{{$itinary->itinary_date}}">  
-                                     </td>
-                                     <td colspan="2">
-                                          <input type="text" name="packege_variation[{{$key}}][variation][{{$loop->index}}][itinary_name]" id="itinary_name" class="form-control" placeholder="Itinary Name" value="{{$itinary->itinary_name}}">  
+                                     <td >
+                                          <input type="text" name="itinary_name1[]" id="itinary_name1" class="form-control" placeholder="Itinary Name" value="{{$one->itinary_name1}}">  
                                      </td>
                                      <td>
-                                         <button type="button" class="btn btn-danger btn-xs remove_variation_value_row" data-id="0">-</button>
+                                         <button type="button" class="btn btn-danger btn-xs " >-</button>
+                                     </td> 
+                               </tr>
+
+                             @endforeach
+                             @endif
+                           </tbody>
+                       </table>
+                      
+                     </div>
+
+                      <div class="row">
+                       <legend class="text-bold">Two Way Packege:
+                       <button type="button" class="btn btn-primary" id="add_option2" data-action="add">Add Itinary(+)</button>
+                      </legend>
+                       <table class="table table-bordered">
+                           <tbody id="two_way_body">
+                           @if (count($packege->twoway)>0)
+                           
+                           @foreach ($packege->twoway as $two)
+                                <tr>
+                                   <td>
+                                     <input type="time" name="time2[]" id="time2" class="form-control" placeholder="Itinary Time" value="{{$two->time2}}">  
                                      </td>
-                                 </tr>
-                               @endforeach
-                             </tbody> 
-                          </table>
-                     @endforeach
-                          <input type="hidden" id="variation_counter" value="{{$packege->packege_option?count($packege->packege_option):'0'}}">
-                      </div>
+                                     <td >
+                                          <input type="text" name="itinary_name2[]" id="itinary_name2" class="form-control" placeholder="Itinary Name" value="{{$two->itinary_name2}}">  
+                                     </td>
+                                     <td>
+                                         <button type="button" class="btn btn-danger btn-xs" data-id="0">-</button>
+                                     </td> 
+                                </tr>
+                                 @endforeach
+                                 @endif
+                           </tbody>
+                       </table>
+                      
                      </div>
                      <div class="row">
                          <div class="col-md-12">

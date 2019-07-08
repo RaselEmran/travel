@@ -33,11 +33,10 @@
                     </div>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Price: *</label>
+                        <label>Price: * (Per Night)</label>
                         <input type="text" name="price" id="price" class="form-control" placeholder="Price">
                     </div>
                 </div>
@@ -135,7 +134,6 @@
             </div>
         </form>
     </div>
-</div>
 </div>
 @endsection
 @push('js')

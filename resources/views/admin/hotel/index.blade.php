@@ -32,6 +32,7 @@
                         <th>SL</th>
                         <th>Photo</th>
                         <th>Hotel Name</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -41,6 +42,13 @@
                         <td>{{$loop->index+1}}</td>
                         <td><img class="img-responsive img-thumbnail" src="{{asset('/storage/hotel/photo/'.$element->photo)}}" alt="" width="120px"></td>
                         <td>{{$element->name}}</td>
+                        <td>
+                            @if($element->status == 1)
+                            <button class="btn btn-xs btn-success">Active</button>
+                            @else
+                            <button class="btn btn-xs btn-danger">In Active</button>
+                            @endif
+                        </td>
                         <td>
                             <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modal_default"  id="view_details" data-url="{{ route('admin.hotel.view',$element->id) }}"><i class=" icon-eye8"></i>View</a>
                             <a href="{{ route('admin.hotel.edit',$element->id) }}" class="btn btn-info"><i class=" icon-pencil5"></i>Edit</a>

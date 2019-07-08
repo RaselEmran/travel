@@ -241,62 +241,41 @@ $(document).on('click', '#delete_item', function(e) {
         });
 //
   //variation product
-      $(document).on('click', '#add_option', function() {
-        var row_index = $('#variation_counter').val();
-        var action = $(this).attr('data-action');
-        console.log('row_index');
-
+      $(document).on('click', '#add_option1', function() {
         $.ajax({
             method: 'GET',
-            url: '/admin/get_packege_option',
-            data: { row_index: row_index, action: action},
+            url: '/admin/one-way-itinary',
             dataType: 'html',
             success: function(result) {
                 if (result) {
-                    $('#table_append').append(result);
-                    $('#variation_counter').val(parseInt(row_index) + 1);
-                    $('.select').select2();
+                    $('#one_way_body').append(result);
                 }
             },
         });
     });
 
+  $("#one_way_body").on('click','.remove1',function(){
+     $(this).closest('tr').remove();
+
+       
+    })
       //
 
-    $(document).on('click', '.add_variation_value_row', function() {
-
-        var row = $(this).data('id');
-        var variation_id =parseInt($("#variation_id_"+row).val());
-
+    $(document).on('click', '#add_option2', function() {
         $.ajax({
             method: 'GET',
-            url: '/admin/get_variation_value_row',
-            data: {
-                variation_id:variation_id,
-                row:row,
-            },
+            url: '/admin/two-way-itinary',
             dataType: 'html',
             success: function(result) {
                 if (result) {
-                      $("#variation_id_"+row).val(variation_id+1)
-                      $("#itinary_option_"+row).append(result);
+                    $('#two_way_body').append(result);
                 }
             },
         });
     });
 
+  $("#two_way_body").on('click','.remove2',function(){
+     $(this).closest('tr').remove();
 
-    $(document).on('click', '.remove_variation_value_row', function() {
-        var row =$(this).data('id');
-         var count = $(this)
-                    .closest('table')
-                    .find('.remove_variation_value_row').length;
-                if (count === 1) {
-                    $("#itinary_option_"+row).closest('table')
-                        .remove();
-                } else {
-                    $(this)
-                        .closest('tr')
-                        .remove();
-                }
-    });
+       
+    })

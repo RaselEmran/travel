@@ -7,8 +7,8 @@ use App\Http\Controllers\Controller;
 use Validator;
 use App\Packege;
 use App\Destination;
-use App\PackegeItinary;
-use App\PackegeOption;
+use App\OneWayPack;
+use App\TwoWayPack;
 
 class PackegeController extends Controller
 {
@@ -24,17 +24,14 @@ class PackegeController extends Controller
    	return view('admin.packege.create',compact('destination'));
    }
 
-   public function get_packege_option(Request $request)
+   public function one_way()
    {
-   	$row_index =$request->row_index;
-   	return view('admin.packege.get_packege_option',compact('row_index'));
+   	return view('admin.packege.one_way');
    }
 
-   public function get_variation_value_row(Request $request)
+   public function two_way()
    {
-   	$variation_id =$request->variation_id;
-   	$row =$request->row;
-   	return view('admin.packege.get_variation_value_row',compact('variation_id','row'));
+   	return view('admin.packege.two_way');
    }
 
     public function store(Request $request)
@@ -43,15 +40,10 @@ class PackegeController extends Controller
       $validator = Validator::make($request->all(), [
          'name' => 'required|string',
          'duration' => 'required|string',
-         'per_persion_price' => 'required|numeric',
+         'one_way_price' => 'required|numeric',
+         'two_way_price' => 'required|numeric',
          'destination_id' => 'required',
          'location' => 'required',
-         // 'option_name' => 'required',
-         // 'start_date' => 'required',
-         // 'end_date' => 'required',
-         // 'option_price' => 'required',
-         // 'itinary_date' => 'required',
-         // 'itinary_name' => 'required',
          'photo' => 'required|mimes:jpeg,bmp,png,jpg|max:2000',
          'banner' => 'required|mimes:jpeg,bmp,png,jpg|max:2000',
 
@@ -75,7 +67,8 @@ class PackegeController extends Controller
           }
       $packege->name =$request->name;
       $packege->duration =$request->duration;
-      $packege->per_persion_price =$request->per_persion_price;
+      $packege->one_way_price =$request->one_way_price;
+      $packege->two_way_price =$request->two_way_price;
       $packege->destination_id =$request->destination_id;
       $packege->location =$request->location;
       $packege->description =$request->description;
@@ -88,23 +81,19 @@ class PackegeController extends Controller
       $packege->meta_description =$request->meta_description;
       $packege->save();
       $id =$packege->id;
-      $variable =$request->get('packege_variation');
-      for ($i=0; $i <count($variable) ; $i++) { 
-        $packegeoption =new PackegeOption;
-        $packegeoption->packege_id =$id;
-        $packegeoption->option_name =$variable[$i]['option_name'];
-        $packegeoption->start_date =$variable[$i]['start_date'];
-        $packegeoption->end_date =$variable[$i]['end_date'];
-        $packegeoption->option_price =$variable[$i]['option_price'];
-        $packegeoption->save();
-        $option_id =$packegeoption->id;
-        for ($j=0; $j <count($variable[$i]['variation']) ; $j++) { 
-          $packegeitinary =new PackegeItinary;
-          $packegeitinary->packege_option_id =$option_id;
-          $packegeitinary->itinary_date =$variable[$i]['variation'][$j]['itinary_date'];
-          $packegeitinary->itinary_name =$variable[$i]['variation'][$j]['itinary_name'];
-          $packegeitinary->save();
-        }
+      for ($i=0; $i <count($request->itinary_name1) ; $i++) { 
+        $one_way_pack =new OneWayPack;
+        $one_way_pack->packege_id =$id;
+        $one_way_pack->time1 =$request->time1[$i];
+        $one_way_pack->itinary_name1 =$request->itinary_name1[$i];
+        $one_way_pack->save();
+      }
+      for ($j=0; $j <count($request->itinary_name2) ; $j++) { 
+        $two_way_pack =new TwoWayPack;
+        $two_way_pack->packege_id =$id;
+        $two_way_pack->time2 =$request->time2[$j];
+        $two_way_pack->itinary_name2 =$request->itinary_name2[$j];
+        $two_way_pack->save();
       }
       return response()->json(['success' => true, 'status' => 'success', 'message' => 'Packege Information Add Successfully.','goto'=>route('admin.packege')]);
     }
@@ -114,7 +103,7 @@ class PackegeController extends Controller
   public function edit($id)
   {
     $destination =Destination::all();
-    $packege=Packege::with('packege_option')->find($id);
+    $packege=Packege::find($id);
     // dd($packege);
     return view('admin.packege.edit',compact('packege','destination'));
   }
@@ -125,15 +114,10 @@ class PackegeController extends Controller
       $validator = Validator::make($request->all(), [
          'name' => 'required|string',
          'duration' => 'required|string',
-         'per_persion_price' => 'required|numeric',
+         'one_way_price' => 'required|numeric',
+         'two_way_price' => 'required|numeric',
          'destination_id' => 'required',
          'location' => 'required',
-         // 'option_name' => 'required',
-         // 'start_date' => 'required',
-         // 'end_date' => 'required',
-         // 'option_price' => 'required',
-         // 'itinary_date' => 'required',
-         // 'itinary_name' => 'required',
          'photo' => 'mimes:jpeg,bmp,png,jpg|max:2000',
          'banner' => 'mimes:jpeg,bmp,png,jpg|max:2000',
 
@@ -178,7 +162,8 @@ class PackegeController extends Controller
 
       $packege->name =$request->name;
       $packege->duration =$request->duration;
-      $packege->per_persion_price =$request->per_persion_price;
+      $packege->one_way_price =$request->one_way_price;
+      $packege->two_way_price =$request->two_way_price;
       $packege->destination_id =$request->destination_id;
       $packege->location =$request->location;
       $packege->description =$request->description;
@@ -192,26 +177,25 @@ class PackegeController extends Controller
       $packege->save();
 
       //::::::::::
-      $option =PackegeOption::where('packege_id',$id);
-      $delete =$option->delete();
-      if ($delete) {
-       $variable =$request->get('packege_variation');
-       for ($i=0; $i <count($variable) ; $i++) { 
-        $packegeoption =new PackegeOption;
-        $packegeoption->packege_id =$id;
-        $packegeoption->option_name =$variable[$i]['option_name'];
-        $packegeoption->start_date =$variable[$i]['start_date'];
-        $packegeoption->end_date =$variable[$i]['end_date'];
-        $packegeoption->option_price =$variable[$i]['option_price'];
-        $packegeoption->save();
-        $option_id =$packegeoption->id;
-        for ($j=0; $j <count($variable[$i]['variation']) ; $j++) { 
-          $packegeitinary =new PackegeItinary;
-          $packegeitinary->packege_option_id =$option_id;
-          $packegeitinary->itinary_date =$variable[$i]['variation'][$j]['itinary_date'];
-          $packegeitinary->itinary_name =$variable[$i]['variation'][$j]['itinary_name'];
-          $packegeitinary->save();
-        }
+      $one =OneWayPack::where('packege_id',$id);
+      $delete1 =$one->delete();
+
+      $two =TwoWayPack::where('packege_id',$id);
+      $delete2 =$two->delete();
+      if ($delete1 && $delete2) {
+      for ($i=0; $i <count($request->itinary_name1) ; $i++) { 
+        $one_way_pack =new OneWayPack;
+        $one_way_pack->packege_id =$id;
+        $one_way_pack->time1 =$request->time1[$i];
+        $one_way_pack->itinary_name1 =$request->itinary_name1[$i];
+        $one_way_pack->save();
+      }
+      for ($j=0; $j <count($request->itinary_name2) ; $j++) { 
+        $two_way_pack =new TwoWayPack;
+        $two_way_pack->packege_id =$id;
+        $two_way_pack->time2 =$request->time2[$j];
+        $two_way_pack->itinary_name2 =$request->itinary_name2[$j];
+        $two_way_pack->save();
       }
       }
     return response()->json(['success' => true, 'status' => 'success', 'message' => 'Packege Information Update Successfully.','goto'=>route('admin.packege')]);

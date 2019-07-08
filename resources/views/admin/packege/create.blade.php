@@ -60,30 +60,24 @@
               <div class="panel-body">
                  <form role="form" action="{{ route('admin.packege.store') }}" method="post" enctype="multipart/form-data" id="addForm">
                      <div class="row">
-                         <div class="col-md-6">
+                         <div class="col-md-12">
                              <div class="form-group">
                                 <label>Packege Name:</label>
                                 <input type="text" name="name" id="name" class="form-control" placeholder="Packege Name">
 
                             </div>
                          </div>
-                             <div class="col-md-6">
+                       </div>
+                       <div class="row"> 
+                         <div class="col-md-6">
                              <div class="form-group">
                                 <label>Duration(Hours):</label>
                                 <input type="text" name="duration" id="duration" class="form-control" placeholder="Duration">
 
                             </div>
                          </div>
-                         </div>
-                         <div class="row">
-                             <div class="col-md-6">
-                             <div class="form-group">
-                                <label>Per Persion Price:</label>
-                                <input type="text" name="per_persion_price" id="per_persion_price" class="form-control" placeholder="Per Persion Price">
 
-                            </div>
-                         </div>
-                             <div class="col-md-6">
+                           <div class="col-md-6">
                              <div class="form-group">
                                 <label>Destination:</label>
                                <select name="destination_id" id="destination_id" class="form-control select">
@@ -91,6 +85,22 @@
                                     <option value="{{$element->id}}">{{$element->name}}</option>
                                    @endforeach
                                </select>
+
+                            </div>
+                         </div>
+                         </div>
+                         <div class="row">
+                             <div class="col-md-6">
+                             <div class="form-group">
+                                <label>One Way Price:</label>
+                                <input type="text" name="one_way_price" id="one_way_price" class="form-control" placeholder="One Way Price">
+
+                            </div>
+                         </div>
+                             <div class="col-md-6">
+                             <div class="form-group">
+                                <label>Two Way Price:</label>
+                              <input type="text" name="two_way_price" id="two_way_price" class="form-control" placeholder="Two Way Price">
 
                             </div>
                          </div>
@@ -114,53 +124,47 @@
                      </div>
 
                      <div class="row">
-                      <legend class="text-bold">Packege Option:
-                      <button type="button" class="btn btn-primary" id="add_option" data-action="add">+</button>
+                       <legend class="text-bold">One Way Packege:
+                       <button type="button" class="btn btn-primary" id="add_option1" data-action="add">Add Itinary(+)</button>
                       </legend>
-                      <div class="col-md-12" id="table_append">
-                          <table class="table table-bordered">
-                             <thead>
-                                 <tr>
+                       <table class="table table-bordered">
+                           <tbody id="one_way_body">
+                               <tr>
                                      <td>
-                                        <input type="text" name="packege_variation[0][option_name]" id="option_name" class="form-control" placeholder="Option Name">
-                                       
+                                     <input type="time" name="time1[]" id="time1" class="form-control" placeholder="Itinary Time">  
                                      </td>
-                                      <td>
-                                        <input type="date" name="packege_variation[0][start_date]" id="start_date" class="form-control" placeholder="Strat Date">  
+                                     <td >
+                                          <input type="text" name="itinary_name1[]" id="itinary_name1" class="form-control" placeholder="Itinary Name">  
                                      </td>
-                                      <td>
-                                        <input type="date" name="packege_variation[0][end_date]" id="end_date" class="form-control" placeholder="End Date">  
-                                     </td>
-                                      <td>
-                                        <input type="text" name="packege_variation[0][option_price]" id="option_price" class="form-control" placeholder="Option Price">  
+                                     <td>
+                                         <button type="button" class="btn btn-danger btn-xs " >-</button>
+                                     </td> 
+                               </tr>
+                           </tbody>
+                       </table>
+                      
+                     </div>
 
+                      <div class="row">
+                       <legend class="text-bold">Two Way Packege:
+                       <button type="button" class="btn btn-primary" id="add_option2" data-action="add">Add Itinary(+)</button>
+                      </legend>
+                       <table class="table table-bordered">
+                           <tbody id="two_way_body">
+                                <tr>
+                                   <td>
+                                     <input type="time" name="time2[]" id="time2" class="form-control" placeholder="Itinary Time">  
                                      </td>
-                                 </tr>
-                                 <tr>
-                                     <td colspan="4">
-                                        <legend> Packege Itinary:
-                                             <button type="button" class="btn btn-success btn-xs add_variation_value_row" data-id="0">+</button>
-                                             <input type="hidden" id="variation_id_0" value="1">
-                                        </legend> 
-                                     </td>
-                                 </tr>
-                             </thead>
-                             <tbody id="itinary_option_0">
-                                 <tr>
-                                    <td colspan="1">
-                                         <input type="date" name="packege_variation[0][variation][0][itinary_date]" id="itinary_date" class="form-control" placeholder="Itinary Date">  
-                                     </td>
-                                     <td colspan="2">
-                                          <input type="text" name="packege_variation[0][variation][0][itinary_name]" id="itinary_name" class="form-control" placeholder="Itinary Name">  
+                                     <td >
+                                          <input type="text" name="itinary_name2[]" id="itinary_name2" class="form-control" placeholder="Itinary Name">  
                                      </td>
                                      <td>
-                                         <button type="button" class="btn btn-danger btn-xs remove_variation_value_row" data-id="0">-</button>
-                                     </td>
-                                 </tr>
-                             </tbody> 
-                          </table>
-                          <input type="hidden" id="variation_counter" value="1">
-                      </div>
+                                         <button type="button" class="btn btn-danger btn-xs" data-id="0">-</button>
+                                     </td> 
+                                </tr>
+                           </tbody>
+                       </table>
+                      
                      </div>
                      <div class="row">
                          <div class="col-md-12">

@@ -17,7 +17,8 @@ class CreatePackegesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('duration');
-            $table->string('per_persion_price');
+            $table->string('one_way_price');
+            $table->string('two_way_price');
             $table->integer('destination_id')->nullable()->unsigned();
             $table->text('description')->nullable();
             $table->text('inclusive_of')->nullable();

@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Packege;
 use App\Destination;
-use App\PackegeItinary;
-use App\PackegeOption;
+use App\OneWayPack;
+use App\TwoWayPack;
+use App\Hotel;
 class ExperienceBookingController extends Controller
 {
    public function index()
@@ -18,6 +19,7 @@ class ExperienceBookingController extends Controller
    public function experience_booking($id)
    {
    	$packege =Packege::find($id);
-   	return view('fontend.experience_booking',compact('packege'));
+      $latest =Hotel::latest()->take(4)->get();
+   	return view('fontend.experience_booking',compact('packege','latest'));
    }
 }
