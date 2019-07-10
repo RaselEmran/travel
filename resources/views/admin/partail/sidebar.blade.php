@@ -50,6 +50,16 @@
 
                                     </ul>
                                 </li>
+
+                                 <li class="{{Request::is('admin/packege/booking*') ?'active':''}}">
+                                    <a href="#"><i class="icon-bookmark4"></i> <span>Booking</span></a>
+                                    <ul>
+                                        <li class="{{Request::is('admin/packege/booking') ?'active':''}}"><a href="{{ route('admin.packege.getbooking') }}"> Packege Booking</a></li>
+
+                                          <li class="{{Request::is('admin/hotel') ?'active':''}}"><a href="{{ route('admin.hotel') }}">Hotel Booking</a></li>
+
+                                    </ul>
+                                </li>
                               {{--    <li>
                                     <a href="#"><i class="icon-people"></i> <span>Destination</span></a>
                                     <ul>

@@ -27,6 +27,9 @@ nav {
 
 }
 
+.active {
+	color: green !important
+}
 
 
 /*Landing page*/
@@ -2419,7 +2422,7 @@ input[type="number"] {
 
 .menu-a {
 
-	color: #524f4f!important;
+	color: #524f4f;
 
 	cursor: pointer;
 

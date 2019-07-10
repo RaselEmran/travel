@@ -48,6 +48,12 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'admin', 'mi
 	Route::post('/packege/edit/{id}', 'PackegeController@update')->name('packege.update');
 	Route::get('/packege/view/{id}', 'PackegeController@view')->name('packege.view');
 	Route::get('/packege/delete/{id}', 'PackegeController@delete')->name('packege.delete');
+	/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+	::::::::::::::::::::::booking:::::::::::::::::::::::::::::::::::::::::::::
+
+	*/
+	Route::get('/packege/booking','BookingController@index')->name('packege.getbooking');
+	Route::get('/packege/booking/details/{booking}/{packege}','BookingController@packege_details')->name('packege.booking.details');
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
  *:::::::::::::::::::::::::::::::::::::Route From Tariqul Islam ::::::::::::::::::::::::::::::::::::::::::::::
@@ -103,7 +109,10 @@ Route::get('auth/{service}/callback', 'Auth\FacebookController@handleFacebookCal
 //:::::::::::::booking:::::::::::::::
 Route::get('/explore','ExperienceBookingController@index')->name('explore');
 Route::get('/experience-booking/{id}','ExperienceBookingController@experience_booking')->name('experience-booking');
-
+Route::get('/booking-result','ExperienceBookingController@booking_result')->name('booking-result');
+Route::post('/itinaray-up','ExperienceBookingController@itinaray_up')->name('itinaray-up');
+Route::get('/user/wishlist','ExperienceBookingController@wishliststore')->name('user.wishlist');
+Route::get('/wishlist','ExperienceBookingController@wishlist')->name('wishlist');
 
 Route::get('stay/{id}', 'admin\HotelController@view')->name('hotel.show');
 
