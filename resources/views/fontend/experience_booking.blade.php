@@ -1,6 +1,7 @@
 @extends('fontend.layouts.master')
 @section('pageTitle') dashboard @endsection
 @push('css')
+<link href="{{asset('fontend/css/toastr.min.css')}}" rel="stylesheet">
 @endpush
 @section('page-header')
 <img src="{{asset('fontend/images/bg8.jpg')}}" class="bg1"/>
@@ -108,17 +109,20 @@
 									Package options
 									</h4>
 								</div>
-								<form>
+								<form action="{{ route('itinaray-up') }}" method="POST" id="itinaryForm">
+								@csrf
+									<input type="hidden" name="packege_id" value="{{$packege->id}}">
 												<div class="col-md-7">
 													<div class="one-way">
 														<div class ="row">
 															<b><span class="col-md-8">{{$packege->name}} (One Way)</span><span class="price-package">RM{{$packege->one_way_price}}</span>
-															<span id="ck-button"><label><input type="checkbox" id="one-way-pack" class="hidden" name="one-way" value="1" onclick="showDiv('one-way-pack')" /><span>Select</span></label></span></b>
+															<span id="ck-button"><label><input type="checkbox" id="one-way-pack" class="hidden" name="one_way" value="1" onclick="showDiv('one-way-pack')" /><span>Select</span></label></span></b>
+															<input type="hidden" name="one_price" value="{{$packege->one_way_price}}">
 														</div>
 														<div id="package-details-container-one" class="row">
 															<div class="col-md-6">
 																<div><label>Select Depart Date</label></div>
-																<div style="padding-bottom: 10px;"><input type="date" id="depart-date" class="form-control" name="depart-date" onchange="getPackageDetail('depart-date')" required /></div>
+																<div style="padding-bottom: 10px;"><input type="date" id="depart-date" class="form-control" name="depart_date" onchange="getPackageDetail('depart-date')" required /></div>
 															</div>
 															<div class="col-md-6">
 															</div>
@@ -127,7 +131,7 @@
 															</div>
 															<div class="col-md-6">
 																<div style="padding-bottom: 10px;">
-																	<select id="pack-quantity" class="form-control" name="pack-quantity" onchange="getPackageDetail('pack-quantity')" required>
+																	<select id="pack-quantity" class="form-control" name="pack_quantity" onchange="getPackageDetail('pack-quantity')" required>
 																		<option value="">Select Pack Quantity</option>
 																		<option value='1'>1</option>
 																		<option value='2'>2</option>
@@ -160,10 +164,10 @@
 															@foreach ($packege->oneway as $one)
 															
 															<div class="col-md-3">
-																<input type="time" id="time1-0" class="form-control form-control100 itinerary-form1" name="time1[0]" value="{{$one->time1}}" readonly />
+																<input type="time" id="time1-0" class="form-control form-control100 itinerary-form1" name="time1[]" value="{{$one->time1}}" readonly />
 															</div>
 															<div class="col-md-9">
-																<input type="text" id="activity1-0" class="form-control form-control100 itinerary-form1" name="activity1[0]" value="{{$one->itinary_name1}}" readonly />
+																<input type="text" id="activity1-0" class="form-control form-control100 itinerary-form1" name="itinary_name1[]" value="{{$one->itinary_name1}}" readonly />
 															</div>
 														@endforeach
 														
@@ -182,11 +186,12 @@
 														<div class ="row package-details-two-way">
 															<b><span class="col-md-8">{{$packege->name}} (Two Way)</span><span class="price-package">RM{{$packege->two_way_price}}</span>
 															<span id="ck-button1"><label><input type="checkbox" id="two-way-pack" class="hidden" name="two-way" value="1" onclick="showDiv('two-way-pack')" /><span>Select</span></label></span></b>
+															<input type="hidden" name="two_price" value="{{$packege->two_way_price}}">
 														</div>
 														<div id="package-details-container-two" class="row">
 															<div class="col-md-6">
 																<div><label>Select Depart Date</label></div>
-																<div style="padding-bottom: 10px;"><input type="date" id="depart-date2" class="form-control"  name="depart-date2"  onchange="getPackageDetail2('depart-date2')"required />
+																<div style="padding-bottom: 10px;"><input type="date" id="depart-date2" class="form-control"  name="depart_date2"  onchange="getPackageDetail2('depart-date2')" required />
 															</div>
 														</div>
 														<div class="col-md-6">
@@ -196,7 +201,7 @@
 														</div>
 														<div class="col-md-6">
 															<div style="padding-bottom: 10px;">
-																<select id="pack-quantity2" class="form-control" name="pack-quantity2"  onchange="getPackageDetail2('pack-quantity2')" required >
+																<select id="pack-quantity2" class="form-control" name="pack_quantity2"  onchange="getPackageDetail2('pack-quantity2')" required >
 																	<option value="">Select Pack Quantity</option>
 																	<option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option><option value='13'>13</option><option value='14'>14</option><option value='15'>15</option><option value='16'>16</option><option value='17'>17</option><option value='18'>18</option><option value='19'>19</option><option value='20'>20</option>															</select>
 																</div>
@@ -210,10 +215,10 @@
 																{{-- expr --}}
 															
 															<div class="col-md-3">
-																<input type="time" id="time2-0" class="form-control form-control100 itinerary-form2" name="time2[0]" value="{{$two->time2}}" readonly />
+																<input type="time" id="time2-0" class="form-control form-control100 itinerary-form2" name="time2[]" value="{{$two->time2}}" readonly />
 															</div>
 															<div class="col-md-9">
-																<input type="text" id="activity2-0" class="form-control form-control100 itinerary-form2" name="activity2[0]" value="{{$two->itinary_name2}}" readonly />
+																<input type="text" id="activity2-0" class="form-control form-control100 itinerary-form2" name="itinary_name2[]" value="{{$two->itinary_name2}}" readonly />
 															</div>
 															@endforeach
 													
@@ -254,14 +259,20 @@
 																<div id="total-price-txt" class="col-md-6 align-right-col"></div>
 															</div>
 														</div>
+														@if (Auth::user())
 														<div class="col-md-12" style="padding-bottom: 20px;">
 															<input type="submit" class="btn btn-info btn-book" name="book-btn" value="Book now" />
 														</div>
+														@else
+														<div class="col-md-12" style="padding-bottom: 20px;">
+															<a href="{{ route('login') }}" class="btn btn-info btn-book">Book Now</a>
+														</div>
+														@endif
 														<div class="col-md-12" style="padding-bottom: 10px;">
 															<p>To be confirmed within 3 working day(s)</p>
 														</div>
 														<div class="col-md-12">
-															<a href="" class="wishlist-btn"> Add to Wishlists</a>
+															<button type="button" class="wishlist-btn" data-id="{{$packege->id}}" data-url="{{ route('user.wishlist') }}"> Add to Wishlists</button>
 														</div>
 													</div>
 												</div>
@@ -376,7 +387,9 @@
 @endsection
 @push('js')
 <!--===============================================================================================-->
+
 <script type="text/javascript" src="{{asset('fontend/js/experience-booking.js')}}"></script>
+<script src="{{asset('fontend/js/toastr.min.js')}}"></script>
 		<script>
 		function onSuccess(googleUser) {
 			console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
@@ -418,4 +431,5 @@
 		});
 		});
 		</script>
+
 @endpush	

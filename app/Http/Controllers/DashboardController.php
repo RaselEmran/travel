@@ -19,7 +19,7 @@ class DashboardController extends Controller
     {
     	$user_id = Auth::user()->id;
         $info =User::find($user_id);
-    	return view('fontend.dashboard',compact('info'));
+    	return view('fontend.profile.dashboard',compact('info'));
     }
 
     public function profile_update(Request $request)

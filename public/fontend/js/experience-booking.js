@@ -51,10 +51,10 @@ $(document).ready(function(){
 					activity = "activity1-" + i;
 
 					var appendRow = "<div class='col-md-3'>" +
-									"<input type='time' id='" + time + "' class='form-control form-control100 itinerary-none1' name='" + time + "' />" +
+									"<input type='time' id='" + time + "' class='form-control form-control100 itinerary-none1' name='time1[]' />" +
 									"</div>" +
 									"<div class='col-md-9'>" +
-									"<input type='text' id='" + activity + "' class='form-control form-control100 itinerary-none1' name='" + activity + "' />" +
+									"<input type='text' id='" + activity + "' class='form-control form-control100 itinerary-none1' name='itinary_name1[]' />" +
 									"</div>";
 					$("#itinerary-container1").append(appendRow);
 				}
@@ -79,10 +79,10 @@ $(document).ready(function(){
 					activityname = "activity2[" + i + "]";
 
 					var appendRow = "<div class='col-md-3'>" +
-									"<input type='time' id='" + timeid + "' class='form-control form-control100 itinerary-none2' name='" + timename + "' />" +
+									"<input type='time' id='" + timeid + "' class='form-control form-control100 itinerary-none2' name='time2[]' />" +
 									"</div>" +
 									"<div class='col-md-9'>" +
-									"<input type='text' id='" + activity + "' class='form-control form-control100 itinerary-none2' name='" + activityname + "' />" +
+									"<input type='text' id='" + activity + "' class='form-control form-control100 itinerary-none2' name='itinary_name2[]' />" +
 									"</div>";
 					$("#itinerary-container2").append(appendRow);
 				}
@@ -195,3 +195,81 @@ function getPackageDetail2(getId) {
 		$("#total-price-txt").text(newtotalprice);
 	}
 }
+
+$(document).on('click','#one-way-pack',function(){
+  $("#depart-date2").removeAttr('required');
+  $("#pack-quantity2").removeAttr('required');
+
+});
+
+$(document).on('click','#two-way-pack',function(){
+  $("#depart-date").removeAttr('required');
+  $("#pack-quantity").removeAttr('required');
+
+});
+			//Insert data
+
+$(document).on('submit','#itinaryForm', function(e){
+   e.preventDefault();
+   $(".ajax_error").remove();
+   var form = $(this).serialize();
+   var url = $(this).attr('action');
+              $.ajax({
+              method:'POST',
+              url: url,
+              data :form,
+              dateType: 'json',
+              success: function(data){
+                     if (data.success) {
+                        toastr.success(data.message);
+                        setTimeout(function(){
+
+                      window.location.href=data.goto;
+                      },2500);
+
+                    }
+
+                     else { 
+                            const errors = data.message
+                                // console.log(errors)
+                            var i = 0;
+                            $.each(errors, function(key, value) {
+                                const first_item = Object.keys(errors)[i]
+                                const message = errors[first_item][0]
+                                $('#' + first_item).after('<div class="ajax_error" style="color:red">' + value + '</div');
+                                 toastr.error(value);
+                                i++;
+                            });
+                        }
+               },
+                error: function(data) {
+                        var jsonValue = $.parseJSON(data.responseText);
+                      toastr.error(jsonValue.message);
+                      
+                    }
+
+            });
+  });
+//wishlist
+$(document).on('click','.wishlist-btn',function(){
+	var id =$(this).data('id');
+	var url = $(this).data('url');
+              $.ajax({
+              method:'GET',
+              url: url,
+              data :{id:id},
+              dateType: 'json',
+              success: function(data){
+                     if (data.status=='warning') {
+                     	console.log(data.message);
+                        toastr.warning(data.message);
+
+                    }
+                     if (data.status=='success') {
+                     	console.log(data.message);
+                        toastr.success(data.message);
+
+                    }
+                }
+            });
+});
