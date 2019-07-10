@@ -62,11 +62,13 @@ class HotelController extends Controller {
 			$hotel->meta_description = $request->meta_description;
 			$hotel->save();
 			$hotel_id = $hotel->id;
-			foreach ($request->amenity as $amenity) {
-				$amenity_hotels = new AmenityHotel;
-				$amenity_hotels->amenity_id = $amenity;
-				$amenity_hotels->hotel_id = $hotel_id;
-				$amenity_hotels->save();
+			if ($request->amenity) {
+				foreach ($request->amenity as $amenity) {
+					$amenity_hotels = new AmenityHotel;
+					$amenity_hotels->amenity_id = $amenity;
+					$amenity_hotels->hotel_id = $hotel_id;
+					$amenity_hotels->save();
+				}
 			}
 
 			return response()->json(['success' => true, 'status' => 'success', 'message' => 'Hotel Information Add Successfully.', 'goto' => route('admin.hotel')]);
