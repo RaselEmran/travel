@@ -152,7 +152,9 @@
                         <tr>
                             <td>
                                 <button type="submit" class="btn btn-info"> <i class=" icon-mail5"></i>Send Mail</button>
+                                  <button type="submit" class="btn btn-danger"> <i class=" icon-alarm-cancel"></i>Cancel Tour</button>
                             </td>
+                             
                         </tr>
                     </tfoot>
                     </table>

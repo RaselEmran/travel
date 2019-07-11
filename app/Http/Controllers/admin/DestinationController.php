@@ -5,7 +5,6 @@ namespace App\Http\Controllers\admin;
 use App\Destination;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Validator;
 
 class DestinationController extends Controller {

@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('pageTitle') Booking Packege @endsection
+@section('pageTitle') wishlist Packege @endsection
 @section('page-header')
    <div class="page-header page-header-default">
                     <div class="page-header-content">
@@ -46,7 +46,7 @@
 @section('content')
      <div class="panel panel-flat">
               <div class="panel-heading">
-                    <h5 class="panel-title">Packege Booking
+                    <h5 class="panel-title">User Packege Wishlist
                     </h5>
                     <div class="heading-elements">
                         <ul class="icons-list">
@@ -63,16 +63,16 @@
                                     <tr>
                                         
                                             <th>SL</th>
-                                            <th>Travelar name</th>
+                                            <th>User name</th>
                                             <th>packege Name</th>
                                             <th>Destination Name</th>
-                                            <th>Booking date</th>
+                                            <th>Wishlist date</th>
                                             <th>Action</th>
                                           
                                     </tr>
                                 </thead>
                                <tbody id="product_list">
-                                @foreach ($userpackege as $element)
+                                @foreach ($wishlist as $element)
                                    <tr>
                                    <td>{{$loop->index+1}}</td>
                                        <td>{{$element->user->name}}</td>
@@ -121,5 +121,5 @@
  <script src="{{asset('backend/global_assets/js/plugins/forms/selects/select2.min.js')}}"></script>
     <script src="{{asset('backend/global_assets/js/demo_pages/form_checkboxes_radios.js')}}"></script>
     <script src="{{asset('backend/global_assets/js/plugins/notifications/sweet_alert.min.js')}}"></script>
-    <script src="{{asset('backend/assets/js/packege.js')}}"></script>
+    {{-- <script src="{{asset('backend/assets/js/packege.js')}}"></script> --}}
 @endpush

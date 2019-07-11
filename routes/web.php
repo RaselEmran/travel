@@ -55,6 +55,24 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'admin', 'mi
 	Route::get('/packege/booking','BookingController@index')->name('packege.getbooking');
 	Route::get('/packege/booking/details/{booking}/{packege}','BookingController@packege_details')->name('packege.booking.details');
 
+
+
+
+	/*::::::::::::::Wishlist:::::::::::::::::::::::::::
+	:::::::::::::::::::::*/
+	Route::get('wishlist/packege','BookingController@pack_wishlist')->name('wishlist.packege');
+
+
+
+	/*::::::::::::Travelkit:::::::::::::::::::::::::::::::
+	:::::*/
+	Route::get('/travelkit','TravelkitController@index')->name('travelkit');
+	Route::get('/travelkit/create','TravelkitController@create')->name('travelkit.create');
+	Route::post('/travelkit/store','TravelkitController@store')->name('travelkit.store');
+	Route::get('/travelkit/edit/{id}','TravelkitController@edit')->name('travelkit.edit');
+	Route::post('/travelkit/edit','TravelkitController@update')->name('travelkit.update');
+	Route::get('/travelkit/delete/{id}','TravelkitController@delete')->name('travelkit.delete');
+
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
  *:::::::::::::::::::::::::::::::::::::Route From Tariqul Islam ::::::::::::::::::::::::::::::::::::::::::::::
  *::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -113,6 +131,10 @@ Route::get('/booking-result','ExperienceBookingController@booking_result')->name
 Route::post('/itinaray-up','ExperienceBookingController@itinaray_up')->name('itinaray-up');
 Route::get('/user/wishlist','ExperienceBookingController@wishliststore')->name('user.wishlist');
 Route::get('/wishlist','ExperienceBookingController@wishlist')->name('wishlist');
+
+/*::::::::::::::::::::::travelkit:::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+Route::get('/travelkit','ExperienceBookingController@travelkit')->name('travelkit');
 
 Route::get('stay/{id}', 'admin\HotelController@view')->name('hotel.show');
 

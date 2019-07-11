@@ -12,6 +12,7 @@ use App\TwoWayPack;
 use App\Hotel;
 use App\UserPackege;
 use App\UserItinary;
+use App\Wishlist;
 
 class BookingController extends Controller
 {
@@ -25,5 +26,11 @@ class BookingController extends Controller
     	$userpackege =UserPackege::find($booking);
     	$packegeinfo= Packege::find($packege);
     	return view('admin.booking.packege.details',compact('userpackege','packegeinfo'));
+    }
+    /*::::wishlist:::::*/
+    public function pack_wishlist()
+    {
+        $wishlist =Wishlist::all();
+        return view('admin.wishlist.packege.index',compact('wishlist'));
     }
 }

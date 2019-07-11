@@ -60,6 +60,26 @@
 
                                     </ul>
                                 </li>
+
+                                <li class="{{Request::is('admin/wishlist/*') ?'active':''}}">
+                                    <a href="#"><i class="icon-droplet"></i> <span>Wishlist</span></a>
+                                    <ul>
+                                        <li class="{{Request::is('admin/wishlist/packege') ?'active':''}}"><a href="{{ route('admin.wishlist.packege') }}"> Packege Wishlist</a></li>
+
+                                          <li class="{{Request::is('admin/wishlist/hotel') ?'active':''}}"><a href="{{ route('admin.hotel') }}">Hotel Wishlist</a></li>
+
+                                    </ul>
+                                </li>
+
+                                <li class="{{Request::is('admin/travelkit/*') ?'active':''}}">
+                                    <a href="#"><i class=" icon-basket"></i> <span>TravelKit</span></a>
+                                    <ul>
+                                        <li class="{{Request::is('admin/travelkit') ?'active':''}}"><a href="{{ route('admin.travelkit') }}"> Manage Kit</a></li>
+
+                                          <li class="{{Request::is('admin/wishlist/hotel') ?'active':''}}"><a href="{{ route('admin.hotel') }}">Hotel Wishlist</a></li>
+
+                                    </ul>
+                                </li>
                               {{--    <li>
                                     <a href="#"><i class="icon-people"></i> <span>Destination</span></a>
                                     <ul>

@@ -90,7 +90,7 @@
 							<span class="price-label" style="float: right;">{{$packege->one_way_price}}</span>
 						</div>
 						<div class="col-md-12" style="padding-bottom: 20px;">
-							<a href="#package-options-content" class="btn btn-info btn-book-redirect">Book</a>
+							<a href="{{ route('travelkit') }}" class="btn btn-info btn-book-redirect">Book</a>
 						</div>
 						<div class="col-md-12" style="padding-bottom: 20px;">
 							<p>To be confirmed within 3 working day(s)</p>

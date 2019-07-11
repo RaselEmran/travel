@@ -11,6 +11,7 @@ use App\Hotel;
 use App\UserPackege;
 use App\UserItinary;
 use App\Wishlist;
+use App\TravelKit;
 use Validator;
 use Auth;
 use User;
@@ -128,5 +129,18 @@ class ExperienceBookingController extends Controller
     $user_id =Auth::user()->id;
     $wishlist =Wishlist::where('user_id',$user_id)->get();
     return view('fontend.profile.wishlist',compact('wishlist'));
+   }
+
+   public function travelkit()
+   {
+    $phones =TravelKit::where('type','Phone Accessories')->where('status',1)->get();
+
+    $medicals =TravelKit::where('type','Medical')->where('status',1)->get();
+
+    $toiletries =TravelKit::where('type','Toiletries')->where('status',1)->get();
+
+    $others =TravelKit::where('type','Others')->where('status',1)->get();
+
+    return view('fontend.travelkit',compact('phones','medicals','toiletries','others'));
    }
 }
