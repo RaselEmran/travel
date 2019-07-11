@@ -49,30 +49,6 @@
 			</div>
 			<br>
 			@endif
-			<!-- <div class="row">
-				<div class="col-md-8">
-					<h4 class="hotel-sub-titles">Reviews</h4>
-				</div>
-				<div class="col-md-4">
-					<a class="view-more-review">More reviews</a>
-				</div>
-			</div>
-			<div class="row">
-				<div class="review-hotel-container">
-					<div class="col-md-2">
-						<span><img src="./images/profile-pic.png" class="profile-pic-comment" /></span>
-					</div>
-					<div class="col-md-10">
-						<div class="comment-name">Tsunghsien</div>
-						<div class="comment-review-star">
-							<img src="./images/star.png" class="staricon"/><img src="./images/star.png" class="staricon"/><img src="./images/star.png" class="staricon"/><img src="./images/star.png" class="staricon"/><img src="./images/star.png" class="staricon"/><span class="review">&nbsp;&nbsp;2019/04/15</span>
-						</div>
-						<div class="comment-review-desc">
-							Miss Lu, a young and bloody student, has many stories about the Big Island. Listening and listening to the spirit are coming! Although the volcano is not erupting now. But the beautiful story is also a good experience.
-						</div>
-					</div>
-				</div>
-			</div> -->
 			<br>
 			@if($hotel->room_details)
 			<div class="row">
@@ -160,7 +136,8 @@
 					<hr>
 				</div>
 				<div class="col-md-12">
-					<form>
+					<form action="{{ route('hotel.booking', $hotel->id) }}" method="POST" id="hotel_for">
+						{{ csrf_field() }}
 						<div class="row">
 							<div class="col-md-12">
 								<label>Check-in</label>
@@ -168,7 +145,8 @@
 						</div>
 						<div class="row">
 							<div class="col-md-12" style="padding-bottom: 10px;">
-								<input type="date" id="check-in" class="form-control form-control100" name="check-in" required />
+								<input type="hidden" value="{{ $hotel->id }}" name="hotel_id">
+								<input type="date" id="check_in" class="form-control form-control100" name="check_in" required />
 							</div>
 						</div>
 						<div class="row">
@@ -178,7 +156,7 @@
 						</div>
 						<div class="row">
 							<div class="col-md-12" style="padding-bottom: 10px;">
-								<input type="date" id="check-out" class="form-control form-control100" name="check-iout" required />
+								<input type="date" id="check_out" class="form-control form-control100" name="check_out" required />
 							</div>
 						</div>
 						<div class="row">
@@ -188,7 +166,7 @@
 						</div>
 						<div class="row">
 							<div class="col-md-12" style="padding-bottom: 10px;">
-								<select id="select-guest" class="form-control form-control-2" name="select-guest" required >
+								<select id="select-guest" class="form-control form-control-2" name="guest" required >
 									<option value="">Select Guest</option>
 									<option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option><option value='13'>13</option><option value='14'>14</option><option value='15'>15</option><option value='16'>16</option><option value='17'>17</option><option value='18'>18</option><option value='19'>19</option><option value='20'>20</option>											</select>
 								</div>
@@ -238,5 +216,10 @@
 </div>
 </div>
 @endsection
-@push('css')
+@push('js')
+<!--===============================================================================================-->
+
+<script type="text/javascript" src="{{asset('fontend/js/hotel-booking.js')}}"></script>
+<script src="{{asset('fontend/js/toastr.min.js')}}"></script>
+
 @endpush

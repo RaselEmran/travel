@@ -40,8 +40,8 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'admin', 'mi
 	Route::get('/packege', 'PackegeController@index')->name('packege');
 	Route::get('/packege/create', 'PackegeController@create')->name('packege.create');
 	//.....get
-	Route::get('/one-way-itinary','PackegeController@one_way');
-	Route::get('/two-way-itinary','PackegeController@two_way');
+	Route::get('/one-way-itinary', 'PackegeController@one_way');
+	Route::get('/two-way-itinary', 'PackegeController@two_way');
 	Route::post('/packege/store', 'PackegeController@store')->name('packege.store');
 	Route::get('/packege/edit/{id}', 'PackegeController@edit')->name('packege.edit');
 	Route::post('/packege/edit', 'PackegeController@update')->name('packege.update');
@@ -49,11 +49,11 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'admin', 'mi
 	Route::get('/packege/view/{id}', 'PackegeController@view')->name('packege.view');
 	Route::get('/packege/delete/{id}', 'PackegeController@delete')->name('packege.delete');
 	/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-	::::::::::::::::::::::booking:::::::::::::::::::::::::::::::::::::::::::::
+		::::::::::::::::::::::booking:::::::::::::::::::::::::::::::::::::::::::::
 
 	*/
-	Route::get('/packege/booking','BookingController@index')->name('packege.getbooking');
-	Route::get('/packege/booking/details/{booking}/{packege}','BookingController@packege_details')->name('packege.booking.details');
+	Route::get('/packege/booking', 'BookingController@index')->name('packege.getbooking');
+	Route::get('/packege/booking/details/{booking}/{packege}', 'BookingController@packege_details')->name('packege.booking.details');
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
  *:::::::::::::::::::::::::::::::::::::Route From Tariqul Islam ::::::::::::::::::::::::::::::::::::::::::::::
@@ -107,12 +107,15 @@ Route::get('auth/{service}', 'Auth\FacebookController@redirectToFacebook');
 Route::get('auth/{service}/callback', 'Auth\FacebookController@handleFacebookCallback');
 
 //:::::::::::::booking:::::::::::::::
-Route::get('/explore','ExperienceBookingController@index')->name('explore');
-Route::get('/experience-booking/{id}','ExperienceBookingController@experience_booking')->name('experience-booking');
-Route::get('/booking-result','ExperienceBookingController@booking_result')->name('booking-result');
-Route::post('/itinaray-up','ExperienceBookingController@itinaray_up')->name('itinaray-up');
-Route::get('/user/wishlist','ExperienceBookingController@wishliststore')->name('user.wishlist');
-Route::get('/wishlist','ExperienceBookingController@wishlist')->name('wishlist');
+Route::get('/explore', 'ExperienceBookingController@index')->name('explore');
+Route::get('/experience-booking/{id}', 'ExperienceBookingController@experience_booking')->name('experience-booking');
+Route::get('/booking-result', 'ExperienceBookingController@booking_result')->name('booking-result');
+Route::post('/itinaray-up', 'ExperienceBookingController@itinaray_up')->name('itinaray-up')->middleware('auth');
+Route::get('/user/wishlist', 'ExperienceBookingController@wishliststore')->name('user.wishlist');
+Route::get('/wishlist', 'ExperienceBookingController@wishlist')->name('wishlist');
 
-Route::get('stay/{id}', 'admin\HotelController@view')->name('hotel.show');
+Route::get('stay/{id}', 'HotelController@show')->name('hotel.show');
 
+// 10-07-2019
+Route::get('/stays', 'HotelController@index')->name('hotel.index');
+Route::post('/stay/{id}', 'HotelController@booking')->name('hotel.booking')->middleware('auth');

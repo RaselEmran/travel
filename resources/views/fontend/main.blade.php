@@ -48,7 +48,7 @@
 							<h4><b>Explore The World</b></h4>
 
 						</div>
-						
+
                         <div class="col-md-10">
 
 							<p class="p1">Discover a different side of these beloved cities</p>
@@ -60,7 +60,7 @@
 
 						</div>
 
-		
+
 				</div>
 				@foreach ($data['packege'] as $allpack)
 
@@ -125,7 +125,7 @@
 					<p class="p1">Make sure you don't miss out any attractive hotspot nearby your destination</p>
 				</div>
 				<div class="col-md-2">
-					<p class="p1"><a class="views-all-btn flt-right" href="">View All</a></p>
+					<p class="p1"><a class="views-all-btn flt-right" href="{{ route('hotel.index') }}">View All</a></p>
 				</div>
 				@foreach($data['hotel'] as $hotel)
 				<div class="col-lg-3 col-md-6 borderimg1">

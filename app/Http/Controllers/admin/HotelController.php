@@ -142,11 +142,8 @@ class HotelController extends Controller {
 		if ($request->ajax()) {
 			$hotel = Hotel::find($id);
 			return view('admin.hotel.view', compact('hotel'));
-		} else {
-			$hotel = Hotel::findOrFail($id);
-			$latest = Hotel::take(4)->latest()->get();
-			return view('fontend.stay', compact('hotel', 'latest'));
 		}
+		return abort(404);
 	}
 
 	public function delete(Request $request, $id) {
