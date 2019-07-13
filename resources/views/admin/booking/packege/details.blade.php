@@ -103,7 +103,10 @@
          <div class="row">
              <div class="col-md-12">
                 <h2>Travelar Itinary <b>{{$userpackege->type}}</b></h2>
-                <form action="">
+                <form action="{{ route('admin.send-packege-mail') }}" method="post">
+                @csrf
+                <input type="hidden" name="user_packege" value="{{$userpackege->id}}">
+                <input type="hidden" name="user_id" value="{{$userpackege->user_id}}">
                 <table class="table table-bordered">
                     <thead>
                         <tr>

@@ -1,7 +1,7 @@
 @extends('fontend.layouts.master')
 @section('pageTitle') travelkit @endsection
 @push('css')
-
+<link href="{{asset('fontend/css/toastr.min.css')}}" rel="stylesheet">
 @endpush
 @section('page-header')
 		  
@@ -14,7 +14,8 @@
 @section('content')
     <div class="row bg-payment">
             <div id="content12">
-                <form>
+                <form action="{{ route('travelkit-book') }}" method="post" id="travelkit">
+                @csrf
                     <div class="container">
                         <div class="row">
                             <div class="col-md-7 booking-order-details">
@@ -196,6 +197,7 @@
                                     <div class="order-total-prices">
                                         <span>Total</span>
                                         <span id="total-price" class="align-right-col flt-right">0.00</span><span class="align-right-col flt-right">RM&nbsp;</span>
+                                        <input type="hidden" name="total_price" id="hidden_price">
                                     </div>
                                 </div>
                                 <div class="col-md-12" style="padding-bottom: 10px;">
@@ -221,6 +223,22 @@
 @endsection
 
 @push('js')
+<script src="{{asset('fontend/js/toastr.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('fontend/js/main.js')}}"></script>
 <script type="text/javascript" src="{{asset('fontend/js/travel-kits.js')}}"></script>
+<script>
+    @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                toastr.error('{{$error}}');
+            @endforeach
+    @endif
+
+    @if(session('msg'))
+    toastr.warning('{{session('msg')}}');
+    @endif
+
+    @if(session('emsg'))
+    toastr.warning('{{session('emsg')}}');
+    @endif
+</script>
 @endpush

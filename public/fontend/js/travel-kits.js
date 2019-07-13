@@ -31,6 +31,7 @@ $(document).ready(function(){
 			priceItem = parseFloat(priceItem) * parseFloat(quantity);
 			var newTotalPrice = parseFloat(currentTotalPrice) + parseFloat(priceItem);			
 			$("#total-price").text(newTotalPrice.toFixed(2));
+			$("#hidden_price").val(newTotalPrice.toFixed(2));
 			
 		} else {
             $(quantityId).attr("disabled","disabled");
@@ -43,6 +44,7 @@ $(document).ready(function(){
 			var minusPriceItem = parseFloat(priceItem) * quantity;
 			var latestTotalPrice = parseFloat(minusTotalPrice) - parseFloat(minusPriceItem);
 			$("#total-price").text(latestTotalPrice.toFixed(2));
+			$("#hidden_price").val(latestTotalPrice.toFixed(2));
 		}
 	});
 	
@@ -84,6 +86,8 @@ $(document).ready(function(){
 		$(newQuantityId).text(newQuantity);
 		
 		$("#total-price").text(newTotalPriceItem.toFixed(2));
+		$("#hidden_price").val(newTotalPriceItem.toFixed(2));
+
 		
 	});
 });

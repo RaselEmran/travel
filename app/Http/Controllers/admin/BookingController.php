@@ -12,7 +12,9 @@ use App\TwoWayPack;
 use App\Hotel;
 use App\UserPackege;
 use App\UserItinary;
+use App\User;
 use App\Wishlist;
+use App\Notifications\CheckoutNotification;
 
 class BookingController extends Controller
 {
@@ -32,5 +34,19 @@ class BookingController extends Controller
     {
         $wishlist =Wishlist::all();
         return view('admin.wishlist.packege.index',compact('wishlist'));
+    }
+
+    public function send_packege_mail(Request $request)
+    {
+     $user_id =$request->user_id;
+     $packege =$request->user_packege;
+     $userpackege =UserPackege::find($packege);
+     $user =User::find($user_id);
+     $messege =$request->messege;
+     if ($user->email) {
+        $user->notify(new CheckoutNotification($userpackege,$user,$messege));
+     }
+
+
     }
 }

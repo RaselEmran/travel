@@ -9,13 +9,17 @@ use Illuminate\Notifications\Notification;
 class CheckoutNotification extends Notification {
 	use Queueable;
 	protected $user;
+	protected $packege;
+	protected $messege;
 	/**
 	 * Create a new notification instance.
 	 *
 	 * @return void
 	 */
-	public function __construct($user) {
+	public function __construct($packege,$user,$messege=null) {
 		$this->user = $user;
+		$this->packege = $packege;
+		$this->messege = $messege;
 	}
 
 	/**
@@ -35,10 +39,12 @@ class CheckoutNotification extends Notification {
 	 * @return \Illuminate\Notifications\Messages\MailMessage
 	 */
 	public function toMail($notifiable) {
+		$user =$this->user;
+		$packege =$this->packege;
+		$messege =$this->messege;
 		return (new MailMessage)
-			->line('The introduction to the notification.')
-			->action('Notification Action', url('/'))
-			->line('Thank you for using our application!');
+		 	->subject('Booking Confirmation')
+			->view('admin.email.packege_checkout',compact('user','packege','messege'));
 	}
 
 	/**

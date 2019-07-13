@@ -12,6 +12,9 @@ use App\UserPackege;
 use App\UserItinary;
 use App\Wishlist;
 use App\TravelKit;
+use App\bookingKit;
+use App\ConfirmKit;
+use App\Helpars\Kitpaypale;
 use Validator;
 use Auth;
 use User;
@@ -149,5 +152,65 @@ class ExperienceBookingController extends Controller
 
     return view('fontend.travelkit',compact('phones','medicals','toiletries','others'));
    }
+  public function travelkit_book(Request $request)
+  {
+    
+      $this->validate($request, [
+        'pick_up_date' => 'required|date',
+        'pick_up_time' => 'required',
+        'location' => 'required',
+        'location_name' => 'required',
 
+      ]);
+      $user_id =Auth::user()->id;
+ 
+      $kit =$request->pha;
+      if (!isset($kit)) {
+        return redirect('/travelkit')->with('msg','Select Atleast One Kit');
+
+      }
+      else{
+         $confirmkit =new ConfirmKit;
+         $confirmkit->user_id =$user_id;
+         $confirmkit->pick_up_date =$request->pick_up_date;
+         $confirmkit->pick_up_time =$request->pick_up_time;
+         $confirmkit->location =$request->location;
+         $confirmkit->location_name =$request->location_name;
+         $confirmkit->total_amt =$request->total_price;
+         $confirmkit->status ='Pendding';
+         $confirmkit->save(); 
+         $confirm_kit_id =$confirmkit->id;
+
+         for ($i=0; $i <count($kit) ; $i++) { 
+          $bookingKit =new bookingKit;
+          $bookingKit->confirm_kit_id =$confirm_kit_id;
+          $bookingKit->travel_kit_id=$kit[$i];
+          $bookingKit->price=$request->price[$i];
+          $bookingKit->quantity=$request->quantity[$i];
+          $bookingKit->save();
+         }
+
+          return redirect('/travelkit')->with('emsg','Your Travelkit Card add Successfully,we will Confirm you within 24 hours');
+            // $paypal = new Kitpaypale;
+
+            // $response = $paypal->purchase([
+            //     'amount' => $paypal->formatAmount($request->total_price),
+            //     'transactionId' => '12345698745',
+            //     'currency' => 'USD',
+            //     'cancelUrl' => $paypal->getCancelUrl($confirm_kit_id),
+            //     'returnUrl' => $paypal->getReturnUrl($confirm_kit_id),
+            // ]);
+            // dd($response);
+
+        //       if ($response->isSuccessful()) {
+        //         dd($response->getTransactionReference());
+
+          
+        // }
+
+      }
+
+      
+ 
+  }
 }
