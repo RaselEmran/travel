@@ -42,6 +42,7 @@ class HomeController extends Controller {
 		return view('fontend.login');
 	}
 
+
 	public function news()
 	{
 		$news =News::paginate(5);
@@ -63,4 +64,5 @@ class HomeController extends Controller {
    	 	return view('fontend.about_us',compact('aboutinfo'));
    	 }
 	}
+
 }

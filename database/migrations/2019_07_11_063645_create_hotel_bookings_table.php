@@ -15,9 +15,10 @@ class CreateHotelBookingsTable extends Migration {
 			$table->increments('id');
 			$table->integer('hotel_id')->nullable()->unsigned();
 			$table->integer('user_id')->nullable()->unsigned();
-			$table->date('check_in');
-			$table->date('check_out');
-			$table->integer('guest');
+			$table->date('check_in')->nullable();
+			$table->date('check_out')->nullable();
+			$table->integer('guest')->nullable();
+			$table->double('price', 10, 2)->nullable();
 			$table->boolean('status')->default(false);
 			$table->timestamps();
 			$table->foreign('hotel_id')->references('id')->on('hotels')->onDelete('cascade');

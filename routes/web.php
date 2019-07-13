@@ -19,14 +19,13 @@ $this->get('/admin/login', 'AdminAuth\LoginController@showLoginForm')->name('adm
 $this->post('admin/login', 'AdminAuth\LoginController@login')->name('admin.login');
 $this->post('admin/logout', 'AdminAuth\LoginController@logout')->name('admin.logout');
 
-
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'admin', 'middleware' => ['auth:admin']], function () {
 	//profile
 	Route::get('/profile', 'DashboardController@profile')->name('profile');
 	Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-    //:::::::::::::::travelar::::::::::::::::::
-    Route::get('/travelar','DashboardController@travelar')->name('travelar');
-    //::::::::::::::destination::::::::::::::
+	//:::::::::::::::travelar::::::::::::::::::
+	Route::get('/travelar', 'DashboardController@travelar')->name('travelar');
+	//::::::::::::::destination::::::::::::::
 	Route::get('/destination', 'DestinationController@index')->name('destination');
 	Route::get('/destination/create', 'DestinationController@create')->name('destination.create');
 	Route::post('/destination/store', 'DestinationController@store')->name('destination.store');
@@ -53,42 +52,37 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'admin', 'mi
 	Route::get('/packege/booking', 'BookingController@index')->name('packege.getbooking');
 	Route::get('/packege/booking/details/{booking}/{packege}', 'BookingController@packege_details')->name('packege.booking.details');
 
-
-
-
 	/*::::::::::::::Wishlist:::::::::::::::::::::::::::
 	:::::::::::::::::::::*/
-	Route::get('wishlist/packege','BookingController@pack_wishlist')->name('wishlist.packege');
-
-
+	Route::get('wishlist/packege', 'BookingController@pack_wishlist')->name('wishlist.packege');
 
 	/*::::::::::::Travelkit:::::::::::::::::::::::::::::::
 	:::::*/
-	Route::get('/travelkit','TravelkitController@index')->name('travelkit');
-	Route::get('/travelkit/create','TravelkitController@create')->name('travelkit.create');
-	Route::post('/travelkit/store','TravelkitController@store')->name('travelkit.store');
-	Route::get('/travelkit/edit/{id}','TravelkitController@edit')->name('travelkit.edit');
-	Route::post('/travelkit/edit','TravelkitController@update')->name('travelkit.update');
-	Route::get('/travelkit/delete/{id}','TravelkitController@delete')->name('travelkit.delete');
+	Route::get('/travelkit', 'TravelkitController@index')->name('travelkit');
+	Route::get('/travelkit/create', 'TravelkitController@create')->name('travelkit.create');
+	Route::post('/travelkit/store', 'TravelkitController@store')->name('travelkit.store');
+	Route::get('/travelkit/edit/{id}', 'TravelkitController@edit')->name('travelkit.edit');
+	Route::post('/travelkit/edit', 'TravelkitController@update')->name('travelkit.update');
+	Route::get('/travelkit/delete/{id}', 'TravelkitController@delete')->name('travelkit.delete');
 
 	/*:::::::::::::::News:::::::::::::::::::::::::::::::::::
 	::::::::::::::::::::::::::::::::::::*/
-	Route::get('news/category','NewsController@category')->name('news.category');
-	Route::get('news/category/create','NewsController@category_create')->name('news.category.create');
-	Route::post('news/category/create','NewsController@category_store')->name('news.category.store');
-	Route::get('/news/category/edit/{id}','NewsController@category_edit')->name('news.category.edit');
-	Route::post('/news/category/edit','NewsController@category_update')->name('news.category.update');
-	Route::get('/news/category/delete/{id}','NewsController@category_delete')->name('news.category.delete');
-	Route::get('/news/blog','NewsController@news')->name('news.blog');
-	Route::get('/news/blog/create','NewsController@news_create')->name('news.blog.create');
-	Route::post('/news/blog/create','NewsController@news_store')->name('news.blog.store');
-	Route::get('/news/blog/edit/{id}','NewsController@news_edit')->name('news.blog.edit');
-	Route::post('/news/blog/edit','NewsController@news_update')->name('news.blog.upadte');
-	Route::get('/news/blog/delete/{id}','NewsController@news_delete')->name('news.blog.delete');
+	Route::get('news/category', 'NewsController@category')->name('news.category');
+	Route::get('news/category/create', 'NewsController@category_create')->name('news.category.create');
+	Route::post('news/category/create', 'NewsController@category_store')->name('news.category.store');
+	Route::get('/news/category/edit/{id}', 'NewsController@category_edit')->name('news.category.edit');
+	Route::post('/news/category/edit', 'NewsController@category_update')->name('news.category.update');
+	Route::get('/news/category/delete/{id}', 'NewsController@category_delete')->name('news.category.delete');
+	Route::get('/news/blog', 'NewsController@news')->name('news.blog');
+	Route::get('/news/blog/create', 'NewsController@news_create')->name('news.blog.create');
+	Route::post('/news/blog/create', 'NewsController@news_store')->name('news.blog.store');
+	Route::get('/news/blog/edit/{id}', 'NewsController@news_edit')->name('news.blog.edit');
+	Route::post('/news/blog/edit', 'NewsController@news_update')->name('news.blog.upadte');
+	Route::get('/news/blog/delete/{id}', 'NewsController@news_delete')->name('news.blog.delete');
 
 	/*:::::::::::::::::::::::Pages::::::::::::::::::::::::::::*/
-	Route::get('/pages','PageController@index')->name('pages');
-	Route::post('/pages/update','PageController@store')->name('page.update');
+	Route::get('/pages', 'PageController@index')->name('pages');
+	Route::post('/pages/update', 'PageController@store')->name('page.update');
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
  *:::::::::::::::::::::::::::::::::::::Route From Tariqul Islam ::::::::::::::::::::::::::::::::::::::::::::::
@@ -146,22 +140,25 @@ Route::get('auth/{service}/callback', 'Auth\FacebookController@handleFacebookCal
 
 //:::::::::::::booking:::::::::::::::
 
-Route::get('/explore','ExperienceBookingController@index')->name('explore');
-Route::get('/experience-booking/{id}','ExperienceBookingController@experience_booking')->name('experience-booking');
-Route::get('/booking-result','ExperienceBookingController@booking_result')->name('booking-result');
-Route::post('/itinaray-up','ExperienceBookingController@itinaray_up')->name('itinaray-up');
-Route::get('/user/wishlist','ExperienceBookingController@wishliststore')->name('user.wishlist');
-Route::get('/wishlist','ExperienceBookingController@wishlist')->name('wishlist');
-Route::get('/experience-booking-details/{id}','ExperienceBookingController@packege_book_details')->name('experience-booking-details')->middleware('auth');
+Route::get('/explore', 'ExperienceBookingController@index')->name('explore');
+Route::get('/experience-booking/{id}', 'ExperienceBookingController@experience_booking')->name('experience-booking');
+Route::get('/booking-result', 'ExperienceBookingController@booking_result')->name('booking-result');
+Route::post('/itinaray-up', 'ExperienceBookingController@itinaray_up')->name('itinaray-up');
+Route::get('/user/wishlist', 'ExperienceBookingController@wishliststore')->name('user.wishlist');
+Route::get('/wishlist', 'ExperienceBookingController@wishlist')->name('wishlist');
+Route::get('/experience-booking-details/{id}', 'ExperienceBookingController@packege_book_details')->name('experience-booking-details')->middleware('auth');
 
 /*::::::::::::::::::::::travelkit:::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
-Route::get('/travelkit','ExperienceBookingController@travelkit')->name('travelkit');
+Route::get('/travelkit', 'ExperienceBookingController@travelkit')->name('travelkit');
 
-Route::get('stay/{id}', 'admin\HotelController@view')->name('hotel.show');
-
+Route::get('stay/{id}', 'HotelController@show')->name('hotel.show');
 
 // 10-07-2019
 Route::get('/stays', 'HotelController@index')->name('hotel.index');
 Route::post('/stay/{id}', 'HotelController@booking')->name('hotel.booking')->middleware('auth');
 
+//13-07-2019
+
+Route::get('/hotel-booking-details/{id}', 'HotelController@book_details')->name('hotel.booking_details')->middleware('auth');
+Route::get('/hotel-booking-list', 'HotelController@booking_list')->name('hotel.booking_list')->middleware('auth');

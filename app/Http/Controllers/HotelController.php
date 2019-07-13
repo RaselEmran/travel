@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Hotel;
 use App\HotelBooking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class HotelController extends Controller {
 	/**
@@ -32,9 +33,12 @@ class HotelController extends Controller {
 		$booking->check_in = $request->check_in;
 		$booking->check_out = $request->check_out;
 		$booking->guest = $request->guest;
+		$booking->price = $request->price;
 		$booking->save();
+		Session::flash('message', 'Packege Book Successfully.Check Your mail After 24 hours!');
+		return redirect()->route('hotel.booking_list');
 
-		return response()->json(['success' => true, 'status' => 'success', 'message' => 'Packege Book Successfully.Check Your mail After 24 hours', 'goto' => route('dashboard')]);
+		// return response()->json(['success' => true, 'status' => 'success', 'message' => 'Packege Book Successfully.Check Your mail After 24 hours', 'goto' => route('dashboard')]);
 	}
 
 	/**
@@ -100,5 +104,16 @@ class HotelController extends Controller {
 	 */
 	public function destroy($id) {
 		//
+	}
+
+	public function booking_list() {
+		$user_id = auth()->user()->id;
+		$hotels = HotelBooking::where('user_id', $user_id)->paginate(6);
+		return view('fontend.profile.hotel_booking', compact('hotels'));
+	}
+	public function book_details($id) {
+		$user_id = auth()->user()->id;
+		$hotel_booking = HotelBooking::where('id', $id)->where('user_id', $user_id)->firstOrFail();
+		return view('fontend.profile.hotel_booking_details', compact('hotel_booking'));
 	}
 }

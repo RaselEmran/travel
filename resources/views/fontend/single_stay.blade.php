@@ -146,6 +146,7 @@
 						<div class="row">
 							<div class="col-md-12" style="padding-bottom: 10px;">
 								<input type="hidden" value="{{ $hotel->id }}" name="hotel_id">
+								<input type="hidden" value="{{ $hotel->price }}" name="price">
 								<input type="date" id="check_in" class="form-control form-control100" name="check_in" required />
 							</div>
 						</div>
