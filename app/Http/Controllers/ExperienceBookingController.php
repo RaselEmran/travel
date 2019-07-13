@@ -20,7 +20,7 @@ class ExperienceBookingController extends Controller
    public function index()
    {
    	
-	   $packege =Packege::all();
+	   $packege =Packege::paginate(8);
 	   return view('fontend.explore',compact('packege'));
    }
    public function experience_booking($id)
@@ -33,9 +33,9 @@ class ExperienceBookingController extends Controller
    public function itinaray_up(Request $request)
    {
       // dd($request->all());
-      if ($request->one_way !==1) {
-         return response()->json(['success' => true, 'status' => 'success', 'message' => 'Packege Book Successfully','goto'=>route('dashboard')]);
-      }
+      // if ($request->one_way !==1) {
+      //    return response()->json(['success' => true, 'status' => 'success', 'message' => 'Packege Book Successfully','goto'=>route('dashboard')]);
+      // }
 
       if ($request->one_way) {
           $userpackege =new UserPackege;

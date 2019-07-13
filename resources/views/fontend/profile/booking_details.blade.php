@@ -8,7 +8,8 @@
 @section('procontent')
 
 	<div class="col-md-8 booking-order-details">
-     <h4>Packege Info</h4>
+    <img src="{{asset('/storage/packege/banner/'.$packege->packege->banner)}}" alt="" class="img-responsive">
+     <h4 class="label label-primary">Packege Info</h4>
      <table class="table">
          <tr>
              <th>Packege Name</th>
@@ -22,7 +23,7 @@
          </tr>
      </table>
      <div>
-         <h4>Booking Info</h4>
+         <h4 class="label label-info">Booking Info</h4>
          <table class="table">
              <tr>
                  <th>Packege Type</th>
@@ -42,23 +43,26 @@
      </div>
 
         <div>
-         <h4>Your Itinary</h4>
+         <h4 class="label label-default">Your Itinary</h4>
          <table class="table">
              <tr>
-                 <th>Packege Type</th>
-                 <th>Depart date</th>
-                 <th>Pack Quantity</th>
-                 <th>Price</th>
-                 <th>Total</th>
+                 <th>Time</th>
+                 <th>Name</th>
              </tr>
              <tr>
-                 <td>{{$packege->type}}</td>
-                 <td>{{$packege->depart_date}}</td>
-                 <td>{{$packege->pack_quantity}}</td>
-                 <td>{{$packege->price}}</td>
-                 <td>{{$packege->total}}</td>
+               @foreach ($packege->useritinary as $element)
+                 <tr>
+                     <td>{{$element->time}}</td>
+                     <td>{{$element->name}}</td>
+                 </tr>
+               @endforeach
              </tr>
          </table>
+         <h3>Your Tour Status @if ($packege->status==0)
+             <span class="label label-danger">Pendding</span>
+             @else
+             <span class="label label-success">Mail Sent</span>
+         @endif</h3>
      </div>
     </div>
 		

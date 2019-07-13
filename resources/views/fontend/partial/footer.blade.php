@@ -18,13 +18,13 @@
 
 						<p class="headertitle1">Resources</p>
 
-						<p class="subtext1">About us</p>
+						<p class="subtext1"><a href="{{ route('about-us') }}">About us</a></p>
 
 						<p class="subtext1">Terms and conditions</p>
 
 						<p class="subtext1">Privacy Policy</p>
 
-						<p class="subtext1">Blog</p>
+						<p class="subtext1"><a class="nav" href="{{ route('home.news') }}">Blog</a></p>
 
 						<p class="subtext1">Career</p>
 

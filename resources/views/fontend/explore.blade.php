@@ -42,6 +42,7 @@
 
 						</div>
 				@endforeach
+                {{ $packege->links() }}
             </div>
         </div>
     </div>

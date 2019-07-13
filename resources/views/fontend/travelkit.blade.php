@@ -37,10 +37,10 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4" style="padding-bottom: 20px;">
-                                            <input type="date" class="form-control form-control100" name="pick-up-date" />
+                                            <input type="date" class="form-control form-control100" name="pick_up_date" />
                                         </div>
                                         <div class="col-md-4" style="padding-bottom: 20px;">
-                                            <input type="time" class="form-control form-control100" name="pick-up-time" />
+                                            <input type="time" class="form-control form-control100" name="pick_up_time" />
                                         </div>
                                         <div class="col-md-4" style="padding-bottom: 20px;">
                                             <select class="form-control form-control100" name="location">
@@ -55,7 +55,7 @@
                                             <label>Location Name</label>
                                         </div>
                                         <div class="col-md-12" style="padding-bottom: 20px;">
-                                            <input type="text" class="form-control form-control100" name="location-name" placeholder="Example: Hotel's Name or Airport's Name" />
+                                            <input type="text" class="form-control form-control100" name="location_name" placeholder="Example: Hotel's Name or Airport's Name" />
                                         </div>
                                     </div>
                                     <div class="row">

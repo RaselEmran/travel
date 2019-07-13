@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Hotel;
 use App\Packege;
+use App\News;
+use App\Pages;
 
 class HomeController extends Controller {
 	/**
@@ -38,5 +40,27 @@ class HomeController extends Controller {
 
 	public function login() {
 		return view('fontend.login');
+	}
+
+	public function news()
+	{
+		$news =News::paginate(5);
+		return view('fontend.news',compact('news'));
+	}
+
+	public function news_details($slug,$id)
+	{
+		$details =News::find($id);
+		return view('fontend.news_details',compact('details'));
+	}
+
+	public function about_us()
+	{
+		$about = Pages::where('key', 'about')->select('key','value')->first();
+		$aboutinfo =null;
+		if ($about) {
+   	 	$aboutinfo=json_decode($about->value);
+   	 	return view('fontend.about_us',compact('aboutinfo'));
+   	 }
 	}
 }
