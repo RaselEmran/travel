@@ -6,7 +6,7 @@ $(document).on('click','#logout',function(e){
               $.ajax({
               method:'Post',
               url: url,
-              dateType: 'json',
+              dataType: 'json',
               contentType:false,
               cache:false,
               processData:false,

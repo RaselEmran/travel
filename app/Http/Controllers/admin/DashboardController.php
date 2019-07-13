@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
 use App\Admin;
+use App\user;
 
 class DashboardController extends Controller
 {
@@ -36,5 +37,11 @@ class DashboardController extends Controller
         $user_id = Auth::user()->id;
         $admin =Admin::find($user_id);
         return view('admin.profile.profile',compact('admin'));
+    }
+
+    public function travelar()
+    {
+        $travelars =User::all();
+        return view('admin.travelar',compact('travelars'));
     }
 }

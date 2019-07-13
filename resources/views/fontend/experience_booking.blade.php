@@ -97,7 +97,7 @@
 						</div>
 					</div>
 				</div>
-				
+
 				<div class="col-md-12">
 					<div id="package-options-content"></div>
 					<br>
@@ -162,7 +162,7 @@
 																<p>Your Itinerary :</p>
 															</div>
 															@foreach ($packege->oneway as $one)
-															
+
 															<div class="col-md-3">
 																<input type="time" id="time1-0" class="form-control form-control100 itinerary-form1" name="time1[]" value="{{$one->time1}}" readonly />
 															</div>
@@ -170,7 +170,7 @@
 																<input type="text" id="activity1-0" class="form-control form-control100 itinerary-form1" name="itinary_name1[]" value="{{$one->itinary_name1}}" readonly />
 															</div>
 														@endforeach
-														
+
 															<div id="itinerary-container1">
 															</div>
 															<div class="col-md-3">
@@ -213,7 +213,7 @@
 															</div>
 															@foreach ($packege->twoway as $two)
 																{{-- expr --}}
-															
+
 															<div class="col-md-3">
 																<input type="time" id="time2-0" class="form-control form-control100 itinerary-form2" name="time2[]" value="{{$two->time2}}" readonly />
 															</div>
@@ -221,9 +221,9 @@
 																<input type="text" id="activity2-0" class="form-control form-control100 itinerary-form2" name="itinary_name2[]" value="{{$two->itinary_name2}}" readonly />
 															</div>
 															@endforeach
-													
+
 															<div id="itinerary-container2">
-																
+
 															</div>
 															<div class="col-md-3">
 																<button type="button" id="edit-itinerary-btn2" class="btn btn-info form-control" name="edit-btn2">Edit</button>
@@ -259,15 +259,10 @@
 																<div id="total-price-txt" class="col-md-6 align-right-col"></div>
 															</div>
 														</div>
-														@if (Auth::user())
 														<div class="col-md-12" style="padding-bottom: 20px;">
 															<input type="submit" class="btn btn-info btn-book" name="book-btn" value="Book now" />
 														</div>
-														@else
-														<div class="col-md-12" style="padding-bottom: 20px;">
-															<a href="{{ route('login') }}" class="btn btn-info btn-book">Book Now</a>
-														</div>
-														@endif
+
 														<div class="col-md-12" style="padding-bottom: 10px;">
 															<p>To be confirmed within 3 working day(s)</p>
 														</div>
@@ -291,7 +286,7 @@
 						<div class="col-md-12">
 						{!! $packege->description  !!}
 						</div>
-					
+
 					</div>
 					<br>
 					<div class="row">
@@ -301,7 +296,7 @@
 						<div class="col-md-12">
 						{!!$packege->inclusive_of !!}
 						</div>
-					
+
 					</div>
 					<br>
 					<div class="row">
@@ -311,7 +306,7 @@
 						<div class="col-md-12">
 						{!! $packege->not_inclusive_of !!}
 						</div>
-						
+
 					</div>
 					<br>
 					<div class="row">
@@ -345,7 +340,7 @@
 						<div class="col-md-12">
 						{!! $packege->policy !!}
 						</div>
-						
+
 					</div>
 				</div>
 				<div class="col-md-1"></div>
@@ -409,7 +404,7 @@
 			});
 		}
 		</script>
-		
+
 		<script>
 		function showPass() {
 			var x = document.getElementById("password");
@@ -432,4 +427,4 @@
 		});
 		</script>
 
-@endpush	
+@endpush

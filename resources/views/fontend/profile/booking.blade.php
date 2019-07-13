@@ -18,7 +18,7 @@
                 <div class="row">
                 @foreach ($userpackege as $allpack)
                    <div class="col-lg-4 col-md-6 borderimg1">
-                          <a href="{{ route('experience-booking',$allpack->packege->id) }}">
+                          <a href="{{ route('experience-booking-details',$allpack->packege->id) }}">
 					<img src="{{asset('/storage/packege/photo/'.$allpack->packege->photo)}}"
 					 class="img1" width="235px" height="175" />
 
@@ -28,7 +28,7 @@
                         
                     </div>
                     @endforeach
-                   
+                   {{ $userpackege->links() }}
                 </div>
             </div>
     </div>

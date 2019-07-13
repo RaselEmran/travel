@@ -35,6 +35,7 @@
                                 <li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
                                 <li class="{{Request::is('admin/dashboard') ?'active':''}}"><a href="{{ route('admin.dashboard') }}"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
 
+                                  <li  class="{{Request::is('admin/travelar*') ?'active':''}}"><a href="{{ route('admin.travelar') }}"><i class="icon-man-woman"></i> <span>Travelar</span></a></li>
 
                                 <li  class="{{Request::is('admin/destination*') ?'active':''}}"><a href="{{ route('admin.destination') }}"><i class="icon-width"></i> <span>Destination</span></a></li>
 
@@ -80,6 +81,19 @@
 
                                     </ul>
                                 </li>
+
+                                <li class="{{Request::is('admin/news/*') ?'active':''}}">
+                                    <a href="#"><i class="  icon-newspaper2"></i> <span>News</span></a>
+                                    <ul>
+                                        <li class="{{Request::is('admin/news/category') ?'active':''}}"><a href="{{ route('admin.news.category') }}"> Category</a></li>
+
+                                          <li class="{{Request::is('admin/news/blog') ?'active':''}}"><a href="{{ route('admin.news.blog') }}">News</a></li>
+
+                                           <li class="{{Request::is('admin/news/blog') ?'active':''}}"><a href="{{ route('admin.news.blog') }}">Comment</a></li>
+
+                                    </ul>
+                                </li>
+                                 <li  class="{{Request::is('admin/pages*') ?'active':''}}"><a href="{{ route('admin.pages') }}"><i class="icon-width"></i> <span>Pages</span></a></li>
                               {{--    <li>
                                     <a href="#"><i class="icon-people"></i> <span>Destination</span></a>
                                     <ul>

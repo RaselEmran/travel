@@ -95,7 +95,7 @@ class ExperienceBookingController extends Controller
    public function booking_result(Request $request)
    {
       $user_id =Auth::user()->id;
-      $userpackege =UserPackege::where('user_id',$user_id)->get();
+      $userpackege =UserPackege::where('user_id',$user_id)->paginate(6);
       return view('fontend.profile.booking',compact('userpackege'));
    }
 
@@ -131,6 +131,12 @@ class ExperienceBookingController extends Controller
     return view('fontend.profile.wishlist',compact('wishlist'));
    }
 
+   public function packege_book_details($id)
+   {
+    $packege=UserPackege::where('packege_id',$id)->first();
+    return view('fontend.profile.booking_details',compact('packege'));
+   }
+
    public function travelkit()
    {
     $phones =TravelKit::where('type','Phone Accessories')->where('status',1)->get();
@@ -143,4 +149,5 @@ class ExperienceBookingController extends Controller
 
     return view('fontend.travelkit',compact('phones','medicals','toiletries','others'));
    }
+
 }

@@ -62,11 +62,13 @@ class HotelController extends Controller {
 			$hotel->meta_description = $request->meta_description;
 			$hotel->save();
 			$hotel_id = $hotel->id;
-			foreach ($request->amenity as $amenity) {
-				$amenity_hotels = new AmenityHotel;
-				$amenity_hotels->amenity_id = $amenity;
-				$amenity_hotels->hotel_id = $hotel_id;
-				$amenity_hotels->save();
+			if ($request->amenity) {
+				foreach ($request->amenity as $amenity) {
+					$amenity_hotels = new AmenityHotel;
+					$amenity_hotels->amenity_id = $amenity;
+					$amenity_hotels->hotel_id = $hotel_id;
+					$amenity_hotels->save();
+				}
 			}
 
 			return response()->json(['success' => true, 'status' => 'success', 'message' => 'Hotel Information Add Successfully.', 'goto' => route('admin.hotel')]);
@@ -140,11 +142,8 @@ class HotelController extends Controller {
 		if ($request->ajax()) {
 			$hotel = Hotel::find($id);
 			return view('admin.hotel.view', compact('hotel'));
-		} else {
-			$hotel = Hotel::findOrFail($id);
-			$latest = Hotel::take(4)->latest()->get();
-			return view('fontend.stay', compact('hotel', 'latest'));
 		}
+		return abort(404);
 	}
 
 	public function delete(Request $request, $id) {
