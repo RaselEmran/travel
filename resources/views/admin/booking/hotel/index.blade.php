@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('pageTitle') Booking Packege @endsection
+@section('pageTitle') Booking Hotel @endsection
 @section('page-header')
 <div class="page-header page-header-default">
   <div class="breadcrumb-line">
@@ -13,7 +13,7 @@
 @section('content')
 <div class="panel panel-flat">
   <div class="panel-heading">
-    <h5 class="panel-title">Packege Booking
+    <h5 class="panel-title">Hotel Booking
     </h5>
   </div>
   <div class="panel-body">
@@ -24,25 +24,27 @@
 
             <th>SL</th>
             <th>Travelar name</th>
-            <th>packege Name</th>
-            <th>Destination Name</th>
-            <th>Booking date</th>
+            <th>Hotel Name</th>
+            <th>Checkin Date</th>
+            <th>Chcekout Date</th>
+            <th>Guest</th>
+            <th>Price</th>
             <th>Action</th>
 
           </tr>
         </thead>
         <tbody id="product_list">
-          @foreach ($userpackege as $element)
+          @foreach ($hotel_bookings as $element)
           <tr>
             <td>{{$loop->index+1}}</td>
             <td>{{$element->user->name}}</td>
-            <td>{{$element->packege->name}}</td>
-            <td>{{$element->packege->destination->name}}</td>
-            <td>{{$element->date}}</td>
+            <td>{{$element->hotel->name}}</td>
+            <td>{{$element->check_in}}</td>
+            <td>{{$element->check_out}}</td>
+            <td>{{$element->guest}}</td>
+            <td>{{$element->price}}</td>
             <td>
-              <a href="{{ route('admin.packege.booking.details',['book'=>$element->id,'packege'=>$element->packege->id]) }}" class="btn btn-success"  ><i class=" icon-eye8"></i>View</a>
-              <a href="{{ route('admin.packege.edit',$element->id) }}" class="btn btn-info"><i class=" icon-pencil5"></i>Edit</a>
-              <a href="#" id="delete_item" data-id="{{$element->id}}" data-url="{{ route('admin.packege.delete',$element->id) }}" class="btn btn-danger"><i class="  icon-trash"></i>Delete</a>
+              <a href="{{ route('admin.hotel.booking_details',$element->id) }}" class="btn btn-success"  ><i class=" icon-eye8"></i>View</a>
             </td>
           </tr>
           @endforeach

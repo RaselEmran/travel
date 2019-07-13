@@ -111,6 +111,9 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'admin', 'mi
  * :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
  * ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
  */
+
+	Route::get('booking/hotel', 'BookingController@hotel')->name('hotel.booking');
+	Route::get('booking/hotel/details/{booking}', 'BookingController@hotel_details')->name('hotel.booking_details');
 });
 
 // Route::get('/home', 'HomeController@index')->name('home');
@@ -121,8 +124,8 @@ $this->post('register', 'Auth\RegisterController@register')->name('register');
 
 Route::get('/', 'HomeController@index')->name('home.index');
 Route::get('/news', 'HomeController@news')->name('home.news');
-Route::get('/news-details/{slug}/{id}','HomeController@news_details')->name('news-details');
-Route::get('/about-us','HomeController@about_us')->name('about-us');
+Route::get('/news-details/{slug}/{id}', 'HomeController@news_details')->name('news-details');
+Route::get('/about-us', 'HomeController@about_us')->name('about-us');
 Route::get('/sign-up-option', 'HomeController@sign_up_option')->middleware(['guest'])->name('sign-up-option');
 Route::get('/sign-up', 'HomeController@sign_up')->middleware(['guest'])->name('sign-up');
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
