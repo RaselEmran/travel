@@ -1,7 +1,10 @@
+@php
+	$reviews = $hotel->reviews->where('status', 'approved');
+@endphp
 @extends('fontend.layouts.master')
 @section('pageTitle') dashboard @endsection
 @push('css')
- <link href="{{asset('backend/global_assets/css/icons/icomoon/styles.css')}}" rel="stylesheet" type="text/css">
+<link href="{{asset('backend/global_assets/css/icons/icomoon/styles.css')}}" rel="stylesheet" type="text/css">
 @endpush
 @section('page-header')
 <img src="{{asset('/storage/hotel/banner/'.$hotel->banner)}}" class="bg1"/ width="1351px" height="368px">
@@ -21,20 +24,79 @@
 	<div class="row">
 		<div class="col-md-7">
 			<div class="row">
-				<div class="col-md-12">
+				{{-- <div class="col-md-12">
 					<span class="state">State > </span><span class="area">Balik Pulau</span>
-				</div>
+				</div> --}}
 			</div>
 			<div class="row">
 				<div class="col-md-12">
 					<h3>{{ $hotel->name }}</h3>
 				</div>
 			</div>
-			{{-- <div class="row">
+			<div class="row">
 				<div class="col-md-12">
-					<span class="hotel-review"><img src="{{ asset('fontend/images/star.png') }}" class="staricon"/><img src="{{ asset('fontend/images/star.png') }}" class="staricon"/><img src="{{ asset('fontend/images/star.png') }}" class="staricon"/><img src="{{ asset('fontend/images/star.png') }}" class="staricon"/><img src="{{ asset('fontend/images/star.png') }}" class="staricon"/><span class="review">&nbsp;&nbsp;1 review</span></span>
+					<span class="hotel-review"><span id="rateYo_{{ $hotel->id }}"></span><span class="review">&nbsp;&nbsp;{{ $reviews->count() }} review</span></span>
+					@php
+					if($reviews->count()){
+						$rating = $reviews->average('rate');
+					} else{
+						$rating = 0;
+					}
+					@endphp
+					<script>
+					$(function () {
+						$("#rateYo_{{ $hotel->id }}").rateYo({
+							rating: {{ $rating }},
+							readOnly: true
+						});
+					});
+					</script>
 				</div>
-			</div> --}}
+			</div>
+			@if ($reviews->count() > 0)
+
+			<br>
+			<div class="row">
+				<div class="col-md-8">
+					<h4 class="hotel-sub-titles">Reviews</h4>
+				</div>
+				<div class="col-md-4">
+					<a class="view-more-review">More reviews</a>
+				</div>
+			</div>
+			@php
+
+			@endphp
+			@foreach($reviews->take(2) as $review)
+			<div class="row">
+				<div class="review-hotel-container">
+					<div class="col-md-2">
+						<span>
+							<img src="{{asset($review->user->image ? $review->user->image : 'fontend/images/profile-pic.png')}}" class="profile-pic-comment" />
+						</span>
+					</div>
+					<div class="col-md-10">
+						<div class="comment-name">{{ $review->user->name }}</div>
+						<div class="comment-review-star">
+							<span id="personal_rate_{{ $review->id }}"></span>&nbsp;&nbsp;{{ $review->created_at->format('Y/m/d') }}</span>
+						</div>
+						<div class="comment-review-desc">
+							{!! $review->review !!}
+						</div>
+					</div>
+				</div>
+			</div>
+			<br>
+			<script>
+					$(function () {
+						$("#personal_rate_{{ $review->id }}").rateYo({
+							rating: {{ $review->rate }},
+							readOnly: true
+						});
+					});
+					</script>
+			@endforeach
+			@endif
 			<br>
 			@if($hotel->entire_place)
 			<div class="row">
@@ -198,18 +260,18 @@
 			</div>
 			@foreach($latest as $hotel)
 			<div class="col-lg-3 col-md-6 borderimg1">
-					<center>
-					<div class="darkbg3">
-						<img src="{{asset('/storage/hotel/photo/'.$hotel->photo)}}" class="img3"/>
-						<div class="row">
-							<div class="col-md-12 titleimg4"><a href="{{ route('hotel.show', $hotel->id) }}">{{ $hotel->name }}</a></div>
-							<div class="col-md-7 reviewcontainer">
-								<img src="{{asset('fontend/images/star.png')}}" class="staricon"/><img src="{{asset('fontend/images/star.png')}}" class="staricon"/><img src="{{asset('fontend/images/star.png')}}" class="staricon"/><img src="{{asset('fontend/images/star.png')}}" class="staricon"/><img src="{{asset('fontend/images/star.png')}}" class="staricon"/><span class="review"> (188)</span>
-							</div>
-							<div class="col-md-5 price1">MYR {{ $hotel->price }}</div>
+				<center>
+				<div class="darkbg3">
+					<img src="{{asset('/storage/hotel/photo/'.$hotel->photo)}}" class="img3"/>
+					<div class="row">
+						<div class="col-md-12 titleimg4"><a href="{{ route('hotel.show', $hotel->id) }}">{{ $hotel->name }}</a></div>
+						<div class="col-md-7 reviewcontainer">
+							<img src="{{asset('fontend/images/star.png')}}" class="staricon"/><img src="{{asset('fontend/images/star.png')}}" class="staricon"/><img src="{{asset('fontend/images/star.png')}}" class="staricon"/><img src="{{asset('fontend/images/star.png')}}" class="staricon"/><img src="{{asset('fontend/images/star.png')}}" class="staricon"/><span class="review"> (188)</span>
 						</div>
+						<div class="col-md-5 price1">MYR {{ $hotel->price }}</div>
 					</div>
-					</center>
+				</div>
+				</center>
 			</div>
 			@endforeach
 		</div>
@@ -219,8 +281,6 @@
 @endsection
 @push('js')
 <!--===============================================================================================-->
-
 <script type="text/javascript" src="{{asset('fontend/js/hotel-booking.js')}}"></script>
 <script src="{{asset('fontend/js/toastr.min.js')}}"></script>
-
 @endpush

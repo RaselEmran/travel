@@ -17,6 +17,7 @@ class CreateHotelReviewsTable extends Migration {
 			$table->integer('user_id')->nullable()->unsigned();
 			$table->text('review');
 			$table->double('rate', 2, 1);
+			$table->string('status')->default('pending');
 			$table->timestamps();
 			$table->foreign('hotel_id')->references('id')->on('hotels')->onDelete('cascade');
 			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
