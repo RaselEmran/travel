@@ -21,7 +21,7 @@
 
 	<!--===============================================================================================-->
 
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="{{ asset('fontend/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
 
 	<!--==============================================================================================-->
 
@@ -30,6 +30,8 @@
 	<!--main css===============================================================================================-->
 
 	<link rel="stylesheet" type="text/css" href="{{asset('fontend/css/main.css')}}">
+
+    <link href="{{ asset('fontend/css/rate.css') }}" rel="stylesheet">
 	@stack('css')
 
 	<!--===============================================================================================-->
@@ -72,6 +74,8 @@
 <!--===============================================================================================-->
 
 	<script src="{{asset('fontend/vendor/tilt/tilt.jquery.min.js')}}"></script>
+
+	<script src="{{ asset('fontend/js/rate.js') }}" defer></script>
 
 	    <script>
          $.ajaxSetup({
