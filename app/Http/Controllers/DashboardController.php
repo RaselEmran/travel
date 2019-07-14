@@ -81,16 +81,16 @@ class DashboardController extends Controller
   public function user_kit(Request $request)
   {
       //
-      $token =$request->token
+      $token =$request->token;
       $paymentId =$request->paymentId;
       $token =$request->token;
       $PayerID =$request->PayerID;
       if (isset($paymentId) && isset($token) && isset($PayerID)) {
-       $confirmKit =ConfirmKit::where('token'$token)->first();
-       $confirmKit->status ='confirm'; 
+       $confirmKit =ConfirmKit::where('token',$token)->first();
+       $confirmKit->status ='Paid'; 
        $confirmKit->transaction_id =$paymentId; 
        $confirmKit->payment_date =date('Y-m-d'); 
-       $confirmKit->save()
+       $confirmKit->save();
        return rediect('/user-travel-kit');
       }
     $user_id = Auth::user()->id;
