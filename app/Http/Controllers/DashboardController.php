@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Hash;
 use Auth;
 use App\User;
 use Validator;
+use App\bookingKit;
+use App\ConfirmKit;
 
 class DashboardController extends Controller
 {
@@ -75,5 +77,32 @@ class DashboardController extends Controller
       }
     }
 }
+
+  public function user_kit(Request $request)
+  {
+      //
+      $token =$request->token
+      $paymentId =$request->paymentId;
+      $token =$request->token;
+      $PayerID =$request->PayerID;
+      if (isset($paymentId) && isset($token) && isset($PayerID)) {
+       $confirmKit =ConfirmKit::where('token'$token)->first();
+       $confirmKit->status ='confirm'; 
+       $confirmKit->transaction_id =$paymentId; 
+       $confirmKit->payment_date =date('Y-m-d'); 
+       $confirmKit->save()
+       return rediect('/user-travel-kit');
+      }
+    $user_id = Auth::user()->id;
+    $confirmKit =ConfirmKit::where('user_id',$user_id)->get();
+    return view('fontend.profile.user_kit',compact('confirmKit'));
+  }
+
+  public function user_kit_details($id)
+  {
+    $user_id = Auth::user()->id;
+     $confirmKit =ConfirmKit::where('id',$id)->where('user_id',$user_id)->first();
+    return view('fontend.profile.user_kit_details',compact('confirmKit'));
+  }
 
 }

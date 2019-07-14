@@ -26,6 +26,7 @@ class CreateConfirmKitsTable extends Migration
             $table->string('payment_date')->nullable();
             $table->string('invoice_no')->nullable();
             $table->string('status')->nullable();
+            $table->string('token')->nullable();
             $table->timestamps();
 
         });

@@ -51,7 +51,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'admin', 'mi
 	*/
 	Route::get('/packege/booking', 'BookingController@index')->name('packege.getbooking');
 	Route::get('/packege/booking/details/{booking}/{packege}', 'BookingController@packege_details')->name('packege.booking.details');
-	Route::post('/send-packege-mail','BookingController@send_packege_mail')->name('send-packege-mail');
+	Route::post('/send-packege-mail', 'BookingController@send_packege_mail')->name('send-packege-mail');
 
 	/*::::::::::::::Wishlist:::::::::::::::::::::::::::
 	:::::::::::::::::::::*/
@@ -65,8 +65,8 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'admin', 'mi
 	Route::get('/travelkit/edit/{id}', 'TravelkitController@edit')->name('travelkit.edit');
 	Route::post('/travelkit/edit', 'TravelkitController@update')->name('travelkit.update');
 	Route::get('/travelkit/delete/{id}', 'TravelkitController@delete')->name('travelkit.delete');
-	Route::get('/travelkit/order-kit','TravelkitController@order_kit')->name('order-kit');
-	Route::get('/kitsorder/view/{id}','TravelkitController@order_details')->name('kitsorder.view');
+	Route::get('/travelkit/order-kit', 'TravelkitController@order_kit')->name('order-kit');
+	Route::get('/kitsorder/view/{id}', 'TravelkitController@order_details')->name('kitsorder.view');
 	/*:::::::::::::::News:::::::::::::::::::::::::::::::::::
 	::::::::::::::::::::::::::::::::::::*/
 	Route::get('news/category', 'NewsController@category')->name('news.category');
@@ -152,11 +152,13 @@ Route::post('/itinaray-up', 'ExperienceBookingController@itinaray_up')->name('it
 Route::get('/user/wishlist', 'ExperienceBookingController@wishliststore')->name('user.wishlist')->middleware('auth');
 Route::get('/wishlist', 'ExperienceBookingController@wishlist')->name('wishlist')->middleware('auth');
 Route::get('/experience-booking-details/{id}', 'ExperienceBookingController@packege_book_details')->name('experience-booking-details')->middleware('auth');
+Route::get('/user-travel-kit','DashboardController@user_kit')->name('user-travel-kit')->middleware('auth');
+Route::get('/user-kit-details/{id}','DashboardController@user_kit_details')->name('user-kit-details')->middleware('auth');
 
 /*::::::::::::::::::::::travelkit:::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 Route::get('/travelkit', 'ExperienceBookingController@travelkit')->name('travelkit');
-Route::post('/travelkit-book','ExperienceBookingController@travelkit_book')->name('travelkit-book')->middleware('auth');
+Route::post('/travelkit-book', 'ExperienceBookingController@travelkit_book')->name('travelkit-book')->middleware('auth');
 
 Route::get('stay/{id}', 'HotelController@show')->name('hotel.show');
 

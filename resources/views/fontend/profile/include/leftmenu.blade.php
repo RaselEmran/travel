@@ -30,6 +30,11 @@
 			<div class="col-md-12">
 				<div class="dash-menu"><a href="" class="menu-a"><i class="far fa-comment-dots icon-menu"></i><span class="menu-space">Review</span></a></div>
 			</div>
+
+			<div class="col-md-12">
+				<div class="dash-menu"><a href="{{ route('user-travel-kit') }}" class="menu-a"><i class="far fa-comment-dots icon-menu"></i><span class="menu-space">Travel Kit</span></a></div>
+			</div>
+
 			<div class="col-md-12">
 				<div class="dash-menu"><a href="{{ route('hotel.booking_list') }}" class="menu-a"><i class="far fa-hotel icon-menu"></i><span class="menu-space">Hotel Booking</span></a></div>
 			</div>
