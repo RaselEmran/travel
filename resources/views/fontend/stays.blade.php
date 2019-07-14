@@ -28,13 +28,28 @@
                         <div class="row">
                             <div class="col-md-12 titleimg4"><a href="{{ route('hotel.show', $hotel->id) }}">{{ $hotel->name }}</a></div>
                             <div class="col-md-7 reviewcontainer">
-                                <img src="{{asset('fontend/images/star.png')}}" class="staricon"/><img src="{{asset('fontend/images/star.png')}}" class="staricon"/><img src="{{asset('fontend/images/star.png')}}" class="staricon"/><img src="{{asset('fontend/images/star.png')}}" class="staricon"/><img src="{{asset('fontend/images/star.png')}}" class="staricon"/><span class="review"> (188)</span>
+                                <span id="rateYo_{{ $hotel->id }}"></span>
                             </div>
                             <div class="col-md-5 price1">MYR {{ $hotel->price }}</div>
                         </div>
                     </div>
                     </center>
                 </div>
+                @php
+                if($hotel->reviews->count()){
+                    $rating = $hotel->reviews->average('rate');
+                } else{
+                    $rating = 0;
+                }
+                @endphp
+                <script>
+                    $(function () {
+                      $("#rateYo_{{ $hotel->id }}").rateYo({
+                        rating: {{ $rating }},
+                        readOnly: true
+                      });
+                    });
+                </script>
                 @endforeach
             </div>
             <div class="row">
