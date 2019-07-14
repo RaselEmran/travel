@@ -26,7 +26,7 @@
                          <th>Total Amount</th>
                          <th>View Mode</th>
                      </tr>
-                 </thead> 
+                 </thead>
 
                  <tbody>
                      @foreach ($confirmKit as $element)
@@ -54,11 +54,11 @@
                      @endforeach
                  </tbody>
               </table>
-                   
+
                 </div>
             </div>
     </div>
-		
+
 
 @endsection
 
@@ -67,4 +67,9 @@
 <script>
 $('.select').select2();
 </script>
+@if (isset($message))
+    <script>
+        toastr.success({{ $message }});
+    </script>
+@endif
 @endpush

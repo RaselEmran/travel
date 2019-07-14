@@ -244,8 +244,8 @@ class ExperienceBookingController extends Controller {
 				->setInvoiceNumber($invoice_no);
 
 			$redirectUrls = new RedirectUrls();
-			$redirectUrls->setReturnUrl(route('user-travel-kit',['token'=>$token]))
-				->setCancelUrl(route('user-travel-kit'));
+			$redirectUrls->setReturnUrl(route('user-travel-kit', ['secret' => $token]))
+				->setCancelUrl(route('user-travel-kit', ['secret' => $token]));
 
 			$payment = new Payment();
 			$payment->setIntent("sale")
@@ -257,7 +257,7 @@ class ExperienceBookingController extends Controller {
 			$payment->create($apiContext);
 			$approvalUrl = $payment->getApprovalLink();
 			return redirect($approvalUrl);
-		
+
 		}
 
 	}
