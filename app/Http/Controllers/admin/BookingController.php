@@ -12,7 +12,8 @@ use App\UserItinary;
 use App\User;
 
 use App\Wishlist;
-use App\Notifications\CheckoutNotification;
+use App\Notifications\PackegeConfirm;
+use Illuminate\Http\Request;
 
 class BookingController extends Controller {
 	public function index() {
@@ -43,10 +44,12 @@ class BookingController extends Controller {
      $user_id =$request->user_id;
      $packege =$request->user_packege;
      $userpackege =UserPackege::find($packege);
+     $userpackege->total =$request->edit_amt;
+     $userpackege->save();
      $user =User::find($user_id);
      $messege =$request->messege;
      if ($user->email) {
-        $user->notify(new CheckoutNotification($userpackege,$user,$messege));
+        $user->notify(new PackegeConfirm($userpackege,$user,$messege));
      }
 
 

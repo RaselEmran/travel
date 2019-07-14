@@ -39,12 +39,14 @@ class CheckoutNotification extends Notification {
 	 * @return \Illuminate\Notifications\Messages\MailMessage
 	 */
 	public function toMail($notifiable) {
+
+		$url = route('packege-chackeout',['secret'=>$this->packege->secret]);
 		$user =$this->user;
 		$packege =$this->packege;
 		$messege =$this->messege;
 		return (new MailMessage)
 		 	->subject('Booking Confirmation')
-			->view('admin.email.packege_checkout',compact('user','packege','messege'));
+			->markdown('admin.email.packege_checkout',compact('user','packege','messege','url'));
 	}
 
 	/**
