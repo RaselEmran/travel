@@ -169,11 +169,3 @@ Route::post('/stay/{id}', 'HotelController@booking')->name('hotel.booking')->mid
 Route::get('/hotel-booking-details/{id}', 'HotelController@book_details')->name('hotel.booking_details')->middleware('auth');
 Route::get('/hotel-booking-list', 'HotelController@booking_list')->name('hotel.booking_list')->middleware('auth');
 
-
-
-
-
-Route::get('/paypal/checkout/{order}/completed','PayPalController@completed')->name('paypal.checkout.completed');
-Route::get('/paypal/checkout/{order}/cancelled','PayPalController@cancelled')->name('paypal.checkout.cancelled');
-Route::post('/webhook/paypal/{order?}/{env?}','PayPalController@webhook')->name('webhook.paypal.ipn');
-Route::get('payment-completed/{order}','PayPalController@paymentCompleted')->name('paymentCompleted');
