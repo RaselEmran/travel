@@ -51,7 +51,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'admin', 'mi
 	*/
 	Route::get('/packege/booking', 'BookingController@index')->name('packege.getbooking');
 	Route::get('/packege/booking/details/{booking}/{packege}', 'BookingController@packege_details')->name('packege.booking.details');
-	Route::post('/send-packege-mail','BookingController@send_packege_mail')->name('send-packege-mail');
+	Route::post('/send-packege-mail', 'BookingController@send_packege_mail')->name('send-packege-mail');
 
 	/*::::::::::::::Wishlist:::::::::::::::::::::::::::
 	:::::::::::::::::::::*/
@@ -65,8 +65,8 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'admin', 'mi
 	Route::get('/travelkit/edit/{id}', 'TravelkitController@edit')->name('travelkit.edit');
 	Route::post('/travelkit/edit', 'TravelkitController@update')->name('travelkit.update');
 	Route::get('/travelkit/delete/{id}', 'TravelkitController@delete')->name('travelkit.delete');
-	Route::get('/travelkit/order-kit','TravelkitController@order_kit')->name('order-kit');
-	Route::get('/kitsorder/view/{id}','TravelkitController@order_details')->name('kitsorder.view');
+	Route::get('/travelkit/order-kit', 'TravelkitController@order_kit')->name('order-kit');
+	Route::get('/kitsorder/view/{id}', 'TravelkitController@order_details')->name('kitsorder.view');
 	/*:::::::::::::::News:::::::::::::::::::::::::::::::::::
 	::::::::::::::::::::::::::::::::::::*/
 	Route::get('news/category', 'NewsController@category')->name('news.category');
@@ -156,7 +156,7 @@ Route::get('/experience-booking-details/{id}', 'ExperienceBookingController@pack
 /*::::::::::::::::::::::travelkit:::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 Route::get('/travelkit', 'ExperienceBookingController@travelkit')->name('travelkit');
-Route::post('/travelkit-book','ExperienceBookingController@travelkit_book')->name('travelkit-book')->middleware('auth');
+Route::post('/travelkit-book', 'ExperienceBookingController@travelkit_book')->name('travelkit-book')->middleware('auth');
 
 Route::get('stay/{id}', 'HotelController@show')->name('hotel.show');
 
@@ -168,12 +168,3 @@ Route::post('/stay/{id}', 'HotelController@booking')->name('hotel.booking')->mid
 
 Route::get('/hotel-booking-details/{id}', 'HotelController@book_details')->name('hotel.booking_details')->middleware('auth');
 Route::get('/hotel-booking-list', 'HotelController@booking_list')->name('hotel.booking_list')->middleware('auth');
-
-
-
-
-
-Route::get('/paypal/checkout/{order}/completed','PayPalController@completed')->name('paypal.checkout.completed');
-Route::get('/paypal/checkout/{order}/cancelled','PayPalController@cancelled')->name('paypal.checkout.cancelled');
-Route::post('/webhook/paypal/{order?}/{env?}','PayPalController@webhook')->name('webhook.paypal.ipn');
-Route::get('payment-completed/{order}','PayPalController@paymentCompleted')->name('paymentCompleted');
