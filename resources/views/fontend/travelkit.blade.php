@@ -170,11 +170,7 @@
                             </table>
                             </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <input type="submit" class="btn btn-info" name="add-to-cart-btn" value="Add to cart" />
-                                </div>
-                            </div>
+                          
                         </div>
                         </div>
                     <div class="col-md-1"></div>

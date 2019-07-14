@@ -57,7 +57,7 @@
                                     <ul>
                                         <li class="{{Request::is('admin/packege/booking') ?'active':''}}"><a href="{{ route('admin.packege.getbooking') }}"> Packege Booking</a></li>
 
-                                          <li class="{{Request::is('admin/hotel') ?'active':''}}"><a href="{{ route('admin.hotel') }}">Hotel Booking</a></li>
+                                          <li class="{{Request::is('admin/booking/hotel') ?'active':''}}"><a href="{{ route('admin.hotel.booking') }}">Hotel Booking</a></li>
 
                                     </ul>
                                 </li>
@@ -77,7 +77,7 @@
                                     <ul>
                                         <li class="{{Request::is('admin/travelkit') ?'active':''}}"><a href="{{ route('admin.travelkit') }}"> Manage Kit</a></li>
 
-                                          <li class="{{Request::is('admin/wishlist/hotel') ?'active':''}}"><a href="{{ route('admin.hotel') }}">Hotel Wishlist</a></li>
+                                          <li class="{{Request::is('admin/travelkit/order-kit') ?'active':''}}"><a href="{{ route('admin.order-kit') }}">Order Kit</a></li>
 
                                     </ul>
                                 </li>

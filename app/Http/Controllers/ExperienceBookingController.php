@@ -37,10 +37,18 @@ class ExperienceBookingController extends Controller
    {
       // dd($request->all());
       // if ($request->one_way !==1) {
-      //    return response()->json(['success' => true, 'status' => 'success', 'message' => 'Packege Book Successfully','goto'=>route('dashboard')]);
+      //    return response()->json(['success' => true, 'status' => 'success', 'message' => 'Packege Book Successfully']);
       // }
 
       if ($request->one_way) {
+          $validator = Validator::make($request->all(), [
+            'depart_date' => 'required|string',
+            'pack_quantity' => 'required|string',
+          ]);
+
+          if ($validator->fails()) {
+            return response()->json(['success' => false, 'status' => 'danger', 'message' => $validator->errors()]);
+          }
           $userpackege =new UserPackege;
           $userpackege->packege_id =$request->packege_id;
           $userpackege->user_id =Auth::user()->id;
@@ -67,6 +75,14 @@ class ExperienceBookingController extends Controller
           }
       }
       else{
+          $validator = Validator::make($request->all(), [
+            'depart_date2' => 'required|string',
+            'pack_quantity2' => 'required|string',
+          ]);
+
+          if ($validator->fails()) {
+            return response()->json(['success' => false, 'status' => 'danger', 'message' => $validator->errors()]);
+          }
           $userpackege =new UserPackege;
           $userpackege->packege_id =$request->packege_id;
           $userpackege->user_id =Auth::user()->id;
@@ -92,7 +108,7 @@ class ExperienceBookingController extends Controller
              $useritinary->save();
           }
       }
-     return response()->json(['success' => true, 'status' => 'success', 'message' => 'Packege Book Successfully.Check Your mail After 24 hours','goto'=>route('dashboard')]);
+     return response()->json(['success' => true, 'status' => 'success', 'message' => 'Packege Book Successfully.Check Your mail After 24 hours','goto'=>route('booking-result')]);
    }
 
    public function booking_result(Request $request)
@@ -111,10 +127,15 @@ class ExperienceBookingController extends Controller
 
           return response()->json(['success' => true, 'status' => 'warning', 'message' => 'Please Login Before']);
         }
+        $id =$request->id;
+        $user_id =Auth::user()->id;
+        $check =Wishlist::where('packege_id',$id)->where('user_id',$user_id)->first();
+        if ($check) {
+          return response()->json(['success' => true, 'status' => 'warning', 'message' => 'Your Wishlist Already add to this item']);
+        }
         else
         {
-          $id =$request->id;
-          $user_id =Auth::user()->id;
+          
           $wishlist =new Wishlist;
           $wishlist->packege_id =$id;
           $wishlist->user_id =$user_id;

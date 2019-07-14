@@ -65,7 +65,8 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'admin', 'mi
 	Route::get('/travelkit/edit/{id}', 'TravelkitController@edit')->name('travelkit.edit');
 	Route::post('/travelkit/edit', 'TravelkitController@update')->name('travelkit.update');
 	Route::get('/travelkit/delete/{id}', 'TravelkitController@delete')->name('travelkit.delete');
-
+	Route::get('/travelkit/order-kit','TravelkitController@order_kit')->name('order-kit');
+	Route::get('/kitsorder/view/{id}','TravelkitController@order_details')->name('kitsorder.view');
 	/*:::::::::::::::News:::::::::::::::::::::::::::::::::::
 	::::::::::::::::::::::::::::::::::::*/
 	Route::get('news/category', 'NewsController@category')->name('news.category');
@@ -112,6 +113,9 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'admin', 'mi
  * :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
  * ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
  */
+
+	Route::get('booking/hotel', 'BookingController@hotel')->name('hotel.booking');
+	Route::get('booking/hotel/details/{booking}', 'BookingController@hotel_details')->name('hotel.booking_details');
 });
 
 // Route::get('/home', 'HomeController@index')->name('home');
@@ -122,8 +126,8 @@ $this->post('register', 'Auth\RegisterController@register')->name('register');
 
 Route::get('/', 'HomeController@index')->name('home.index');
 Route::get('/news', 'HomeController@news')->name('home.news');
-Route::get('/news-details/{slug}/{id}','HomeController@news_details')->name('news-details');
-Route::get('/about-us','HomeController@about_us')->name('about-us');
+Route::get('/news-details/{slug}/{id}', 'HomeController@news_details')->name('news-details');
+Route::get('/about-us', 'HomeController@about_us')->name('about-us');
 Route::get('/sign-up-option', 'HomeController@sign_up_option')->middleware(['guest'])->name('sign-up-option');
 Route::get('/sign-up', 'HomeController@sign_up')->middleware(['guest'])->name('sign-up');
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
@@ -143,10 +147,10 @@ Route::get('auth/{service}/callback', 'Auth\FacebookController@handleFacebookCal
 
 Route::get('/explore', 'ExperienceBookingController@index')->name('explore');
 Route::get('/experience-booking/{id}', 'ExperienceBookingController@experience_booking')->name('experience-booking');
-Route::get('/booking-result', 'ExperienceBookingController@booking_result')->name('booking-result');
-Route::post('/itinaray-up', 'ExperienceBookingController@itinaray_up')->name('itinaray-up');
-Route::get('/user/wishlist', 'ExperienceBookingController@wishliststore')->name('user.wishlist');
-Route::get('/wishlist', 'ExperienceBookingController@wishlist')->name('wishlist');
+Route::get('/booking-result', 'ExperienceBookingController@booking_result')->name('booking-result')->middleware('auth');
+Route::post('/itinaray-up', 'ExperienceBookingController@itinaray_up')->name('itinaray-up')->middleware('auth');
+Route::get('/user/wishlist', 'ExperienceBookingController@wishliststore')->name('user.wishlist')->middleware('auth');
+Route::get('/wishlist', 'ExperienceBookingController@wishlist')->name('wishlist')->middleware('auth');
 Route::get('/experience-booking-details/{id}', 'ExperienceBookingController@packege_book_details')->name('experience-booking-details')->middleware('auth');
 
 /*::::::::::::::::::::::travelkit:::::::::::::::::::::::

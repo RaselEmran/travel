@@ -213,3 +213,17 @@ $(document).on('click', '#delete_item', function(e) {
             }
         });
         });
+
+//details
+$(document).on('click','#view_details',function(){
+  var url =$(this).data('url');
+     $.ajax({
+                    url: url,
+                    method: 'GET',
+                    dataType:'html',
+                    success: function(data) {
+                  $("#show").html(data);
+                  }
+                });
+
+});

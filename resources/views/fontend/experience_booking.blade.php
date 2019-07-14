@@ -122,7 +122,7 @@
 														<div id="package-details-container-one" class="row">
 															<div class="col-md-6">
 																<div><label>Select Depart Date</label></div>
-																<div style="padding-bottom: 10px;"><input type="date" id="depart-date" class="form-control" name="depart_date" onchange="getPackageDetail('depart-date')" required /></div>
+																<div style="padding-bottom: 10px;"><input type="date" id="depart-date" class="form-control" name="depart_date" onchange="getPackageDetail('depart-date')"  /></div>
 															</div>
 															<div class="col-md-6">
 															</div>
@@ -131,7 +131,7 @@
 															</div>
 															<div class="col-md-6">
 																<div style="padding-bottom: 10px;">
-																	<select id="pack-quantity" class="form-control" name="pack_quantity" onchange="getPackageDetail('pack-quantity')" required>
+																	<select id="pack-quantity" class="form-control" name="pack_quantity" onchange="getPackageDetail('pack-quantity')" >
 																		<option value="">Select Pack Quantity</option>
 																		<option value='1'>1</option>
 																		<option value='2'>2</option>
@@ -191,7 +191,7 @@
 														<div id="package-details-container-two" class="row">
 															<div class="col-md-6">
 																<div><label>Select Depart Date</label></div>
-																<div style="padding-bottom: 10px;"><input type="date" id="depart-date2" class="form-control"  name="depart_date2"  onchange="getPackageDetail2('depart-date2')" required />
+																<div style="padding-bottom: 10px;"><input type="date" id="depart-date2" class="form-control"  name="depart_date2"  onchange="getPackageDetail2('depart-date2')"  />
 															</div>
 														</div>
 														<div class="col-md-6">
@@ -201,7 +201,7 @@
 														</div>
 														<div class="col-md-6">
 															<div style="padding-bottom: 10px;">
-																<select id="pack-quantity2" class="form-control" name="pack_quantity2"  onchange="getPackageDetail2('pack-quantity2')" required >
+																<select id="pack-quantity2" class="form-control" name="pack_quantity2"  onchange="getPackageDetail2('pack-quantity2')"  >
 																	<option value="">Select Pack Quantity</option>
 																	<option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option><option value='13'>13</option><option value='14'>14</option><option value='15'>15</option><option value='16'>16</option><option value='17'>17</option><option value='18'>18</option><option value='19'>19</option><option value='20'>20</option>															</select>
 																</div>

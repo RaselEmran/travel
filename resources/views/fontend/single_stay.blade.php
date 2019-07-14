@@ -194,7 +194,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<span><h4><b>More place you may like</b></h4></span><span class="flt-right" ><a href="" class="view-all-hotel">View all ></a></span>
+				<span><h4><b>More place you may like</b></h4></span><span class="flt-right" ><a href="{{ route('hotel.index') }}" class="view-all-hotel">View all ></a></span>
 			</div>
 			@foreach($latest as $hotel)
 			<div class="col-lg-3 col-md-6 borderimg1">

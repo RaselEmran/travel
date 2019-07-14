@@ -67,7 +67,7 @@
                                             <th>packege Name</th>
                                             <th>Destination Name</th>
                                             <th>Wishlist date</th>
-                                            <th>Action</th>
+                                           
                                           
                                     </tr>
                                 </thead>
@@ -79,11 +79,7 @@
                                        <td>{{$element->packege->name}}</td>
                                        <td>{{$element->packege->destination->name}}</td>
                                        <td>{{$element->date}}</td>
-                                       <td>
-                                          <a href="{{ route('admin.packege.booking.details',['book'=>$element->id,'packege'=>$element->packege->id]) }}" class="btn btn-success"  ><i class=" icon-eye8"></i>View</a>
-                                           <a href="{{ route('admin.packege.edit',$element->id) }}" class="btn btn-info"><i class=" icon-pencil5"></i>Edit</a>
-                                            <a href="#" id="delete_item" data-id="{{$element->id}}" data-url="{{ route('admin.packege.delete',$element->id) }}" class="btn btn-danger"><i class="  icon-trash"></i>Delete</a>
-                                       </td>
+                         
 
                                    </tr>
                                 @endforeach
@@ -95,22 +91,7 @@
                 </div>
         </div>
 
-  {{--  --}}
 
-     <div id="modal_default" data-backdrop="static" class="modal fade" tabindex="-1">
-                        <div class="modal-dialog modal-full">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h5 class="modal-title">Packege View</h5>
-                                </div>
-
-                                <div class="modal-body" id="show">
-                             
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
 @endsection
 @push('js')

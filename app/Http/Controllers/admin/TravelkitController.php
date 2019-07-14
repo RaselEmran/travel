@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Validator;
 use App\TravelKit;
+use App\ConfirmKit;
 class TravelkitController extends Controller
 {
   public function index(){
@@ -90,4 +91,17 @@ class TravelkitController extends Controller
 
 		}
 	}
+
+  //booking kit::::
+  public function order_kit()
+  {
+    $kits =ConfirmKit::all();
+    return view('admin.travelkit.booking',compact('kits'));
+  }
+
+  public function order_details($id)
+  {
+    $kit =ConfirmKit::find($id);
+    return view('admin.travelkit.order_details',compact('kit'));
+  }
 }
