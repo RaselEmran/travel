@@ -14,13 +14,13 @@
 
 			<span class="icon-bar"></span> -->
 
-			<img id="sidemenu" src="{{asset('fontend/images/menu.png')}}">                       
+			<img id="sidemenu" src="{{asset('fontend/images/menu.png')}}">
 
 			</button>
 
 
 
-			<a class="navbar-brand" href=""><img src="{{asset('fontend/images/yupa-logo-white.png')}}" style="width: auto; height: 55px; margin-top: -10px;"></a>
+			<a class="navbar-brand" href="{{ URL::to('/') }}"><img src="{{asset('fontend/images/yupa-logo-white.png')}}" style="width: auto; height: 55px; margin-top: -10px;"></a>
 
 		</div>
 

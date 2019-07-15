@@ -147,12 +147,11 @@ nav {
 
 
 .search-btn-icon {
-
     background: none;
-
     padding: 0;
-
     border: none;
+    top: -38px;
+    position: relative;
 
 }
 

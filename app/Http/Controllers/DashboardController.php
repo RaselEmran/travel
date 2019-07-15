@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\ConfirmKit;
+use App\Hotel;
+use App\Packege;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
@@ -102,6 +104,17 @@ class DashboardController extends Controller {
 		$user_id = Auth::user()->id;
 		$confirmKit = ConfirmKit::where('id', $id)->where('user_id', $user_id)->first();
 		return view('fontend.profile.user_kit_details', compact('confirmKit'));
+	}
+
+	public function search(Request $request) {
+		$query = $request->q;
+		if ($query) {
+			$hotels = Hotel::search($query, null, true)->get();
+			$packages = Packege::search($query, null, true)->get();
+			return view('fontend.search', compact('hotels', 'packages', 'query'));
+		} else {
+			return redirect('/');
+		}
 	}
 
 }

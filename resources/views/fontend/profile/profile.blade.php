@@ -30,6 +30,7 @@
 	<!--main css===============================================================================================-->
 
 	<link rel="stylesheet" type="text/css" href="{{asset('fontend/css/main.css')}}">
+   <link href="{{ asset('fontend/css/rate.css') }}" rel="stylesheet">
 	@stack('css')
 
 	<!--===============================================================================================-->
@@ -84,6 +85,7 @@
  </script>
  <script src="{{asset('fontend/js/toastr.min.js')}}"></script>
 <script src="{{asset('fontend/js/logout.js')}}"></script>
+<script src="{{ asset('fontend/js/rate.js') }}" defer></script>
 	@stack('js')
 
 <!--===============================================================================================-->
@@ -126,7 +128,7 @@ $(document).on('submit','#ChangePass', function(e){
                 error: function(data) {
                         var jsonValue = $.parseJSON(data.responseText);
                       toastr.error(jsonValue.message);
-                      
+
                     }
 
             });
@@ -147,7 +149,6 @@ $(document).on('submit','#addForm', function(e){
                         toastr.success(data.message);
 
                     }
-
                      else {
                             const errors = data.message
                                 // console.log(errors)
@@ -164,7 +165,7 @@ $(document).on('submit','#addForm', function(e){
                 error: function(data) {
                         var jsonValue = $.parseJSON(data.responseText);
                       toastr.error(jsonValue.message);
-                      
+
                     }
 
             });

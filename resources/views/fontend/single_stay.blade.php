@@ -47,6 +47,7 @@
 					$(function () {
 						$("#rateYo_{{ $hotel->id }}").rateYo({
 							rating: {{ $rating }},
+							starWidth: "15px",
 							readOnly: true
 						});
 					});
@@ -91,6 +92,7 @@
 					$(function () {
 						$("#personal_rate_{{ $review->id }}").rateYo({
 							rating: {{ $review->rate }},
+							starWidth: "15px",
 							readOnly: true
 						});
 					});
@@ -266,13 +268,29 @@
 					<div class="row">
 						<div class="col-md-12 titleimg4"><a href="{{ route('hotel.show', $hotel->id) }}">{{ $hotel->name }}</a></div>
 						<div class="col-md-7 reviewcontainer">
-							<img src="{{asset('fontend/images/star.png')}}" class="staricon"/><img src="{{asset('fontend/images/star.png')}}" class="staricon"/><img src="{{asset('fontend/images/star.png')}}" class="staricon"/><img src="{{asset('fontend/images/star.png')}}" class="staricon"/><img src="{{asset('fontend/images/star.png')}}" class="staricon"/><span class="review"> (188)</span>
+							<span id="latest_rate_{{ $hotel->id }}"></span>
 						</div>
 						<div class="col-md-5 price1">MYR {{ $hotel->price }}</div>
 					</div>
 				</div>
 				</center>
 			</div>
+			@php
+			$reviews = $hotel->reviews->where('status', 'approved');
+				if($reviews->count()){
+					$rating = $reviews->average('rate');
+				} else{
+					$rating = 0;
+				}
+				@endphp
+				<script>
+				$(function () {
+					$("#latest_rate_{{ $hotel->id }}").rateYo({
+						rating: {{ $rating }},
+						readOnly: true
+					});
+				});
+				</script>
 			@endforeach
 		</div>
 	</div>

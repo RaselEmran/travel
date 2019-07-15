@@ -333,9 +333,6 @@ $reviews = $packege->reviews->where('status', 'approved');
 						<div class="col-md-12">
 							{!! $packege->booking_info!!}
 						</div>
-						<div class="col-md-12">
-							<a class="show-all">Show all ></a>
-						</div>
 					</div>
 					<br>
 					<div class="row">
@@ -371,7 +368,7 @@ $reviews = $packege->reviews->where('status', 'approved');
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-				<span><h4><b>More place you may like</b></h4></span
+				<span><h4><b>More place you may like</b></h4></span>
 			</div>
 			@foreach($latest as $hotel)
 			<div class="col-lg-3 col-md-6 borderimg1">
@@ -381,13 +378,29 @@ $reviews = $packege->reviews->where('status', 'approved');
 					<div class="row">
 						<div class="col-md-12 titleimg4"><a href="{{ route('hotel.show', $hotel->id) }}">{{ $hotel->name }}</a></div>
 						<div class="col-md-7 reviewcontainer">
-							<img src="{{asset('fontend/images/star.png')}}" class="staricon"/><img src="{{asset('fontend/images/star.png')}}" class="staricon"/><img src="{{asset('fontend/images/star.png')}}" class="staricon"/><img src="{{asset('fontend/images/star.png')}}" class="staricon"/><img src="{{asset('fontend/images/star.png')}}" class="staricon"/><span class="review"> (188)</span>
+							<span id="rating_{{ $hotel->id }}"></span>
 						</div>
 						<div class="col-md-5 price1">MYR {{ $hotel->price }}</div>
 					</div>
 				</div>
 				</center>
 			</div>
+			@php
+				$reviews = $hotel->reviews->where('status', 'approved');
+				if($reviews->count() > 0){
+					$rating = $reviews->average('rate');
+				} else{
+					$rating = 0;
+				}
+				@endphp
+				<script>
+					$(function () {
+					  $("#rating_{{ $hotel->id }}").rateYo({
+					    rating: {{ $rating }},
+					    readOnly: true
+					  });
+					});
+				</script>
 			@endforeach
 		</div>
 	</div>
@@ -399,43 +412,4 @@ $reviews = $packege->reviews->where('status', 'approved');
 <!--===============================================================================================-->
 <script type="text/javascript" src="{{asset('fontend/js/experience-booking.js')}}"></script>
 <script src="{{asset('fontend/js/toastr.min.js')}}"></script>
-<script>
-function onSuccess(googleUser) {
-	console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-}
-function onFailure(error) {
-	console.log(error);
-}
-function renderButton() {
-	gapi.signin2.render('my-signin2', {
-	'scope': 'profile email',
-	'width': 240,
-	'height': 50,
-	'longtitle': true,
-	'theme': 'dark',
-	'onsuccess': onSuccess,
-	'onfailure': onFailure
-	});
-}
-</script>
-<script>
-function showPass() {
-	var x = document.getElementById("password");
-	if (x.type === "password") {
-		x.type = "text";
-	} else {
-		x.type = "password";
-		}
-}
-</script>
-<script>
-$(document).ready(function(){
-$("#ck-button").click(function(){
-	$("p").toggle();
-});
-$("#show").click(function(){
-	$("p").show();
-});
-});
-</script>
 @endpush

@@ -23,14 +23,29 @@
                     <img src="{{asset('/storage/hotel/photo/'.$hotel_booking->hotel->photo)}}" class="img3" style="width: 225px;" />
                     <div class="row">
                         <div class="col-md-12 titleimg4"><a href="{{ route('hotel.booking_details', $hotel_booking->id) }}">{{ $hotel_booking->hotel->name }}</a></div>
-                        <div class="col-md-7 reviewcontainer">
-                            <img src="{{asset('fontend/images/star.png')}}" class="staricon"/><img src="{{asset('fontend/images/star.png')}}" class="staricon"/><img src="{{asset('fontend/images/star.png')}}" class="staricon"/><img src="{{asset('fontend/images/star.png')}}" class="staricon"/><img src="{{asset('fontend/images/star.png')}}" class="staricon"/><span class="review"> (188)</span>
+                        <div class="col-md-6 reviewcontainer">
+                            <span id="rating_{{ $hotel_booking->id }}"></span>
                         </div>
-                        <div class="col-md-5 price1">MYR {{ $hotel_booking->price }}</div>
                     </div>
                 </div>
                 </center>
             </div>
+            @php
+            $reviews = $hotel_booking->hotel->reviews->where('status', 'approved');
+            if($reviews->count()){
+            $rating = $reviews->average('rate');
+            } else{
+            $rating = 0;
+            }
+            @endphp
+            <script>
+            $(function () {
+            $("#rating_{{ $hotel_booking->id }}").rateYo({
+            rating: {{ $rating }},
+            readOnly: true
+            });
+            });
+            </script>
             @endforeach
         </div>
         <div class="row">

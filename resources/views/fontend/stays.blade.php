@@ -36,8 +36,9 @@
                     </center>
                 </div>
                 @php
-                if($hotel->reviews->count()){
-                    $rating = $hotel->reviews->average('rate');
+                $reviews = $hotel->reviews->where('status', 'approved');
+                if($reviews->count()){
+                    $rating = $reviews->average('rate');
                 } else{
                     $rating = 0;
                 }

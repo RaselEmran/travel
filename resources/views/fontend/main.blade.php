@@ -8,7 +8,10 @@
 	<h2><strong>Times To Explore</strong></h2>
 	<p class="subtitle">Start your new adventure here</p>
 	<div class="search-bar">
-		<input type="text" id="search" class="input-field" name="search" placeholder="Search by destination, activity, or interest" /><button class="search-btn-icon"><img class="search-bar-icon" src="{{asset('fontend/images/search.png')}}"/></button>
+		<form action="{{ route('search') }}" method="get">
+		<input type="text" id="search" class="input-field" name="q" placeholder="Search by destination, activity, or interest" />
+		<button class="search-btn-icon"><img class="search-bar-icon" src="{{asset('fontend/images/search.png')}}"/></button>
+		</form>
 	</div>
 </div>
 @endsection

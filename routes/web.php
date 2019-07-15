@@ -152,8 +152,8 @@ Route::post('/itinaray-up', 'ExperienceBookingController@itinaray_up')->name('it
 Route::get('/user/wishlist', 'ExperienceBookingController@wishliststore')->name('user.wishlist')->middleware('auth');
 Route::get('/wishlist', 'ExperienceBookingController@wishlist')->name('wishlist')->middleware('auth');
 Route::get('/experience-booking-details/{id}', 'ExperienceBookingController@packege_book_details')->name('experience-booking-details')->middleware('auth');
-Route::get('/user-travel-kit','DashboardController@user_kit')->name('user-travel-kit')->middleware('auth');
-Route::get('/user-kit-details/{id}','DashboardController@user_kit_details')->name('user-kit-details')->middleware('auth');
+Route::get('/user-travel-kit', 'DashboardController@user_kit')->name('user-travel-kit')->middleware('auth');
+Route::get('/user-kit-details/{id}', 'DashboardController@user_kit_details')->name('user-kit-details')->middleware('auth');
 
 /*::::::::::::::::::::::travelkit:::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
@@ -172,5 +172,9 @@ Route::get('/hotel-booking-details/{id}', 'HotelController@book_details')->name(
 Route::get('/hotel-booking-list', 'HotelController@booking_list')->name('hotel.booking_list')->middleware('auth');
 
 //::::::::::::::::checkout:::::::::::::::::::::::
-Route::get('/packege-chackeout','CheckoutController@index')->name('packege-chackeout');
+Route::get('/packege-chackeout', 'CheckoutController@index')->name('packege-chackeout');
 
+Route::post('hotel/review/store', 'HotelReviewController@store')->name('hotel.review.store')->middleware('auth');
+Route::post('package/review/store', 'HotelReviewController@store')->name('package.review.store')->middleware('auth');
+
+Route::get('search', 'DashboardController@search')->name('search');
