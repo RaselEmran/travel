@@ -38,7 +38,7 @@
                 </table>
             </div>
             <div class="col-md-6">
-                <h2>Packege Itinary - <b>One Way</b></h2>
+                <h2>Packege Itinary - <b>Two Way</b></h2>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -96,36 +96,6 @@
                         </tr>
                     </tfoot>
                 </table> 
-
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Time</th>
-                                <th>Name/Destination</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($userpackege->useritinary as $useriti)
-                            <tr>
-                                <td>
-                                    <input type="time" id="time2-0" class="form-control form-control100 itinerary-form" name="time[]" value="{{$useriti->time}}" readonly />
-                                </td>
-                                <td>
-                                    <input type="text" id="activity2-0" class="form-control form-control100 itinerary-form" name="itinary_name[]" value="{{$useriti->name}}" readonly />
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                        <tfoot>
-                        <tr>
-                            <td>
-                                <button type="button" id="itinary_edit" class="btn btn-info">Edit</button>
-                                <button type="button" id="itinary_done" class="btn btn-success">Done</button>
-                            </td>
-
-                        </tr>
-                        </tfoot>
-                    </table>
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
@@ -133,6 +103,21 @@
                                     <label>Email:</label>
                                     <input type="text" id="email" class="form-control " name="email" value="{{$userpackege->user->email}}" readonly />
                                 </td>
+                            </tr>
+
+                             <tr>
+                                <td>
+                                    <label>Default Amount:</label>
+                                    <input type="text" id="default_amt" class="form-control " name="default_amt" value="{{$userpackege->total}}" readonly />
+                                </td>
+
+                            </tr>
+                            <tr>
+                                
+                                <td>
+                                    <label>Editable Amouny:</label>
+                                    <input type="text" id="edit_amt" class="form-control " name="edit_amt" value="{{$userpackege->total}}" />
+                                 </td>
                             </tr>
                             <tr>
                                 <td>

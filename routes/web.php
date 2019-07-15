@@ -171,3 +171,6 @@ Route::post('/stay/{id}', 'HotelController@booking')->name('hotel.booking')->mid
 Route::get('/hotel-booking-details/{id}', 'HotelController@book_details')->name('hotel.booking_details')->middleware('auth');
 Route::get('/hotel-booking-list', 'HotelController@booking_list')->name('hotel.booking_list')->middleware('auth');
 
+//::::::::::::::::checkout:::::::::::::::::::::::
+Route::get('/packege-chackeout','CheckoutController@index')->name('packege-chackeout');
+

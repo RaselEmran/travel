@@ -32,11 +32,11 @@
 			</div>
 
 			<div class="col-md-12">
-				<div class="dash-menu"><a href="{{ route('user-travel-kit') }}" class="menu-a"><i class="far fa-comment-dots icon-menu"></i><span class="menu-space">Travel Kit</span></a></div>
+				<div class="dash-menu"><a href="{{ route('user-travel-kit') }}" class="menu-a {{Request::is('user-travel-kit') ?'active':''}}"><i class="glyphicon-flash"></i><span class="menu-space">Travel Kit</span></a></div>
 			</div>
 
 			<div class="col-md-12">
-				<div class="dash-menu"><a href="{{ route('hotel.booking_list') }}" class="menu-a"><i class="far fa-hotel icon-menu"></i><span class="menu-space">Hotel Booking</span></a></div>
+				<div class="dash-menu"><a href="{{ route('hotel.booking_list') }}" class="menu-a {{Request::is('hotel-booking-list') ?'active':''}}"><i class="far fa-hotel icon-menu"></i><span class="menu-space">Hotel Booking</span></a></div>
 			</div>
 			<div class="col-md-12">
 				<div class="dash-menu"><a href="{{ route('wishlist') }}" class="menu-a {{Request::is('wishlist') ?'active':''}}"><i class="far fa-heart icon-menu"></i><span class="menu-space">Wishlist</span></a></div>

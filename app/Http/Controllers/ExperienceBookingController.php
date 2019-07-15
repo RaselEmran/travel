@@ -42,7 +42,8 @@ class ExperienceBookingController extends Controller {
 		// if ($request->one_way !==1) {
 		//    return response()->json(['success' => true, 'status' => 'success', 'message' => 'Packege Book Successfully']);
 		// }
-
+        $invoice_id = uniqid();
+        $secret =uniqid();
 		if ($request->one_way) {
 			$validator = Validator::make($request->all(), [
 				'depart_date' => 'required|string',
@@ -61,6 +62,8 @@ class ExperienceBookingController extends Controller {
 			$userpackege->price = $request->one_price;
 			$userpackege->total = $request->one_price * $request->pack_quantity;
 			$userpackege->status = false;
+			$userpackege->secret = $secret;
+			$userpackege->invoice_id = $invoice_id;
 			$userpackege->date = date('Y-m-d');
 			$userpackege->save();
 			$bookid = $userpackege->id;
@@ -95,6 +98,8 @@ class ExperienceBookingController extends Controller {
 			$userpackege->total = $request->two_price * $request->pack_quantity2;
 			$userpackege->status = false;
 			$userpackege->date = date('Y-m-d');
+			$userpackege->secret = $secret;
+			$userpackege->invoice_id = $invoice_id;
 			$userpackege->save();
 			$bookid = $userpackege->id;
 

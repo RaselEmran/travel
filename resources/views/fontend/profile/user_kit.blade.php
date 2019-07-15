@@ -67,9 +67,10 @@
 <script>
 $('.select').select2();
 </script>
-@if (isset($message))
-    <script>
-        toastr.success({{ $message }});
-    </script>
-@endif
+
+<script>
+ @if(session('message'))
+    toastr.success('{{session('message')}}');
+ @endif
+</script>
 @endpush
