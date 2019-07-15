@@ -9,6 +9,7 @@ use App\Packege;
 use App\Destination;
 use App\OneWayPack;
 use App\TwoWayPack;
+use Illuminate\Support\Facades\Storage;
 
 class PackegeController extends Controller
 {

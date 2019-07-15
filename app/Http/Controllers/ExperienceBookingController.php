@@ -119,6 +119,22 @@ class ExperienceBookingController extends Controller {
 	}
 
 	public function booking_result(Request $request) {
+		$secret = $request->secret;
+		$token = $request->token;
+		$paymentId = $request->paymentId;
+		$PayerID = $request->PayerID;
+		if (isset($paymentId) && isset($token) && isset($PayerID) && $secret)
+		{
+		 $userPackege =UserPackege::where('secret',$secret)->first();	
+
+		 $userpackege->status=true;
+		 $userpackege->transaction_id=$paymentId;
+		 $userpackege->invoice_id=$token;
+		 $userpackege->save();
+		 $message = 'Your Order Payment Done Successfull';
+			return redirect('/booking-result')->with('message', $message);
+
+		}
 		$user_id = Auth::user()->id;
 		$userpackege = UserPackege::where('user_id', $user_id)->paginate(6);
 		return view('fontend.profile.booking', compact('userpackege'));
@@ -205,8 +221,8 @@ class ExperienceBookingController extends Controller {
 
 			$apiContext = new ApiContext(
 				new OAuthTokenCredential(
-					env('PAYPAL_CLIENT_ID'),
-					env('PAYPAL_SECRET')
+					env('PAYPAL_CLIENT_ID',config('settings.paypale_client_id')),
+					env('PAYPAL_SECRET',config('settings.paypale_client_secret'))
 				)
 			);
 			$payer = new Payer();

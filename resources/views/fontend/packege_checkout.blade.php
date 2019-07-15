@@ -30,6 +30,7 @@
   <!--main css===============================================================================================-->
 
   <link rel="stylesheet" type="text/css" href="{{asset('fontend/css/main.css')}}">
+  <link href="{{asset('fontend/css/toastr.min.css')}}" rel="stylesheet">
   @stack('css')
 
   <!--===============================================================================================-->
@@ -48,10 +49,11 @@
       <div id="content1">
         @include('fontend.partial.topnavbg')
       </div>
-    </div>
+</div>
   <div class="row bg-payment">
       <div id="content12">
-        <form>
+        <form action="{{ route('post_pack_checkout') }}" method="post">
+        @csrf
         <div class="container">
           <div class="row">
             <div class="col-md-7 booking-order-details">
@@ -64,12 +66,14 @@
                 </div>
                 <div class="row">
                   <div class="col-md-6">
+                  <input type="hidden" name="user_id" value="{{$check->user->id}}">
+                  <input type="hidden" name="secret" value="{{$check->secret}}">
                     <div><label>First Name</label></div>
-                    <div style="padding-bottom: 20px;"><input type="text" id="first-name" class="form-control form-control100" name="first-name" placeholder="Please enter" required /></div>
+                    <div style="padding-bottom: 20px;"><input type="text" id="first_name" class="form-control form-control100" name="first_name" placeholder="Please enter" required value="{{$check->user->first_name}}" /></div>
                   </div>
                   <div class="col-md-6">
                     <div><label>Last Name</label></div>
-                    <div style="padding-bottom: 20px;"><input type="text" id="last-name" class="form-control form-control100" name="last-name" placeholder="Please enter" required /></div>
+                    <div style="padding-bottom: 20px;"><input type="text" id="last_name" class="form-control form-control100" name="last_name" placeholder="Please enter" required value="{{$check->user->last_name}}" /></div>
                   </div>
                 </div>
                 <div class="row">
@@ -79,7 +83,7 @@
                 </div>
                 <div class="row">
                   <div class="col-md-12" style="padding-bottom: 20px;">
-                    <input type="text" id="email" class="form-control form-control100" name="email" placeholder="Please enter" required />
+                    <input type="text" id="enb_email" class="form-control form-control100" name="enb_email" placeholder="Please enter" value="{{$check->user->enb_email}}" required />
                   </div>
                 </div>
                 <div class="row">
@@ -89,12 +93,8 @@
                 </div>
                 <div class="row">
                   <div class="col-md-8">
-                    <div class="col-md-3" style="padding: 0; padding-bottom: 20px;">
-                    <select class="form-control form-control100"><option>+60</option></select>
-                    </div>
-                    <div class="col-md-1"></div>
                     <div class="col-md-8" style="padding: 0; padding-bottom: 20px;">
-                    <input type="text" id="phone-no" class="form-control form-control100" name="phone-no" placeholder="Please enter" required />
+                    <input type="text" id="phn_number" class="form-control form-control100" name="phn_number" placeholder="Please enter" required value="{{$check->user->phn_number}}" />
                     </div>
                   </div>
                   <div class="col-md-4"></div>
@@ -106,7 +106,7 @@
                 </div>
                 <div class="row">
                   <div class="col-md-8" style="padding-bottom: 20px;">
-                     <input type="text" name="guest" class="form-control">
+                     <input type="text" name="guest" class="form-control" value="{{$check->pack_quantity}}" readonly>
                   </div>
                   <div class="col-md-4"></div>
                 </div>
@@ -120,10 +120,7 @@
                     <textarea id="remark" class="form-control form-control100" name="remark" style="resize: none;" placeholder="Let the host know a little about yourself and why you're coming."></textarea>
                   </div>
                 </div>
-                <div class="row">
-                  <input type="hidden" id="name-package" name="name-package" value="One way package" />
-                  <input type="hidden" id="price-package" name="price-package" value="500" />                 
-                </div>
+               
               </div>
             </div>
             <div class="col-md-1"></div>
@@ -134,29 +131,35 @@
                     <img src="{{asset('fontend/images/question-mark.png')}}" /><label>&nbsp;Order Details</label>
                   </div>
                   <div class="col-md-12" style="padding-bottom: 20px;">
-                    <label>Langkawi Explore : Mysterious Island (Two Way)</label>
+                    <label>{{$check->packege->name}} ({{$check->type}})</label>
                   </div>
                   <div class="col-md-6" style="padding-bottom: 5px;">
-                    <span class="depart-date-details" style="float: left;">2019-05-09</span>
+                    <span class="depart-date-details" style="float: left;">Depart Date</span>
                   </div>
                   <div class="col-md-6" style="padding-bottom: 5px;">
-                    <span class="return-date-details" style="float: right;">2019-05-11</span>
+                    <span class="return-date-details" style="float: right;">{{$check->depart_date}}</span>
                   </div>
                   <div class="col-md-12">
                     <div class="order-details">
                       <table id="table-order" style="width: 100%;">
+                      @foreach ($check->useritinary as $element)
                         <tr id="row-order">
-                          <td id="package-name"></td>
-                          <td id="number-guest"></td>
-                          <td id="unit-price" class="flt-right"></td>
-                        </tr>                       
+                          <td id="package-name">
+                            <input type="hidden" name="time" value="{{$element->time}}">{{$element->time}}
+                          </td>
+                          <td id="number-guest">
+                            <input type="hidden" name="itinarya_name" value="{{$element->name}}">{{$element->name}}
+                          </td>
+                        </tr>  
+                      @endforeach                     
                       </table>
                     </div>
                   </div>
                   <div class="col-md-12" style="padding-bottom: 10px;">
                     <div class="order-total-prices">
                       <span>Total</span>
-                      <span id="total-price" class="align-right-col flt-right"></span>
+                      <input type="hidden" name="total" value="{{$check->total}}">
+                      <span id="total-price" class="align-right-col flt-right">{{$check->total}}</span>
                     </div>
                   </div>
                   <div class="col-md-12" style="padding-bottom: 10px;">
@@ -218,7 +221,9 @@
 
 <!--===============================================================================================-->
 
-<script src="{{asset('fontend/vendor/tilt/tilt.jquery.min.js')}}"></script>
+<script src="{{asset('fontend/vendor/tilt/tilt.jquery.min.js')}}">
+</script>
+
  <script>
          $.ajaxSetup({
         headers: {
@@ -229,16 +234,15 @@
  </script>
  <script src="{{asset('fontend/js/toastr.min.js')}}"></script>
 <script src="{{asset('fontend/js/logout.js')}}"></script>
-  @stack('js')
+ <script>
+   @if (Session::has('msg'))
+    toastr.warning('{{Session::get('msg')}}');
+
+   @endif
+  
+   
+</script>
 
 <!--===============================================================================================-->
 </body>
-
-
-@push('js')
-
-<script>
-$('.select').select2();
-
-</script>
-@endpush
+</html>

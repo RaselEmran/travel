@@ -86,7 +86,7 @@
 				</div>
 				@foreach ($data['latestpac'] as $recomand)
 				<div class="col-lg-3 col-md-6 borderimg1">
-					<a href="">
+					<a href=" {{ route('experience-booking',$allpack->id) }}">
 						<img src="{{asset('/storage/packege/photo/'.$recomand->photo)}}" class="img1" width="264px" height="175"/>
 						<div class="bottomed titleimg2 darkbg2">{{$recomand->destination->name}}</div>
 					</a>
@@ -191,7 +191,7 @@
 		</div>
 	</div>
 </div>
-
+@if($data['member']->count() > 0)
 <div class="row">
 	<div id="content8">
 		<div class="container">
@@ -203,53 +203,25 @@
 					</center>
 				</div>
 				<div class="col-md-12 partner-container">
+				@foreach ($data['member'] as $allmember)
+				
 					<div class="col-md-2">
-						<center>
-						<div class="border-partner">
-							<center>Partner 1</center>
+					
+						<div>
+						
+								<img src="{{asset('/storage/member/'.$allmember->photo)}}" width="150px" height="105"" alt="">
+							
 						</div>
-						</center>
+					
 					</div>
-					<div class="col-md-2">
-						<center>
-						<div class="border-partner">
-							<center>Partner 1</center>
-						</div>
-						</center>
-					</div>
-					<div class="col-md-2">
-						<center>
-						<div class="border-partner">
-							<center>Partner 1</center>
-						</div>
-						</center>
-					</div>
-					<div class="col-md-2">
-						<center>
-						<div class="border-partner">
-							<center>Partner 1</center>
-						</div>
-						</center>
-					</div>
-					<div class="col-md-2">
-						<center>
-						<div class="border-partner">
-							<center>Partner 1</center>
-						</div>
-						</center>
-					</div>
-					<div class="col-md-2">
-						<center>
-						<div class="border-partner">
-							<center>Partner 1</center>
-						</div>
-						</center>
-					</div>
+				@endforeach
+				
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+@endif
 
 <div class="row">
 	<div id="content9">

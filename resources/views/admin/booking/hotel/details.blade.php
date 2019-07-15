@@ -1,11 +1,12 @@
 @extends('admin.layouts.master')
-@section('pageTitle') Packege @endsection
+@section('pageTitle') hotel booking @endsection
 @section('page-header')
 <div class="page-header page-header-default">
     <div class="breadcrumb-line">
         <ul class="breadcrumb">
             <li><a href="index.html"><i class="icon-home2 position-left"></i> Home</a></li>
-            <li class="active">Dashboard</li>
+            <li >Dashboard</li>
+            <li class="active">Booking Details</li>
         </ul>
     </div>
 </div>
@@ -97,13 +98,23 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-md-12">
-                <form action="post" action="">
+                <form  action="{{ route('admin.send-hotel-mail') }}" method="post">
+                @csrf
+                 <input type="hidden" name="booking_id" value="{{$booking->id}}">
+                <input type="hidden" name="user_id" value="{{$booking->user_id}}">
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
                                 <td>
                                     <label>Email:</label>
                                     <input type="text" id="email" class="form-control " name="email" value="{{$booking->user->email}}" readonly />
+                                </td>
+                            </tr>
+
+                              <tr>
+                                <td>
+                                    <label>Price:</label>
+                                    <input type="text" id="price" class="form-control " name="price" value="{{$booking->price}}" readonly />
                                 </td>
                             </tr>
                             <tr>

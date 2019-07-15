@@ -52,13 +52,21 @@
 
 						<p class="subtext1">
 
-						<img src="{{asset('fontend/images/linked_in.png')}}" class="icon-media"/>
+						<a href="{{config('settings.linkedin_link')}}">
+							<img src="{{asset('fontend/images/linked_in.png')}}" class="icon-media"/>
+						</a>
 
-						<img src="{{asset('fontend/images/facebook.png')}}" class="icon-media"/>
+						<a href="{{config('settings.fb_id')}}">
+							<img src="{{asset('fontend/images/facebook.png')}}" class="icon-media"/>
+						</a>
 
-						<img src="{{asset('fontend/images/instagram.png')}}" class="icon-media"/>
-
+						<a href="{{config('settings.insta_link')}}">
+							<img src="{{asset('fontend/images/instagram.png')}}" class="icon-media"/>
+						</a>
+						<a href="{{config('settings.youtube_link')}}">
+							
 						<img src="{{asset('fontend/images/youtube.png')}}" class="icon-media"/>
+						</a>
 
 						</p>
 

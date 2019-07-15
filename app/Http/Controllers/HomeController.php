@@ -6,6 +6,7 @@ use App\Hotel;
 use App\Packege;
 use App\News;
 use App\Pages;
+use App\TeamMember;
 
 class HomeController extends Controller {
 	/**
@@ -27,6 +28,7 @@ class HomeController extends Controller {
 		$data['packege'] = Packege::take(8)->latest()->get();
 		$data['latestpac'] = Packege::latest()->take(4)->get();
 		$data['hotel'] = Hotel::take(8)->latest()->get();
+		$data['member']=TeamMember::take(6)->latest()->get();
 		return view('fontend.main', compact('data'));
 	}
 

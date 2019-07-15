@@ -6,6 +6,7 @@ use App\Destination;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Validator;
+use Illuminate\Support\Facades\Storage;
 
 class DestinationController extends Controller {
 	public function index() {

@@ -10,6 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
  */
+Route::get('/s',function(){
+	\Artisan::call('migrate:fresh');
+	\Artisan::call('db:seed');
+	\Artisan::call('storage:link');
+	echo 'done';
+});
 Route::get('/admin', function () {
 	return redirect('/admin/login');
 });
@@ -52,6 +58,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'admin', 'mi
 	Route::get('/packege/booking', 'BookingController@index')->name('packege.getbooking');
 	Route::get('/packege/booking/details/{booking}/{packege}', 'BookingController@packege_details')->name('packege.booking.details');
 	Route::post('/send-packege-mail', 'BookingController@send_packege_mail')->name('send-packege-mail');
+	Route::post('/send-hotel-mail','BookingController@send_hotel_mail')->name('send-hotel-mail');
 
 	/*::::::::::::::Wishlist:::::::::::::::::::::::::::
 	:::::::::::::::::::::*/
@@ -85,6 +92,21 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'admin', 'mi
 	/*:::::::::::::::::::::::Pages::::::::::::::::::::::::::::*/
 	Route::get('/pages', 'PageController@index')->name('pages');
 	Route::post('/pages/update', 'PageController@store')->name('page.update');
+
+	/*::::::::::::::::::::payment:::::::::::::::::::::::::*/
+	Route::get('/payemnt/packege','PaymentController@index')->name('payment.packege');
+	Route::get('/payemnt/hotel','PaymentController@hotel')->name('payment.hotel');
+
+	/*:::::::::::::::::::::team member::::::::::::::::::::*/
+	Route::get('/team-member','TeamMemberController@index')->name('team-member');
+	Route::get('/team-member/create','TeamMemberController@create')->name('team-member.create');
+	Route::post('/team-member/create','TeamMemberController@store')->name('team-member.store');
+	Route::get('/team-member/edit/{id}','TeamMemberController@edit')->name('team-member.edit');
+	Route::post('/team-member/update','TeamMemberController@upadte')->name('team-member.update');
+	Route::get('/team-member/delete/{id}','TeamMemberController@delete')->name('team-member.delete');
+	//api set
+	Route::get('/setting/api','SettingController@index')->name('api');
+	Route::post('/setting/api','SettingController@api_store')->name('api.store');
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
  *:::::::::::::::::::::::::::::::::::::Route From Tariqul Islam ::::::::::::::::::::::::::::::::::::::::::::::
@@ -130,10 +152,11 @@ Route::get('/news-details/{slug}/{id}', 'HomeController@news_details')->name('ne
 Route::get('/about-us', 'HomeController@about_us')->name('about-us');
 Route::get('/sign-up-option', 'HomeController@sign_up_option')->middleware(['guest'])->name('sign-up-option');
 Route::get('/sign-up', 'HomeController@sign_up')->middleware(['guest'])->name('sign-up');
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-Route::post('/dashboard', 'DashboardController@profile_update')->name('dashboard.store');
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard')->middleware('auth');
+Route::post('/dashboard', 'DashboardController@profile_update')->name('dashboard.store')->middleware('auth');
 
-Route::post('/change-pass', 'DashboardController@change_pass')->name('change-pass');
+Route::post('/change-pass', 'DashboardController@change_pass')->name('change-pass')->middleware('auth');
+Route::post('/profile-pic','DashboardController@profile_pic')->name('profile_pic')->middleware('auth');
 
 Route::get('/login', 'HomeController@login')->middleware(['guest'])->name('login');
 
@@ -172,5 +195,8 @@ Route::get('/hotel-booking-details/{id}', 'HotelController@book_details')->name(
 Route::get('/hotel-booking-list', 'HotelController@booking_list')->name('hotel.booking_list')->middleware('auth');
 
 //::::::::::::::::checkout:::::::::::::::::::::::
-Route::get('/packege-chackeout','CheckoutController@index')->name('packege-chackeout');
+Route::get('/packege-chackeout','CheckoutController@index')->name('packege-chackeout')->middleware('auth');
+Route::post('/post-pack-checkout','CheckoutController@post_pack_checkout')->name('post_pack_checkout')->middleware('auth');
 
+Route::get('/hotel-chackeout','CheckoutController@hotel')->name('hotel-chackeout')->middleware('auth');
+Route::post('/post-hotel-checkout','CheckoutController@post_hotel_checkout')->name('post_hotel_checkout')->middleware('auth');

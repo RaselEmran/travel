@@ -34,6 +34,7 @@ class HotelController extends Controller {
 		$booking->check_out = $request->check_out;
 		$booking->guest = $request->guest;
 		$booking->price = $request->price;
+		$booking->secret = uniqid();
 		$booking->save();
 		Session::flash('message', 'Packege Book Successfully.Check Your mail After 24 hours!');
 		return redirect()->route('hotel.booking_list');
@@ -106,7 +107,25 @@ class HotelController extends Controller {
 		//
 	}
 
-	public function booking_list() {
+	public function booking_list(Request $request) {
+     
+     //return paypale request..
+		$secret = $request->secret;
+		$token = $request->token;
+		$paymentId = $request->paymentId;
+		$PayerID = $request->PayerID;
+		if (isset($paymentId) && isset($token) && isset($PayerID) && $secret)
+		{
+			$booking =HotelBooking::where('secret',$secret)->firstOrfail();
+			$booking->status =true;
+			$booking->invoice_no =$token;
+			$booking->transaction_id =$paymentId;
+			$booking->save();
+
+			 $message = 'Your Order Payment Done Successfull';
+			return redirect('/hotel-booking-list')->with('message', $message);
+		}
+		//return paypale request
 		$user_id = auth()->user()->id;
 		$hotels = HotelBooking::where('user_id', $user_id)->paginate(6);
 		return view('fontend.profile.hotel_booking', compact('hotels'));

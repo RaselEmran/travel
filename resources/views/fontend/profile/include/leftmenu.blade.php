@@ -3,7 +3,9 @@
 		<div class="col-md-12 user-profile-container">
 			<div class="col-md-12" style="padding-bottom: 10px;">
 				<center>
-				<span><img src="{{asset('fontend/images/profile-pic.png')}}" class="profile-pic-dash" /></span>
+				<span>
+
+				<img src="{{asset(isset($info)?'/storage/profile/user/'.$info:'fontend/images/profile-pic.png')}}" class="profile-pic-dash" /></span>
 				</center>
 			</div>
 			<div class="col-md-12" style="padding-bottom: 10px;">

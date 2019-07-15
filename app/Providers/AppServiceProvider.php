@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Api;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Config;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -13,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-         Schema::defaultStringLength(191);
+      
     }
 
     /**
@@ -23,6 +25,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+         Schema::defaultStringLength(191);
+         if (Schema::hasTable('apis')) {
+            foreach (Api::all() as $setting) {
+               Config::set('settings.'.$setting->key,$setting->value);
+            }
+         }
     }
 }

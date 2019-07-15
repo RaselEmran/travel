@@ -82,6 +82,17 @@
                                     </ul>
                                 </li>
 
+                                 <li class="{{Request::is('admin/payment/*') ?'active':''}}">
+                                    <a href="#"><i class=" icon-basket"></i> <span>Payment</span></a>
+                                    <ul>
+                                        <li class="{{Request::is('admin/payment/packege') ?'active':''}}"><a href="{{ route('admin.payment.packege') }}"> Packege Payment</a></li>
+
+                                          <li class="{{Request::is('admin/payment/hotel-payment') ?'active':''}}"><a href="{{ route('admin.payment.hotel') }}">Hotel Payment</a></li>
+
+                                    </ul>
+                                </li>
+
+
                                 <li class="{{Request::is('admin/news/*') ?'active':''}}">
                                     <a href="#"><i class="  icon-newspaper2"></i> <span>News</span></a>
                                     <ul>
@@ -94,6 +105,19 @@
                                     </ul>
                                 </li>
                                  <li  class="{{Request::is('admin/pages*') ?'active':''}}"><a href="{{ route('admin.pages') }}"><i class="icon-width"></i> <span>Pages</span></a></li>
+
+                                 <li  class="{{Request::is('admin/team-member*') ?'active':''}}"><a href="{{ route('admin.team-member') }}"><i class="icon-width"></i> <span>Team Member</span></a></li>
+
+                                <li class="{{Request::is('admin/setting/*') ?'active':''}}">
+                                    <a href="#"><i class=" icon-basket"></i> <span>Setting</span></a>
+                                    <ul>
+                                        <li class="{{Request::is('admin/setting/api') ?'active':''}}"><a href="{{ route('admin.api') }}"> Api Setting</a></li>
+
+                                          <li class="{{Request::is('admin/payment/hotel-payment') ?'active':''}}"><a href="{{ route('admin.payment.hotel') }}">Hotel Payment</a></li>
+
+                                    </ul>
+                                </li>
+
                               {{--    <li>
                                     <a href="#"><i class="icon-people"></i> <span>Destination</span></a>
                                     <ul>

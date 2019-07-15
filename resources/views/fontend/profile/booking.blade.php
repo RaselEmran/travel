@@ -41,4 +41,10 @@
 <script>
 $('.select').select2();
 </script>
+
+<script>
+ @if(session('message'))
+    toastr.success('{{session('message')}}');
+ @endif
+</script>
 @endpush

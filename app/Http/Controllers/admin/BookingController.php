@@ -13,6 +13,7 @@ use App\User;
 
 use App\Wishlist;
 use App\Notifications\PackegeConfirm;
+use App\Notifications\HotelConfirm;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller {
@@ -58,6 +59,20 @@ class BookingController extends Controller {
 	public function hotel_details($hotel_booking) {
 		$booking = HotelBooking::findOrFail($hotel_booking);
 		return view('admin.booking.hotel.details', compact('booking'));
+	}
+
+	public function send_hotel_mail(Request $request)
+	{
+	 $user_id =$request->user_id;
+     $booking_id =$request->booking_id;
+     $booking =HotelBooking::find($booking_id);
+     $booking->price =$request->price;
+     $booking->save();
+     $user =User::find($user_id);
+     $messege =$request->messege;
+     if ($user->email) {
+        $user->notify(new HotelConfirm($booking,$user,$messege));
+     }
 	}
 
 }

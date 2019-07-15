@@ -1,54 +1,137 @@
 @extends('admin.layouts.master')
 @section('pageTitle') dashboard @endsection
 @section('page-header')
-   <div class="page-header page-header-default">
-                    <div class="page-header-content">
-                        <div class="page-title">
-                            <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Home</span> - Dashboard</h4>
-                        </div>
-
-                        <div class="heading-elements">
-                            <div class="heading-btn-group">
-                                <a href="#" class="btn btn-link btn-float has-text"><i class="icon-bars-alt text-primary"></i><span>Statistics</span></a>
-                                <a href="#" class="btn btn-link btn-float has-text"><i class="icon-calculator text-primary"></i> <span>Invoices</span></a>
-                                <a href="#" class="btn btn-link btn-float has-text"><i class="icon-calendar5 text-primary"></i> <span>Schedule</span></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="breadcrumb-line">
-                        <ul class="breadcrumb">
-                            <li><a href="index.html"><i class="icon-home2 position-left"></i> Home</a></li>
-                            <li class="active">Dashboard</li>
-                        </ul>
-
-                        <ul class="breadcrumb-elements">
-                            <li><a href="#"><i class="icon-comment-discussion position-left"></i> Support</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="icon-gear position-left"></i>
-                                    Settings
-                                    <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu dropdown-menu-right">
-                                    <li><a href="#"><i class="icon-user-lock"></i> Account security</a></li>
-                                    <li><a href="#"><i class="icon-statistics"></i> Analytics</a></li>
-                                    <li><a href="#"><i class="icon-accessibility"></i> Accessibility</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#"><i class="icon-gear"></i> All settings</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+  <div class="page-header page-header-default">
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a href="{{ route('admin.dashboard') }}"><i class="icon-home2 position-left"></i> Home</a></li>
+            <li class="active">Dashbord</li>
+        </ul>
+    </div>
+</div>
 @endsection
 @section('content')
 
+<div class="row">
 
-                    <!-- /dashboard content -->
+<div class="col-md-6">
+	<div class="panel panel-info">
+		<div class="panel-heading">
+			<h6 class="panel-title">Booking Hotel</h6>
+			<div class="heading-elements">
+				<ul class="icons-list">
+            		<li><a data-action="collapse"></a></li>
+            		<li><a data-action="reload"></a></li>
+            		<li><a data-action="close"></a></li>
+            	</ul>
+        	</div>
+		</div>
 
+		<div class="panel-body">
+			<span class="label label-info">{{$hotbook->count()}}</span>
+		</div>
+	</div>
+</div>
 
+<div class="col-md-6">
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<h6 class="panel-title">Booking Packege</h6>
+			<div class="heading-elements">
+				<ul class="icons-list">
+            		<li><a data-action="collapse"></a></li>
+            		<li><a data-action="reload"></a></li>
+            		<li><a data-action="close"></a></li>
+            	</ul>
+        	</div>
+		</div>
+
+		<div class="panel-body">
+			<span class="label label-primary">{{$bookpack->count()}}</span>
+		</div>
+	</div>
+</div>
+</div>
                 
+<div class="row">
 
+<div class="col-md-6">
+	<div class="panel panel-danger">
+		<div class="panel-heading">
+			<h6 class="panel-title">Total Packege</h6>
+			<div class="heading-elements">
+				<ul class="icons-list">
+            		<li><a data-action="collapse"></a></li>
+            		<li><a data-action="reload"></a></li>
+            		<li><a data-action="close"></a></li>
+            	</ul>
+        	</div>
+		</div>
+
+		<div class="panel-body">
+			<span class="label label-danger">{{$pack->count()}}</span>
+		</div>
+	</div>
+</div>
+
+<div class="col-md-6">
+	<div class="panel panel-success">
+		<div class="panel-heading">
+			<h6 class="panel-title">Total Hotel</h6>
+			<div class="heading-elements">
+				<ul class="icons-list">
+            		<li><a data-action="collapse"></a></li>
+            		<li><a data-action="reload"></a></li>
+            		<li><a data-action="close"></a></li>
+            	</ul>
+        	</div>
+		</div>
+
+		<div class="panel-body">
+			<span class="label label-success">{{$hotel->count()}}</span>
+		</div>
+	</div>
+</div>
+</div>
+
+<div class="row">
+
+<div class="col-md-6">
+	<div class="panel panel-warning">
+		<div class="panel-heading">
+			<h6 class="panel-title">Total Travelar</h6>
+			<div class="heading-elements">
+				<ul class="icons-list">
+            		<li><a data-action="collapse"></a></li>
+            		<li><a data-action="reload"></a></li>
+            		<li><a data-action="close"></a></li>
+            	</ul>
+        	</div>
+		</div>
+
+		<div class="panel-body">
+			<span class="label label-warning">{{$user->count()}}</span>
+		</div>
+	</div>
+</div>
+
+<div class="col-md-6">
+	<div class="panel panel-info">
+		<div class="panel-heading">
+			<h6 class="panel-title">Total Destination</h6>
+			<div class="heading-elements">
+				<ul class="icons-list">
+            		<li><a data-action="collapse"></a></li>
+            		<li><a data-action="reload"></a></li>
+            		<li><a data-action="close"></a></li>
+            	</ul>
+        	</div>
+		</div>
+
+		<div class="panel-body">
+			<span class="label label-info">{{$destination->count()}}</span>
+		</div>
+	</div>
+</div>
+</div>
 @endsection

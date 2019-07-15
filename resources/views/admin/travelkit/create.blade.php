@@ -1,11 +1,11 @@
 @extends('admin.layouts.master')
 @section('pageTitle') travelkit @endsection
 @section('page-header')
-<div class="page-header page-header-default">
+  <div class="page-header page-header-default">
     <div class="breadcrumb-line">
         <ul class="breadcrumb">
-            <li><a href="index.html"><i class="icon-home2 position-left"></i> Home</a></li>
-            <li class="active">Dashboard</li>
+            <li><a href="{{ route('admin.dashboard') }}"><i class="icon-home2 position-left"></i> Home</a></li>
+            <li class="active">Travel Kit</li>
         </ul>
     </div>
 </div>

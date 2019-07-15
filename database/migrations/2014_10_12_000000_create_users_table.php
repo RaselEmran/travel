@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
             $table->string('country_code')->nullable();
             $table->string('phn_number')->nullable();
             $table->string('enb_email')->nullable();
+            $table->string('image')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

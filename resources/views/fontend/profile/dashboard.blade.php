@@ -1,4 +1,4 @@
-@extends('fontend.profile.profile')
+@extends('fontend.profile.profile',['info'=>$info->image])
 @section('pageTitle') dashboard @endsection
 @push('css')
 <link href="{{asset('fontend/css/toastr.min.css')}}" rel="stylesheet">
@@ -72,6 +72,14 @@
 				</div>
 			</form>
 			<br>
+			<form action="{{ route('profile_pic') }}" method="post" id="profile_pic" enctype="multipart/form-data">
+				<input type="file" name="image">
+				  @if($info && isset($info->image))
+                     <input type="hidden" name="oldimage" value="{{$info->image}}">
+                  @endif
+				<input type="submit" class="btn btn-primary" value="Profile Picture">
+
+			</form>
 			<br>
 			<form action="{{ route('change-pass') }} " method="post" id="ChangePass">
 
@@ -157,6 +165,47 @@
 	        success: function(data) {
 	            if (data.success) {
 	                toastr.success(data.message);
+	            } else {
+	                const errors = data.message
+	                    // console.log(errors)
+	                var i = 0;
+	                $.each(errors, function(key, value) {
+	                    const first_item = Object.keys(errors)[i]
+	                    const message = errors[first_item][0]
+	                    $('#' + first_item).after('<div class="ajax_error" style="color:red">' + value + '</div');
+	                    toastr.error(value);
+	                    i++;
+	                });
+	            }
+	        },
+	        error: function(data) {
+	            var jsonValue = $.parseJSON(data.responseText);
+	            toastr.error(jsonValue.message);
+
+	        }
+	    });
+	});
+//profile pic.....
+		$(document).on('submit', '#profile_pic', function(e) {
+	    e.preventDefault();
+	    $(".ajax_error").remove();
+	    var formData = new FormData($(this)[0]);
+   		var url = $(this).attr('action');
+	    $.ajax({
+	      	  method:'POST',
+              url: url,
+              data:formData,
+              dataType:'JSON',
+              contentType: false,
+              cache: false,
+              processData: false,
+	        success: function(data) {
+	            if (data.success) {
+	                toastr.success(data.message);
+	                 setTimeout(function(){
+
+                      window.location.href=data.goto;
+                      },2500);
 	            } else {
 	                const errors = data.message
 	                    // console.log(errors)
